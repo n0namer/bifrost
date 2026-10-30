@@ -413,21 +413,12 @@ func (s *streamBody) Read(p []byte) (int, error) {
 		return 0, io.ErrClosedPipe
 	}
 	n, err := s.reader.Read(p)
+	// Preserve framing errors, including io.ErrUnexpectedEOF after an
+	// incomplete final chunk. Reporting EOF here would authorize replay
+	// of a potentially side-effecting POST using an incomplete HTTP body.
+	// Only a clean EOF makes this connection safe to return to the pool.
 	if errors.Is(err, io.EOF) {
 		s.fullyRead = true
-	} else if errors.Is(err, io.ErrUnexpectedEOF) {
-		// The peer closed before the terminating 0-length chunk. fasthttp's own
-		// streaming reader reports that as a plain io.EOF, and every provider read
-		// loop plus the semantic truncation check (#5546) is built on that contract:
-		// an EOF without a terminal marker becomes the retryable 502 truncation
-		// error, while any other read error is a generic stream failure. The
-		// standard-library chunked reader says io.ErrUnexpectedEOF for the same
-		// close, so restore that contract only for chunked bodies. Fixed-length
-		// bodies must preserve the truncation error. fullyRead stays false: the
-		// half-read connection is closed on release, never returned to the pool.
-		if _, chunked := s.reader.(*chunkedBody); chunked {
-			err = io.EOF
-		}
 	}
 	return n, err
 }

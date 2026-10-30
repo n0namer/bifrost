@@ -600,17 +600,11 @@ func TestContextTransport_ChunkedStreamReleasesConnForReuse(t *testing.T) {
 	}
 }
 
-// TestContextTransport_TruncatedChunkedStreamReadsAsEOFAndDiscardsConn pins the
-// contract every provider read loop and the semantic truncation check (#5546) are
-// built on: fasthttp reports an upstream that closes on a chunk boundary as a plain
-// io.EOF and leaves "was the stream complete?" to the caller's terminal-marker
-// check, which turns a missing marker into the retryable 502 truncation error. The
-// standard-library chunked reader says io.ErrUnexpectedEOF for the same close, and
-// the loops route any non-EOF error to a generic stream failure instead. The
-// half-read connection must still be closed, never returned to the pool: a POST
-// (non-idempotent, so fasthttp will not silently retry it) must get a fresh
-// connection and succeed.
-func TestContextTransport_TruncatedChunkedStreamReadsAsEOFAndDiscardsConn(t *testing.T) {
+// TestContextTransport_TruncatedChunkedStreamReportsUnexpectedEOFAndDiscardsConn
+// requires HTTP framing errors to remain observable. A missing terminating
+// zero chunk is not clean EOF and cannot authorize another POST attempt.
+// The half-read connection must be discarded, not returned to the pool.
+func TestContextTransport_TruncatedChunkedStreamReportsUnexpectedEOFAndDiscardsConn(t *testing.T) {
 	srv := newScriptedServer(t, func(conn net.Conn, br *bufio.Reader) {
 		if !readRequest(br) {
 			return
@@ -626,8 +620,8 @@ func TestContextTransport_TruncatedChunkedStreamReadsAsEOFAndDiscardsConn(t *tes
 	if got := string(body); got != "data: a\n\n" {
 		t.Fatalf("body before the drop = %q, want %q", got, "data: a\n\n")
 	}
-	if err != nil {
-		t.Fatalf("truncated chunked body read error = %v, want a plain io.EOF (io.ReadAll returns nil on EOF)", err)
+	if !errors.Is(err, io.ErrUnexpectedEOF) {
+		t.Fatalf("truncated chunked body read error = %v, want io.ErrUnexpectedEOF", err)
 	}
 	if err := resp.CloseBodyStream(); err != nil {
 		t.Fatalf("CloseBodyStream: %v", err)
