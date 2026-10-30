@@ -1,0 +1,44 @@
+{
+  "at": "2026-10-30T20:27:12.772731+00:00",
+  "sourceCommit": "d45ee450b4a9ab1d49bb045ae1b1a8224f5be131",
+  "candidateSha256": "e69e9a679b19070ced7783b28ae63174adca50aaa99537a5a475abdb10b6db23",
+  "sourceQaSha256": "d8f77132b584bcefced43dda71812d9bb052fa24fe9fd017ca52a56f21163a51",
+  "fixtureSha256": "37b206438abaea48363c4ba7272fed30487872d4acf2f5b6bb1cfb733bd4b216",
+  "probeSha256": "7f7c46dbb8553a8fc4c467387e3cc33c606db97760607acad2099bbc049e58c7",
+  "status": "CANARY_RUNTIME_VERIFIED",
+  "pass": true,
+  "canary": {
+    "pid": 107928,
+    "parent": 99100,
+    "path": "C:\\Users\\Рафик\\Documents\\DEV\\llm-gateway-bakeoff-20261030\\bifrost-transient-r14-d45ee450b4a9.exe",
+    "creationMs": 1793391864164,
+    "command": "C:\\Users\\Рафик\\Documents\\DEV\\llm-gateway-bakeoff-20261030\\bifrost-transient-r14-d45ee450b4a9.exe -host 127.0.0.1 -port 15185 -app-dir C:\\Users\\Рафик\\Documents\\DEV\\llm-gateway-bakeoff-20261030\\bifrost-canary-ocx-data"
+  },
+  "idle": {
+    "at": "2026-10-30T20:27:11.593119+00:00",
+    "metrics": [
+      "bifrost_active_requests{method=\"passthrough_stream\"} 0"
+    ],
+    "listeners": [
+      {
+        "OwningProcess": 107928,
+        "LocalAddress": "127.0.0.1",
+        "LocalPort": 15185
+      }
+    ],
+    "established": []
+  },
+  "openCodexReady": {
+    "pid": 11352,
+    "status": "ready",
+    "version": "2.94.0"
+  },
+  "rehearsalSha256": "259e1e2c04c354a31fdca4b958d982060abfbc998ce8fc08516f1cc1d19120c2",
+  "activationSha256": "7f758e811a95fbb5584f128f2d919603ba254d3908c937a46ab0e645725b6f85",
+  "configSha256": "80413641ddde13a13f289548358a55ed51238aa9aac9a229ed21f59063e034e1",
+  "globalConfigSha256": "dccf8a88f8217191035ef9859cef7d73f3b71869b1556c03eaf0b92b4857a3dc",
+  "oldBinarySha256": "bdd67f733e7deb5ffdc7ed77b00026ae94f974b287efb4828087ad8862dbe8f6",
+  "rollbackRehearsed": true,
+  "globalRouteChanged": false,
+  "serverDone": false
+}

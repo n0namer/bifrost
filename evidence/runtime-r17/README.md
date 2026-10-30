@@ -1,26 +1,31 @@
-# VP49 R17 — candidate backup, runtime acceptance pending
+# VP49 R17 — retry MVP verified on isolated canary
 
 Accepted executable source: d45ee450b4a9ab1d49bb045ae1b1a8224f5be131.
 Binary SHA-256: e69e9a679b19070ced7783b28ae63174adca50aaa99537a5a475abdb10b6db23.
 
-## Verified evidence
+## Delivered behavior
 
-- Independent native source review: QA_ACCEPT for the exact source SHA; full OpenAI provider suite, the four original SSE regressions, selected utils/core contracts, and 32 physical no-replay cases passed.
-- Build: Go1.27.3, exact vcs.revision, pinned fasthttp version/sum, stable source; executable hash matched the same-binary fixture.
-- Binary fixture: 29/29 PASS, no real provider calls, no client retries.
-- Runtime-helper candidate:9/9 Windows tests PASS, including3 local HTTP cases with exactly1 physical POST each. Native partial probe contribution was preserved; coordinator completed the remaining helpers after verified native429/terminal handoff.
-- Current source HEAD and original Git index are preserved by evidence publication in a separate branch.
+Complete explicit HTTP429,500,502,503,504,509,529 errors use the existing bounded retry/backoff/Retry-After loop. Refusal/quota markers and ambiguous, truncated or partially emitted POST results fail closed. Native OpenAI SSE classification and tool-call controls passed independent review.
 
-## Gates still open at this backup
+## Evidence
 
-Independent frozen-helper QA, real isolated streaming E2E, verified rollback rehearsal, canary activation, and CrewSync DONE are still pending. This archive is not activation authorization and does not claim SERVER_DONE.
+- Exact source SHA independently accepted by native reviewer thread01a18dba-d3b3-7300-84fe-cbdaff292365, turn01a18e14-db1c-7f21-a6d8-2467b7e8cd34.
+- Full OpenAI provider suite and four original truncation regressions passed.32physical native no-replay cases each observed primary1/fallback0.
+- Go1.27.3 build metadata binds the executable to this SHA and the pinned fasthttp revision/checksum.
+- Same executable:29/29 fake-upstream contract scenarios passed.
+- Actual isolated candidate SSE and an actual old-binary rollback SSE both passed; private process/port/directory cleanup and unchanged production baseline were verified.
+- Existing isolated canary now runs this executable on127.0.0.1:15185, PID107928. Its post-switch real SSE completed successfully. Five idle samples plus a final sample preceded the switch; post-switch metrics show zero active requests.
+- OpenCodex PID11352 remains ready; live canary config and global Codex config hashes are unchanged. Main Codex routing remains direct to OpenCodex.
+- The probe was tightened against redirects, nonstring delta and named SSE errors.13local helper/probe tests passed; redirect301/302/303/307/308 cases each sent1sourcePOST and0redirect-target requests.
 
-Native source-review turn: 01a18e14-db1c-7f21-a6d8-2467b7e8cd34; original reviewer thread: 01a18dba-d3b3-7300-84fe-cbdaff292365. The original R16 Goal accounting was preserved; the later R17 turn and SHA-bound verdict are recorded separately.
+## Scope and acceptance
 
-The wider utils suite is not fully green: version-guard, host/timing failures and proxy timeout remain disclosed in the original QA report; they were not all proven pre-existing. Acceptance is the bounded OpenAI/passthrough MVP contract.
+Independent QA_ACCEPT applies to the Bifrost source SHA. The supplemental native helper-review expansion was stopped following the user's explicit MVP correction; its old candidate/report artifacts remain historical and are not claimed accepted. Runtime delivery was controlled by the coordinator using the pinned, independently accepted source/build proofs and fresh live observations. No helper QA receipt or native Goal completion was fabricated. No OpenCodex restart or global routing change occurred.
 
-## Layout and reproduction context
+The wider utils suite is not wholly green: version-guard, host/timing failures and proxy timeout are disclosed in the source QA report and were not all proven pre-existing. Acceptance covers the OpenAI/passthrough MVP contract.
 
-The helpers folder archives the exact scripts deployed in C:\Users\Рафик\Documents\DEV\llm-gateway-bakeoff-20261030, alongside the bifrost-sparse checkout. They are not meant to be executed from this archive folder without restoring that layout and satisfying their proof gates. build/go.work is the hash-verified build workspace projection. The proofs folder contains normalized receipts and tests; source-tests contains the independently executed Go test logs.
+CrewSync is authoritative for task DONE. This publication binds the completed runtime evidence before the final CrewSync completion readback.
 
-No live configuration, credential file, binary, whole evidence directory, or unrelated project material is included. Global Codex routing remains outside this delivery scope.
+## Artifact layout
+
+The helpers archive preserves files from the original Windows base directory; runtime scripts were executed from its evidence subdirectory and import the existing activation primitives. Restore the original layout to reproduce. The activation is a single guarded action and must not be blindly rerun after a receipt or unknown acknowledgement. Private configs, credentials, binaries and unrelated evidence are excluded.

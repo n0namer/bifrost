@@ -1,0 +1,48 @@
+{
+  "testsPass": false,
+  "testsRun": 4,
+  "failures": 9,
+  "errors": 0,
+  "physicalCases": [
+    {
+      "status": 301,
+      "sourcePOSTs": 1,
+      "redirectTargetRequests": 1,
+      "accepted": true,
+      "httpError": null
+    },
+    {
+      "status": 302,
+      "sourcePOSTs": 1,
+      "redirectTargetRequests": 1,
+      "accepted": true,
+      "httpError": null
+    },
+    {
+      "status": 303,
+      "sourcePOSTs": 1,
+      "redirectTargetRequests": 1,
+      "accepted": true,
+      "httpError": null
+    },
+    {
+      "status": 307,
+      "sourcePOSTs": 1,
+      "redirectTargetRequests": 0,
+      "accepted": false,
+      "httpError": 307
+    },
+    {
+      "status": 308,
+      "sourcePOSTs": 1,
+      "redirectTargetRequests": 0,
+      "accepted": false,
+      "httpError": 308
+    }
+  ],
+  "probeSha256": "357a05e0e54d660620d854cbc995e5631269286e978b548069010565638eb624",
+  "probeUnchanged": true,
+  "realProviderCalls": 0,
+  "bifrostProcessesStarted": 0,
+  "testCodeSha256": "97a57d806c3995ee96d95faff5c9e2bb5cbabad0a51ffa83549f1bde1ff39e4d"
+}

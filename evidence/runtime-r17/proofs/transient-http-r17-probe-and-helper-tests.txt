@@ -1,0 +1,30 @@
+[Reading 25 lines from line 1 (total: 26 lines, 0 remaining)]
+
+test_named_error_event_rejects_completed (__main__.ProbeNegatives.test_named_error_event_rejects_completed) ... ok
+test_non_string_delta_cannot_prove_text (__main__.ProbeNegatives.test_non_string_delta_cannot_prove_text) ... ok
+test_redirect_never_reaches_other_endpoint (__main__.ProbeNegatives.test_redirect_never_reaches_other_endpoint) ... ok
+test_valid_text_control (__main__.ProbeNegatives.test_valid_text_control) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 1.040s
+
+OK
+{"testsPass": true, "testsRun": 4, "failures": 0, "errors": 0, "physicalCases": [{"status": 301, "sourcePOSTs": 1, "redirectTargetRequests": 0, "accepted": false, "httpError": 301}, {"status": 302, "sourcePOSTs": 1, "redirectTargetRequests": 0, "accepted": false, "httpError": 302}, {"status": 303, "sourcePOSTs": 1, "redirectTargetRequests": 0, "accepted": false, "httpError": 303}, {"status": 307, "sourcePOSTs": 1, "redirectTargetRequests": 0, "accepted": false, "httpError": 307}, {"status": 308, "sourcePOSTs": 1, "redirectTargetRequests": 0, "accepted": false, "httpError": 308}], "probeSha256": "7f7c46dbb8553a8fc4c467387e3cc33c606db97760607acad2099bbc049e58c7", "probeUnchanged": true, "realProviderCalls": 0, "bifrostProcessesStarted": 0, "testCodeSha256": "97a57d806c3995ee96d95faff5c9e2bb5cbabad0a51ffa83549f1bde1ff39e4d"}
+test_drain_requires_expected_series_and_finite_zero (__main__.HelperContracts.test_drain_requires_expected_series_and_finite_zero) ... ok
+test_invalid_probe_arguments_make_no_request (__main__.HelperContracts.test_invalid_probe_arguments_make_no_request) ... ok
+test_invalid_proofs_fail_before_runtime (__main__.HelperContracts.test_invalid_proofs_fail_before_runtime) ... ok
+test_no_client_retry_physical_posts (__main__.HelperContracts.test_no_client_retry_physical_posts) ... ok
+test_rehearsal_receipt_binds_same_helpers_and_binary (__main__.HelperContracts.test_rehearsal_receipt_binds_same_helpers_and_binary) ... ok
+test_rollback_ownership_survives_failed_health (__main__.HelperContracts.test_rollback_ownership_survives_failed_health) ... ok
+test_sse_comments_multiline_tool_events_and_crlf (__main__.HelperContracts.test_sse_comments_multiline_tool_events_and_crlf) ... ok
+test_terminal_status_and_malformed_sse_fail (__main__.HelperContracts.test_terminal_status_and_malformed_sse_fail) ... ok
+test_valid_proof_contract (__main__.HelperContracts.test_valid_proof_contract) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.548s
+
+OK
+{"sourceSha": "d45ee450b4a9ab1d49bb045ae1b1a8224f5be131", "testsPass": true, "testsRun": 9, "failures": 0, "errors": 0, "physicalProbeCases": [{"status": 200, "terminal": "completed", "physicalPOSTs": 1}, {"status": 200, "terminal": "failed", "physicalPOSTs": 1}, {"status": 429, "terminal": "completed", "physicalPOSTs": 1}], "realProviderCalls": 0, "bifrostProcessesStarted": 0, "helperHashes": {"probe_transient_http_r14_live.py": "7f7c46dbb8553a8fc4c467387e3cc33c606db97760607acad2099bbc049e58c7", "activate_transient_http_r14.py": "c4b73a8f8c4d04b565c9cb544193c860c4c60cc553a479faf1296756b6e6408f", "rehearse_transient_http_r17.py": "8a507c5ac6c5b5adb351fc2b8fe3c4c486363117ef7395095473b1d1206223b3"}, "testCodeSha256": "bbbc93ba23957960aafa6ab347c9613bad186cdde3a5ca1ca53a8423952d0863"}
+✅ Process completed with exit code 0 (runtime: 2.62s)
+
+[executed on device: DESKTOP-49VP0KH (9d7a223e-d824-401b-aa62-383493e672ed)]

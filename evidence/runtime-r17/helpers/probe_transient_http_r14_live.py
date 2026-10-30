@@ -4,13 +4,21 @@ import argparse
 import json
 import re
 import time
-from urllib.request import Request, build_opener, ProxyHandler
+from urllib.request import Request, build_opener, ProxyHandler, HTTPRedirectHandler
+
+
+class NoRedirect(HTTPRedirectHandler):
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        return None
 
 
 def validate_sse(status: int, raw: str, sentinel: str) -> dict:
-    events, pending, malformed = [], [], False
+    events, pending, malformed, named_error = [], [], False, False
+    error_types = ('error', 'response.failed', 'response.incomplete', 'response.cancelled')
     for line in raw.splitlines():
-        if line.startswith('data:'):
+        if line.startswith('event:'):
+            named_error = named_error or line[6:].strip() in error_types
+        elif line.startswith('data:'):
             pending.append(line[5:].lstrip(' '))
         elif not line and pending:
             payload = '\n'.join(pending)
@@ -29,9 +37,10 @@ def validate_sse(status: int, raw: str, sentinel: str) -> dict:
     completed = [event for event in events if event.get('type') == 'response.completed']
     response = completed[0].get('response') if completed else None
     terminal_status = response.get('status') if isinstance(response, dict) else None
-    text = ''.join(str(event.get('delta', '')) for event in events
-                   if event.get('type') == 'response.output_text.delta')
-    errors = any(t in ('error', 'response.failed', 'response.incomplete', 'response.cancelled') for t in types)
+    deltas = [event.get('delta') for event in events if event.get('type') == 'response.output_text.delta']
+    malformed = malformed or any(not isinstance(delta, str) for delta in deltas)
+    text = ''.join(delta for delta in deltas if isinstance(delta, str))
+    errors = named_error or any(t in error_types for t in types)
     good = (status == 200 and len(completed) == 1 and terminal_status == 'completed'
             and sentinel in text and not errors and not malformed)
     return {'httpStatus': status, 'completedCount': len(completed),
@@ -55,7 +64,7 @@ def probe(port: int, sentinel: str, timeout: float) -> dict:
                           'Content-Type': 'application/json', 'Accept': 'text/event-stream',
                           'Authorization': 'Bearer test-key-no-provider', 'Connection': 'close'})
     started = time.monotonic()
-    with build_opener(ProxyHandler({})).open(request, timeout=timeout) as response:
+    with build_opener(ProxyHandler({}), NoRedirect()).open(request, timeout=timeout) as response:
         raw = response.read(2 * 1024 * 1024 + 1)
         if len(raw) > 2 * 1024 * 1024:
             raise RuntimeError('SSE_PROBE_BODY_LIMIT')
