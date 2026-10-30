@@ -1,0 +1,13 @@
+{
+  "official_commit": "329917ed143c267f6814c1d6a52dcaec8ab6567c",
+  "version": "v1.77.1-0.20261028061327-329917ed143c",
+  "source_url": "https://raw.githubusercontent.com/valyala/fasthttp/329917ed143c267f6814c1d6a52dcaec8ab6567c/streaming.go",
+  "streaming_go_sha256": "58cbdbb6740e5919b36a1049b4457b97c7499c792bb9c0aea436985389302802",
+  "cache_matches_official": true,
+  "module_zip_sha256": "b2c7345959ba8ab688b01d30d35d932642060d528b65dc673955e93a917d66bf",
+  "go_mod_sha256": "b45a6ea24cafc7f3de40a9f87ea6b17b87fbec9b912197f530248ae7863a37b1",
+  "sum": "h1:QyWiyavtnN3H27uPp835jpoGenXdz4sQGgvf2jC0zUc=",
+  "go_mod_sum": "h1:bhcOhCOsqMVIeYaks1kyHVLSuE8V83Yerkp1+mog3vM=",
+  "checksum_database_url": "https://sum.golang.org/lookup/github.com/valyala/fasthttp@v1.77.1-0.20261028061327-329917ed143c",
+  "checksum_database_record": "70476800\ngithub.com/valyala/fasthttp v1.77.1-0.20261028061327-329917ed143c h1:QyWiyavtnN3H27uPp835jpoGenXdz4sQGgvf2jC0zUc=\ngithub.com/valyala/fasthttp v1.77.1-0.20261028061327-329917ed143c/go.mod h1:bhcOhCOsqMVIeYaks1kyHVLSuE8V83Yerkp1+mog3vM=\n\ngo.sum database tree\n70477462\nkYrA3xca0juuLnnCk2wvbrtyCFJ0gvP3zMIVxSztnRo=\n\n\u2014 sum.golang.org Az3grqYvvdJ677GE3pgAIxjMnHUKfqAocUynLevx1DarsgDF6/gr/greYPfyfuwLOW/yD8fTiaJtuMvNaMKRYCN+fgU=\n"
+}

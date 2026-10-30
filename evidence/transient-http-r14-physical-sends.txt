@@ -1,0 +1,124 @@
+--- FAIL: TestPassthroughTransientPhysicalSends (0.19s)
+    --- FAIL: TestPassthroughTransientPhysicalSends/500/stream=false/recover (0.02s)
+        passthrough_retry_loop_test.go:104: sends=2 want=2 status=200 body="{\"ok\":true}" headers=map[Content-Type:application/json X-Origin:2]
+    --- FAIL: TestPassthroughTransientPhysicalSends/500/stream=false/header (0.00s)
+        passthrough_retry_loop_test.go:104: sends=1 want=1 status=500 body="raw-first:temporary" headers=map[Content-Type:application/json X-Origin:1 X-Should-Retry:false]
+    --- FAIL: TestPassthroughTransientPhysicalSends/500/stream=false/split_refused (0.00s)
+        passthrough_retry_loop_test.go:104: sends=1 want=1 status=500 body="raw-first:upstream_reset_replay_refused" headers=map[Content-Type:application/json X-Origin:1]
+    --- FAIL: TestPassthroughTransientPhysicalSends/500/stream=false/late_quota (0.00s)
+        passthrough_retry_loop_test.go:104: sends=1 want=1 status=500 body="raw-first:insufficient_quota" headers=map[Content-Type:application/json X-Origin:1]
+    --- FAIL: TestPassthroughTransientPhysicalSends/500/stream=false/exhaust (0.00s)
+        passthrough_retry_loop_test.go:104: sends=3 want=3 status=500 body="raw-first:temporary" headers=map[Content-Type:application/json X-Origin:3]
+    --- FAIL: TestPassthroughTransientPhysicalSends/500/stream=true/recover (0.01s)
+        passthrough_retry_loop_test.go:104: sends=2 want=2 status=200 body="{\"ok\":true}" headers=map[Content-Type:application/json X-Origin:2]
+    --- FAIL: TestPassthroughTransientPhysicalSends/500/stream=true/header (0.00s)
+        passthrough_retry_loop_test.go:104: sends=1 want=1 status=500 body="raw-first:temporary" headers=map[Content-Type:application/json X-Origin:1 X-Should-Retry:false]
+    --- FAIL: TestPassthroughTransientPhysicalSends/500/stream=true/split_refused (0.00s)
+        passthrough_retry_loop_test.go:104: sends=1 want=1 status=500 body="raw-first:upstream_reset_replay_refused" headers=map[Content-Type:application/json X-Origin:1]
+    --- FAIL: TestPassthroughTransientPhysicalSends/500/stream=true/late_quota (0.00s)
+        passthrough_retry_loop_test.go:104: sends=1 want=1 status=500 body="raw-first:insufficient_quota" headers=map[Content-Type:application/json X-Origin:1]
+    --- FAIL: TestPassthroughTransientPhysicalSends/500/stream=true/exhaust (0.01s)
+        passthrough_retry_loop_test.go:104: sends=3 want=3 status=500 body="raw-first:temporary" headers=map[Content-Type:application/json X-Origin:3]
+    --- FAIL: TestPassthroughTransientPhysicalSends/502/stream=false/recover (0.00s)
+        passthrough_retry_loop_test.go:104: sends=2 want=2 status=200 body="{\"ok\":true}" headers=map[Content-Type:application/json X-Origin:2]
+    --- FAIL: TestPassthroughTransientPhysicalSends/502/stream=false/header (0.00s)
+        passthrough_retry_loop_test.go:104: sends=1 want=1 status=502 body="raw-first:temporary" headers=map[Content-Type:application/json X-Origin:1 X-Should-Retry:false]
+    --- FAIL: TestPassthroughTransientPhysicalSends/502/stream=false/split_refused (0.00s)
+        passthrough_retry_loop_test.go:104: sends=1 want=1 status=502 body="raw-first:upstream_reset_replay_refused" headers=map[Content-Type:application/json X-Origin:1]
+    --- FAIL: TestPassthroughTransientPhysicalSends/502/stream=false/late_quota (0.00s)
+        passthrough_retry_loop_test.go:104: sends=1 want=1 status=502 body="raw-first:insufficient_quota" headers=map[Content-Type:application/json X-Origin:1]
+    --- FAIL: TestPassthroughTransientPhysicalSends/502/stream=false/exhaust (0.01s)
+        passthrough_retry_loop_test.go:104: sends=3 want=3 status=502 body="raw-first:temporary" headers=map[Content-Type:application/json X-Origin:3]
+    --- FAIL: TestPassthroughTransientPhysicalSends/502/stream=true/recover (0.00s)
+        passthrough_retry_loop_test.go:104: sends=2 want=2 status=200 body="{\"ok\":true}" headers=map[Content-Type:application/json X-Origin:2]
+    --- FAIL: TestPassthroughTransientPhysicalSends/502/stream=true/header (0.00s)
+        passthrough_retry_loop_test.go:104: sends=1 want=1 status=502 body="raw-first:temporary" headers=map[Content-Type:application/json X-Origin:1 X-Should-Retry:false]
+    --- FAIL: TestPassthroughTransientPhysicalSends/502/stream=true/split_refused (0.00s)
+        passthrough_retry_loop_test.go:104: sends=1 want=1 status=502 body="raw-first:upstream_reset_replay_refused" headers=map[Content-Type:application/json X-Origin:1]
+    --- FAIL: TestPassthroughTransientPhysicalSends/502/stream=true/late_quota (0.00s)
+        passthrough_retry_loop_test.go:104: sends=1 want=1 status=502 body="raw-first:insufficient_quota" headers=map[Content-Type:application/json X-Origin:1]
+    --- FAIL: TestPassthroughTransientPhysicalSends/502/stream=true/exhaust (0.01s)
+        passthrough_retry_loop_test.go:104: sends=3 want=3 status=502 body="raw-first:temporary" headers=map[Content-Type:application/json X-Origin:3]
+    --- FAIL: TestPassthroughTransientPhysicalSends/503/stream=false/recover (0.00s)
+        passthrough_retry_loop_test.go:104: sends=2 want=2 status=200 body="{\"ok\":true}" headers=map[Content-Type:application/json X-Origin:2]
+    --- FAIL: TestPassthroughTransientPhysicalSends/503/stream=false/header (0.00s)
+        passthrough_retry_loop_test.go:104: sends=1 want=1 status=503 body="raw-first:temporary" headers=map[Content-Type:application/json X-Origin:1 X-Should-Retry:false]
+    --- FAIL: TestPassthroughTransientPhysicalSends/503/stream=false/split_refused (0.00s)
+        passthrough_retry_loop_test.go:104: sends=1 want=1 status=503 body="raw-first:upstream_reset_replay_refused" headers=map[Content-Type:application/json X-Origin:1]
+    --- FAIL: TestPassthroughTransientPhysicalSends/503/stream=false/late_quota (0.00s)
+        passthrough_retry_loop_test.go:104: sends=1 want=1 status=503 body="raw-first:insufficient_quota" headers=map[Content-Type:application/json X-Origin:1]
+    --- FAIL: TestPassthroughTransientPhysicalSends/503/stream=false/exhaust (0.00s)
+        passthrough_retry_loop_test.go:104: sends=3 want=3 status=503 body="raw-first:temporary" headers=map[Content-Type:application/json X-Origin:3]
+    --- FAIL: TestPassthroughTransientPhysicalSends/503/stream=true/recover (0.00s)
+        passthrough_retry_loop_test.go:104: sends=2 want=2 status=200 body="{\"ok\":true}" headers=map[Content-Type:application/json X-Origin:2]
+    --- FAIL: TestPassthroughTransientPhysicalSends/503/stream=true/header (0.00s)
+        passthrough_retry_loop_test.go:104: sends=1 want=1 status=503 body="raw-first:temporary" headers=map[Content-Type:application/json X-Origin:1 X-Should-Retry:false]
+    --- FAIL: TestPassthroughTransientPhysicalSends/503/stream=true/split_refused (0.00s)
+        passthrough_retry_loop_test.go:104: sends=1 want=1 status=503 body="raw-first:upstream_reset_replay_refused" headers=map[Content-Type:application/json X-Origin:1]
+    --- FAIL: TestPassthroughTransientPhysicalSends/503/stream=true/late_quota (0.00s)
+        passthrough_retry_loop_test.go:104: sends=1 want=1 status=503 body="raw-first:insufficient_quota" headers=map[Content-Type:application/json X-Origin:1]
+    --- FAIL: TestPassthroughTransientPhysicalSends/503/stream=true/exhaust (0.01s)
+        passthrough_retry_loop_test.go:104: sends=3 want=3 status=503 body="raw-first:temporary" headers=map[Content-Type:application/json X-Origin:3]
+    --- FAIL: TestPassthroughTransientPhysicalSends/504/stream=false/recover (0.00s)
+        passthrough_retry_loop_test.go:104: sends=2 want=2 status=200 body="{\"ok\":true}" headers=map[Content-Type:application/json X-Origin:2]
+    --- FAIL: TestPassthroughTransientPhysicalSends/504/stream=false/header (0.00s)
+        passthrough_retry_loop_test.go:104: sends=1 want=1 status=504 body="raw-first:temporary" headers=map[Content-Type:application/json X-Origin:1 X-Should-Retry:false]
+    --- FAIL: TestPassthroughTransientPhysicalSends/504/stream=false/split_refused (0.00s)
+        passthrough_retry_loop_test.go:104: sends=1 want=1 status=504 body="raw-first:upstream_reset_replay_refused" headers=map[Content-Type:application/json X-Origin:1]
+    --- FAIL: TestPassthroughTransientPhysicalSends/504/stream=false/late_quota (0.00s)
+        passthrough_retry_loop_test.go:104: sends=1 want=1 status=504 body="raw-first:insufficient_quota" headers=map[Content-Type:application/json X-Origin:1]
+    --- FAIL: TestPassthroughTransientPhysicalSends/504/stream=false/exhaust (0.01s)
+        passthrough_retry_loop_test.go:104: sends=3 want=3 status=504 body="raw-first:temporary" headers=map[Content-Type:application/json X-Origin:3]
+    --- FAIL: TestPassthroughTransientPhysicalSends/504/stream=true/recover (0.00s)
+        passthrough_retry_loop_test.go:104: sends=2 want=2 status=200 body="{\"ok\":true}" headers=map[Content-Type:application/json X-Origin:2]
+    --- FAIL: TestPassthroughTransientPhysicalSends/504/stream=true/header (0.00s)
+        passthrough_retry_loop_test.go:104: sends=1 want=1 status=504 body="raw-first:temporary" headers=map[Content-Type:application/json X-Origin:1 X-Should-Retry:false]
+    --- FAIL: TestPassthroughTransientPhysicalSends/504/stream=true/split_refused (0.00s)
+        passthrough_retry_loop_test.go:104: sends=1 want=1 status=504 body="raw-first:upstream_reset_replay_refused" headers=map[Content-Type:application/json X-Origin:1]
+    --- FAIL: TestPassthroughTransientPhysicalSends/504/stream=true/late_quota (0.00s)
+        passthrough_retry_loop_test.go:104: sends=1 want=1 status=504 body="raw-first:insufficient_quota" headers=map[Content-Type:application/json X-Origin:1]
+    --- FAIL: TestPassthroughTransientPhysicalSends/504/stream=true/exhaust (0.01s)
+        passthrough_retry_loop_test.go:104: sends=3 want=3 status=504 body="raw-first:temporary" headers=map[Content-Type:application/json X-Origin:3]
+    --- FAIL: TestPassthroughTransientPhysicalSends/509/stream=false/recover (0.00s)
+        passthrough_retry_loop_test.go:104: sends=2 want=2 status=200 body="{\"ok\":true}" headers=map[Content-Type:application/json X-Origin:2]
+    --- FAIL: TestPassthroughTransientPhysicalSends/509/stream=false/header (0.00s)
+        passthrough_retry_loop_test.go:104: sends=1 want=1 status=509 body="raw-first:temporary" headers=map[Content-Type:application/json X-Origin:1 X-Should-Retry:false]
+    --- FAIL: TestPassthroughTransientPhysicalSends/509/stream=false/split_refused (0.00s)
+        passthrough_retry_loop_test.go:104: sends=1 want=1 status=509 body="raw-first:upstream_reset_replay_refused" headers=map[Content-Type:application/json X-Origin:1]
+    --- FAIL: TestPassthroughTransientPhysicalSends/509/stream=false/late_quota (0.00s)
+        passthrough_retry_loop_test.go:104: sends=1 want=1 status=509 body="raw-first:insufficient_quota" headers=map[Content-Type:application/json X-Origin:1]
+    --- FAIL: TestPassthroughTransientPhysicalSends/509/stream=false/exhaust (0.01s)
+        passthrough_retry_loop_test.go:104: sends=3 want=3 status=509 body="raw-first:temporary" headers=map[Content-Type:application/json X-Origin:3]
+    --- FAIL: TestPassthroughTransientPhysicalSends/509/stream=true/recover (0.01s)
+        passthrough_retry_loop_test.go:104: sends=2 want=2 status=200 body="{\"ok\":true}" headers=map[Content-Type:application/json X-Origin:2]
+    --- FAIL: TestPassthroughTransientPhysicalSends/509/stream=true/header (0.00s)
+        passthrough_retry_loop_test.go:104: sends=1 want=1 status=509 body="raw-first:temporary" headers=map[Content-Type:application/json X-Origin:1 X-Should-Retry:false]
+    --- FAIL: TestPassthroughTransientPhysicalSends/509/stream=true/split_refused (0.00s)
+        passthrough_retry_loop_test.go:104: sends=1 want=1 status=509 body="raw-first:upstream_reset_replay_refused" headers=map[Content-Type:application/json X-Origin:1]
+    --- FAIL: TestPassthroughTransientPhysicalSends/509/stream=true/late_quota (0.00s)
+        passthrough_retry_loop_test.go:104: sends=1 want=1 status=509 body="raw-first:insufficient_quota" headers=map[Content-Type:application/json X-Origin:1]
+    --- FAIL: TestPassthroughTransientPhysicalSends/509/stream=true/exhaust (0.01s)
+        passthrough_retry_loop_test.go:104: sends=3 want=3 status=509 body="raw-first:temporary" headers=map[Content-Type:application/json X-Origin:3]
+    --- FAIL: TestPassthroughTransientPhysicalSends/529/stream=false/recover (0.00s)
+        passthrough_retry_loop_test.go:104: sends=2 want=2 status=200 body="{\"ok\":true}" headers=map[Content-Type:application/json X-Origin:2]
+    --- FAIL: TestPassthroughTransientPhysicalSends/529/stream=false/header (0.00s)
+        passthrough_retry_loop_test.go:104: sends=1 want=1 status=529 body="raw-first:temporary" headers=map[Content-Type:application/json X-Origin:1 X-Should-Retry:false]
+    --- FAIL: TestPassthroughTransientPhysicalSends/529/stream=false/split_refused (0.00s)
+        passthrough_retry_loop_test.go:104: sends=1 want=1 status=529 body="raw-first:upstream_reset_replay_refused" headers=map[Content-Type:application/json X-Origin:1]
+    --- FAIL: TestPassthroughTransientPhysicalSends/529/stream=false/late_quota (0.00s)
+        passthrough_retry_loop_test.go:104: sends=1 want=1 status=529 body="raw-first:insufficient_quota" headers=map[Content-Type:application/json X-Origin:1]
+    --- FAIL: TestPassthroughTransientPhysicalSends/529/stream=false/exhaust (0.01s)
+        passthrough_retry_loop_test.go:104: sends=3 want=3 status=529 body="raw-first:temporary" headers=map[Content-Type:application/json X-Origin:3]
+    --- FAIL: TestPassthroughTransientPhysicalSends/529/stream=true/recover (0.00s)
+        passthrough_retry_loop_test.go:104: sends=2 want=2 status=200 body="{\"ok\":true}" headers=map[Content-Type:application/json X-Origin:2]
+    --- FAIL: TestPassthroughTransientPhysicalSends/529/stream=true/header (0.00s)
+        passthrough_retry_loop_test.go:104: sends=1 want=1 status=529 body="raw-first:temporary" headers=map[Content-Type:application/json X-Origin:1 X-Should-Retry:false]
+    --- FAIL: TestPassthroughTransientPhysicalSends/529/stream=true/split_refused (0.00s)
+        passthrough_retry_loop_test.go:104: sends=1 want=1 status=529 body="raw-first:upstream_reset_replay_refused" headers=map[Content-Type:application/json X-Origin:1]
+    --- FAIL: TestPassthroughTransientPhysicalSends/529/stream=true/late_quota (0.00s)
+        passthrough_retry_loop_test.go:104: sends=1 want=1 status=529 body="raw-first:insufficient_quota" headers=map[Content-Type:application/json X-Origin:1]
+    --- FAIL: TestPassthroughTransientPhysicalSends/529/stream=true/exhaust (0.01s)
+        passthrough_retry_loop_test.go:104: sends=3 want=3 status=529 body="raw-first:temporary" headers=map[Content-Type:application/json X-Origin:3]
+FAIL
+FAIL	github.com/maximhq/bifrost/core	0.648s
+FAIL

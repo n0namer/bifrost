@@ -1,0 +1,10 @@
+--- FAIL: TestPassthroughStreamReadFailureNeverReplays (0.07s)
+    --- FAIL: TestPassthroughStreamReadFailureNeverReplays/200 (0.04s)
+        passthrough_retry_loop_test.go:152: sends=1 readFailed=false body="data: partial-output\n\n"
+    --- FAIL: TestPassthroughStreamReadFailureNeverReplays/502 (0.02s)
+        passthrough_retry_loop_test.go:152: sends=3 readFailed=false body="data: partial-output\n\n"
+    --- FAIL: TestPassthroughStreamReadFailureNeverReplays/509 (0.01s)
+        passthrough_retry_loop_test.go:152: sends=3 readFailed=false body="data: partial-output\n\n"
+FAIL
+FAIL	github.com/maximhq/bifrost/core	1.559s
+FAIL

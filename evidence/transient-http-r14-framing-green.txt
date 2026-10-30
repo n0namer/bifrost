@@ -1,0 +1,134 @@
+# github.com/maximhq/bifrost/core
+core\decisionemulation.go:9:2: github.com/pinecone-io/go-pinecone/v5@v5.3.0 requires
+	github.com/google/go-cmp@v0.6.0: verifying go.mod: github.com/google/go-cmp@v0.6.0/go.mod: Get "https://sum.golang.org/lookup/github.com/google/go-cmp@v0.6.0": EOF
+# github.com/maximhq/bifrost/core
+core\bifrost.go:17:2: github.com/pinecone-io/go-pinecone/v5@v5.3.0 requires
+	github.com/google/go-cmp@v0.6.0: verifying go.mod: github.com/google/go-cmp@v0.6.0/go.mod: Get "https://sum.golang.org/lookup/github.com/google/go-cmp@v0.6.0": EOF
+# github.com/maximhq/bifrost/core
+core\bifrost.go:19:2: github.com/pinecone-io/go-pinecone/v5@v5.3.0 requires
+	github.com/google/go-cmp@v0.6.0: verifying go.mod: github.com/google/go-cmp@v0.6.0/go.mod: Get "https://sum.golang.org/lookup/github.com/google/go-cmp@v0.6.0": EOF
+# github.com/maximhq/bifrost/core
+core\schemas\mcp.go:22:2: github.com/pinecone-io/go-pinecone/v5@v5.3.0 requires
+	github.com/google/go-cmp@v0.6.0: verifying go.mod: github.com/google/go-cmp@v0.6.0/go.mod: Get "https://sum.golang.org/lookup/github.com/google/go-cmp@v0.6.0": EOF
+# github.com/maximhq/bifrost/core
+core\schemas\mcp.go:24:2: github.com/pinecone-io/go-pinecone/v5@v5.3.0 requires
+	github.com/google/go-cmp@v0.6.0: verifying go.mod: github.com/google/go-cmp@v0.6.0/go.mod: Get "https://sum.golang.org/lookup/github.com/google/go-cmp@v0.6.0": EOF
+# github.com/maximhq/bifrost/core
+core\schemas\chatcompletions.go:11:2: github.com/pinecone-io/go-pinecone/v5@v5.3.0 requires
+	github.com/google/go-cmp@v0.6.0: verifying go.mod: github.com/google/go-cmp@v0.6.0/go.mod: Get "https://sum.golang.org/lookup/github.com/google/go-cmp@v0.6.0": EOF
+# github.com/maximhq/bifrost/core
+core\schemas\chatcompletions.go:12:2: github.com/pinecone-io/go-pinecone/v5@v5.3.0 requires
+	github.com/google/go-cmp@v0.6.0: verifying go.mod: github.com/google/go-cmp@v0.6.0/go.mod: Get "https://sum.golang.org/lookup/github.com/google/go-cmp@v0.6.0": EOF
+# github.com/maximhq/bifrost/core
+core\schemas\context_native.go:5:8: github.com/pinecone-io/go-pinecone/v5@v5.3.0 requires
+	github.com/google/go-cmp@v0.6.0: verifying go.mod: github.com/google/go-cmp@v0.6.0/go.mod: Get "https://sum.golang.org/lookup/github.com/google/go-cmp@v0.6.0": EOF
+# github.com/maximhq/bifrost/core
+core\schemas\relay.go:10:2: github.com/pinecone-io/go-pinecone/v5@v5.3.0 requires
+	github.com/google/go-cmp@v0.6.0: verifying go.mod: github.com/google/go-cmp@v0.6.0/go.mod: Get "https://sum.golang.org/lookup/github.com/google/go-cmp@v0.6.0": EOF
+# github.com/maximhq/bifrost/core
+core\mcp\clientmanager.go:20:2: github.com/pinecone-io/go-pinecone/v5@v5.3.0 requires
+	github.com/google/go-cmp@v0.6.0: verifying go.mod: github.com/google/go-cmp@v0.6.0/go.mod: Get "https://sum.golang.org/lookup/github.com/google/go-cmp@v0.6.0": EOF
+# github.com/maximhq/bifrost/core
+core\network\http.go:23:2: github.com/pinecone-io/go-pinecone/v5@v5.3.0 requires
+	github.com/google/go-cmp@v0.6.0: verifying go.mod: github.com/google/go-cmp@v0.6.0/go.mod: Get "https://sum.golang.org/lookup/github.com/google/go-cmp@v0.6.0": EOF
+# github.com/maximhq/bifrost/core
+core\mcp\codemode\starlark\sandbox.go:12:2: github.com/pinecone-io/go-pinecone/v5@v5.3.0 requires
+	github.com/google/go-cmp@v0.6.0: verifying go.mod: github.com/google/go-cmp@v0.6.0/go.mod: Get "https://sum.golang.org/lookup/github.com/google/go-cmp@v0.6.0": EOF
+# github.com/maximhq/bifrost/core
+core\mcp\codemode\starlark\sandbox.go:13:2: github.com/pinecone-io/go-pinecone/v5@v5.3.0 requires
+	github.com/google/go-cmp@v0.6.0: verifying go.mod: github.com/google/go-cmp@v0.6.0/go.mod: Get "https://sum.golang.org/lookup/github.com/google/go-cmp@v0.6.0": EOF
+# github.com/maximhq/bifrost/core
+core\mcp\codemode\starlark\executecode.go:12:2: github.com/pinecone-io/go-pinecone/v5@v5.3.0 requires
+	github.com/google/go-cmp@v0.6.0: verifying go.mod: github.com/google/go-cmp@v0.6.0/go.mod: Get "https://sum.golang.org/lookup/github.com/google/go-cmp@v0.6.0": EOF
+# github.com/maximhq/bifrost/core
+core\mcp\codemode\starlark\sandbox.go:15:2: github.com/pinecone-io/go-pinecone/v5@v5.3.0 requires
+	github.com/google/go-cmp@v0.6.0: verifying go.mod: github.com/google/go-cmp@v0.6.0/go.mod: Get "https://sum.golang.org/lookup/github.com/google/go-cmp@v0.6.0": EOF
+# github.com/maximhq/bifrost/core
+core\mcp\codemode\starlark\sandbox.go:16:2: github.com/pinecone-io/go-pinecone/v5@v5.3.0 requires
+	github.com/google/go-cmp@v0.6.0: verifying go.mod: github.com/google/go-cmp@v0.6.0/go.mod: Get "https://sum.golang.org/lookup/github.com/google/go-cmp@v0.6.0": EOF
+# github.com/maximhq/bifrost/core
+core\providers\utils\decompression.go:10:2: github.com/pinecone-io/go-pinecone/v5@v5.3.0 requires
+	github.com/google/go-cmp@v0.6.0: verifying go.mod: github.com/google/go-cmp@v0.6.0/go.mod: Get "https://sum.golang.org/lookup/github.com/google/go-cmp@v0.6.0": EOF
+# github.com/maximhq/bifrost/core
+core\providers\utils\namespacetools.go:9:2: github.com/pinecone-io/go-pinecone/v5@v5.3.0 requires
+	github.com/google/go-cmp@v0.6.0: verifying go.mod: github.com/google/go-cmp@v0.6.0/go.mod: Get "https://sum.golang.org/lookup/github.com/google/go-cmp@v0.6.0": EOF
+# github.com/maximhq/bifrost/core
+core\providers\utils\utils.go:32:2: github.com/pinecone-io/go-pinecone/v5@v5.3.0 requires
+	github.com/google/go-cmp@v0.6.0: verifying go.mod: github.com/google/go-cmp@v0.6.0/go.mod: Get "https://sum.golang.org/lookup/github.com/google/go-cmp@v0.6.0": EOF
+# github.com/maximhq/bifrost/core
+core\providers\utils\decompression.go:11:2: github.com/pinecone-io/go-pinecone/v5@v5.3.0 requires
+	github.com/google/go-cmp@v0.6.0: verifying go.mod: github.com/google/go-cmp@v0.6.0/go.mod: Get "https://sum.golang.org/lookup/github.com/google/go-cmp@v0.6.0": EOF
+# github.com/maximhq/bifrost/core
+core\providers\utils\fetch.go:20:2: github.com/pinecone-io/go-pinecone/v5@v5.3.0 requires
+	github.com/google/go-cmp@v0.6.0: verifying go.mod: github.com/google/go-cmp@v0.6.0/go.mod: Get "https://sum.golang.org/lookup/github.com/google/go-cmp@v0.6.0": EOF
+# github.com/maximhq/bifrost/core
+core\providers\utils\models.go:18:2: github.com/pinecone-io/go-pinecone/v5@v5.3.0 requires
+	github.com/google/go-cmp@v0.6.0: verifying go.mod: github.com/google/go-cmp@v0.6.0/go.mod: Get "https://sum.golang.org/lookup/github.com/google/go-cmp@v0.6.0": EOF
+# github.com/maximhq/bifrost/core
+core\providers\utils\models.go:19:2: github.com/pinecone-io/go-pinecone/v5@v5.3.0 requires
+	github.com/google/go-cmp@v0.6.0: verifying go.mod: github.com/google/go-cmp@v0.6.0/go.mod: Get "https://sum.golang.org/lookup/github.com/google/go-cmp@v0.6.0": EOF
+# github.com/maximhq/bifrost/core
+core\providers\azure\azure.go:20:2: github.com/pinecone-io/go-pinecone/v5@v5.3.0 requires
+	github.com/google/go-cmp@v0.6.0: verifying go.mod: github.com/google/go-cmp@v0.6.0/go.mod: Get "https://sum.golang.org/lookup/github.com/google/go-cmp@v0.6.0": EOF
+# github.com/maximhq/bifrost/core
+core\providers\azure\azure.go:21:2: github.com/pinecone-io/go-pinecone/v5@v5.3.0 requires
+	github.com/google/go-cmp@v0.6.0: verifying go.mod: github.com/google/go-cmp@v0.6.0/go.mod: Get "https://sum.golang.org/lookup/github.com/google/go-cmp@v0.6.0": EOF
+# github.com/maximhq/bifrost/core
+core\providers\azure\azure.go:22:2: github.com/pinecone-io/go-pinecone/v5@v5.3.0 requires
+	github.com/google/go-cmp@v0.6.0: verifying go.mod: github.com/google/go-cmp@v0.6.0/go.mod: Get "https://sum.golang.org/lookup/github.com/google/go-cmp@v0.6.0": EOF
+# github.com/maximhq/bifrost/core
+core\providers\utils\tokencache\jwtbearer.go:17:2: github.com/pinecone-io/go-pinecone/v5@v5.3.0 requires
+	github.com/google/go-cmp@v0.6.0: verifying go.mod: github.com/google/go-cmp@v0.6.0/go.mod: Get "https://sum.golang.org/lookup/github.com/google/go-cmp@v0.6.0": EOF
+# github.com/maximhq/bifrost/core
+core\providers\utils\tokencache\clientcredentials.go:14:2: github.com/pinecone-io/go-pinecone/v5@v5.3.0 requires
+	github.com/google/go-cmp@v0.6.0: verifying go.mod: github.com/google/go-cmp@v0.6.0/go.mod: Get "https://sum.golang.org/lookup/github.com/google/go-cmp@v0.6.0": EOF
+# github.com/maximhq/bifrost/core
+core\providers\utils\tokencache\clientcredentials.go:15:2: github.com/pinecone-io/go-pinecone/v5@v5.3.0 requires
+	github.com/google/go-cmp@v0.6.0: verifying go.mod: github.com/google/go-cmp@v0.6.0/go.mod: Get "https://sum.golang.org/lookup/github.com/google/go-cmp@v0.6.0": EOF
+# github.com/maximhq/bifrost/core
+core\providers\bedrock\bedrock.go:22:2: github.com/pinecone-io/go-pinecone/v5@v5.3.0 requires
+	github.com/google/go-cmp@v0.6.0: verifying go.mod: github.com/google/go-cmp@v0.6.0/go.mod: Get "https://sum.golang.org/lookup/github.com/google/go-cmp@v0.6.0": EOF
+# github.com/maximhq/bifrost/core
+core\providers\bedrock\bedrock.go:23:2: github.com/pinecone-io/go-pinecone/v5@v5.3.0 requires
+	github.com/google/go-cmp@v0.6.0: verifying go.mod: github.com/google/go-cmp@v0.6.0/go.mod: Get "https://sum.golang.org/lookup/github.com/google/go-cmp@v0.6.0": EOF
+# github.com/maximhq/bifrost/core
+core\providers\bedrock\bedrock.go:24:2: github.com/pinecone-io/go-pinecone/v5@v5.3.0 requires
+	github.com/google/go-cmp@v0.6.0: verifying go.mod: github.com/google/go-cmp@v0.6.0/go.mod: Get "https://sum.golang.org/lookup/github.com/google/go-cmp@v0.6.0": EOF
+# github.com/maximhq/bifrost/core
+core\providers\bedrock\bedrock.go:25:2: github.com/pinecone-io/go-pinecone/v5@v5.3.0 requires
+	github.com/google/go-cmp@v0.6.0: verifying go.mod: github.com/google/go-cmp@v0.6.0/go.mod: Get "https://sum.golang.org/lookup/github.com/google/go-cmp@v0.6.0": EOF
+# github.com/maximhq/bifrost/core
+core\providers\bedrock\s3.go:11:2: github.com/pinecone-io/go-pinecone/v5@v5.3.0 requires
+	github.com/google/go-cmp@v0.6.0: verifying go.mod: github.com/google/go-cmp@v0.6.0/go.mod: Get "https://sum.golang.org/lookup/github.com/google/go-cmp@v0.6.0": EOF
+# github.com/maximhq/bifrost/core
+core\providers\bedrock\bedrock.go:26:2: github.com/pinecone-io/go-pinecone/v5@v5.3.0 requires
+	github.com/google/go-cmp@v0.6.0: verifying go.mod: github.com/google/go-cmp@v0.6.0/go.mod: Get "https://sum.golang.org/lookup/github.com/google/go-cmp@v0.6.0": EOF
+# github.com/maximhq/bifrost/core
+core\providers\bedrock\s3.go:12:2: github.com/pinecone-io/go-pinecone/v5@v5.3.0 requires
+	github.com/google/go-cmp@v0.6.0: verifying go.mod: github.com/google/go-cmp@v0.6.0/go.mod: Get "https://sum.golang.org/lookup/github.com/google/go-cmp@v0.6.0": EOF
+# github.com/maximhq/bifrost/core
+core\providers\bedrock\bedrock.go:27:2: github.com/pinecone-io/go-pinecone/v5@v5.3.0 requires
+	github.com/google/go-cmp@v0.6.0: verifying go.mod: github.com/google/go-cmp@v0.6.0/go.mod: Get "https://sum.golang.org/lookup/github.com/google/go-cmp@v0.6.0": EOF
+# github.com/maximhq/bifrost/core
+core\providers\bedrock\signer.go:16:2: github.com/pinecone-io/go-pinecone/v5@v5.3.0 requires
+	github.com/google/go-cmp@v0.6.0: verifying go.mod: github.com/google/go-cmp@v0.6.0/go.mod: Get "https://sum.golang.org/lookup/github.com/google/go-cmp@v0.6.0": EOF
+# github.com/maximhq/bifrost/core
+core\providers\gemini\types.go:14:2: github.com/pinecone-io/go-pinecone/v5@v5.3.0 requires
+	github.com/google/go-cmp@v0.6.0: verifying go.mod: github.com/google/go-cmp@v0.6.0/go.mod: Get "https://sum.golang.org/lookup/github.com/google/go-cmp@v0.6.0": EOF
+# github.com/maximhq/bifrost/core
+core\providers\vertex\awsfederation.go:19:2: github.com/pinecone-io/go-pinecone/v5@v5.3.0 requires
+	github.com/google/go-cmp@v0.6.0: verifying go.mod: github.com/google/go-cmp@v0.6.0/go.mod: Get "https://sum.golang.org/lookup/github.com/google/go-cmp@v0.6.0": EOF
+# github.com/maximhq/bifrost/core
+core\providers\vertex\awsfederation.go:25:2: github.com/pinecone-io/go-pinecone/v5@v5.3.0 requires
+	github.com/google/go-cmp@v0.6.0: verifying go.mod: github.com/google/go-cmp@v0.6.0/go.mod: Get "https://sum.golang.org/lookup/github.com/google/go-cmp@v0.6.0": EOF
+# github.com/maximhq/bifrost/core
+core\providers\vertex\awsfederation.go:26:2: github.com/pinecone-io/go-pinecone/v5@v5.3.0 requires
+	github.com/google/go-cmp@v0.6.0: verifying go.mod: github.com/google/go-cmp@v0.6.0/go.mod: Get "https://sum.golang.org/lookup/github.com/google/go-cmp@v0.6.0": EOF
+# github.com/maximhq/bifrost/core
+core\logger.go:10:2: github.com/pinecone-io/go-pinecone/v5@v5.3.0 requires
+	github.com/google/go-cmp@v0.6.0: verifying go.mod: github.com/google/go-cmp@v0.6.0/go.mod: Get "https://sum.golang.org/lookup/github.com/google/go-cmp@v0.6.0": EOF
+# github.com/maximhq/bifrost/core
+core\logger.go:11:2: github.com/pinecone-io/go-pinecone/v5@v5.3.0 requires
+	github.com/google/go-cmp@v0.6.0: verifying go.mod: github.com/google/go-cmp@v0.6.0/go.mod: Get "https://sum.golang.org/lookup/github.com/google/go-cmp@v0.6.0": EOF
+FAIL	github.com/maximhq/bifrost/core [setup failed]
+FAIL

@@ -1,0 +1,3 @@
+[augment-provider-harness] wrote evidence/transient-http-r14-harness-augmented.json with 639 generated requests, 528 chained-var guards, 471 scripts sending the setup token
+[filter-collection] wrote evidence/transient-http-r14-harness-filtered.json with 4 requests after filter (provider=openai, feature=transient-http-retry, feature-any=-, class=-, shard=-, smoke=-, rerun-failed=false, serial=-)
+PASS: four cases retained; scripts parse
