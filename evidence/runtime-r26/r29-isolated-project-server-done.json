@@ -1,0 +1,79 @@
+{
+  "schema": "vp49-bifrost-r29-isolated-project-acceptance-v1",
+  "recordedAt": "2026-10-30T22:38:00Z",
+  "provenance": "Coordinator checkpoint summarizing authoritative on-device CrewSync task readbacks and original native App Server receipts. Original source/QA/runtime receipts remain on VP49; this summary is not a substitute for their bytes.",
+  "sourceCommit": "88b335b92192deab1edcd338c7276ae1a40cc1dd",
+  "binarySha256": "69089fbe685fc4880adb505188bc7d098961a1502458e0c73cae1d7597d644e7",
+  "optIn": "BIFROST_UNSAFE_RETRY_AMBIGUOUS_POST=1",
+  "approvedRisk": "An ambiguous upstream model-inference POST may be executed more than once; this was explicitly authorized by the user for isolated Bifrost canary. CrewSync task DONE effects remain protected against replay.",
+  "validation": {
+    "goCorePassthrough": "PASS",
+    "binaryFixtureUnsafe": "6/6 PASS; synthetic OpenCodex 429 and 502 retries incl HTTP/SSE; recovery sends exactly2; bounded exhaustion exactly3",
+    "binaryFixtureDefault": "29/29 PASS; separate default-policy fixture",
+    "realProviderSSE": "OpenCodex through private Bifrost port15186: HTTP200; response.completed exactly1; client retries0",
+    "nativePilot": {
+      "originalParentThread": "01a18c38-b708-7c80-91cb-405f24d2748c",
+      "parentTurn": "01a18eef-46d4-7e53-b779-884964a713f9",
+      "model": "gpt-6.1-sol",
+      "turn": "completed",
+      "goal": "complete",
+      "nativeChildThread": "01a18eef-fb10-76d1-910f-3759338dc9ba",
+      "childTurn": "01a18eef-fb3d-7992-9b7c-e98214e11c30",
+      "childModel": "gpt-6-luna",
+      "childTurnStatus": "completed",
+      "childGoal": "complete",
+      "childToolOutcome": "PILOT_R28_TOOL_OK c8b66345799fd3768b970ca5",
+      "sentinelReads": 1,
+      "lineageVerified": true
+    },
+    "independentSourceQA": "QA_ACCEPT (native reviewer SHA 88b335b)",
+    "independentRollbackQA": "bifrost-canary:pilot-rollback-qa CrewSync SERVER_DONE"
+  },
+  "runtimeReadback": {
+    "openCodex": {
+      "pid": 11352,
+      "localPort": 10111
+    },
+    "newOptInCanary": {
+      "pid": 24168,
+      "bind": "127.0.0.1:15186",
+      "metricsHttpStatus": 200
+    },
+    "priorCanary": {
+      "pid": 107928,
+      "bind": "127.0.0.1:15185",
+      "metricsHttpStatus": 200
+    },
+    "globalConfigSha256": "dccf8a88f8217191035ef9859cef7d73f3b71869b1556c03eaf0b92b4857a3dc",
+    "globalRoutingChanged": false,
+    "isolatedConfigChanged": false,
+    "supervisorNotVerified": true
+  },
+  "crewSync": {
+    "root": "bifrost-canary:root",
+    "rootServerStatus": "done",
+    "completedOnThisContinuation": [
+      "bifrost-canary:ocx-reset-repair",
+      "bifrost-canary:pilot"
+    ],
+    "previousRollbackQA": "bifrost-canary:pilot-rollback-qa SERVER_DONE",
+    "planKey": "bifrost-canary:plan:active",
+    "revision": "bifrost-canary-20261031-r29-isolated-project-server-done",
+    "finalSnapshot": {
+      "rootStatus": "done",
+      "requiredIncomplete": [],
+      "ready": []
+    },
+    "localAcceptanceReceipts": [
+      "evidence/unsafe-r26-crewsync-acceptance.json",
+      "evidence/pilot-r28-acceptance.json"
+    ]
+  },
+  "limitations": [
+    "The physical connection reset root cause inside OpenCodex is still unresolved; this is an explicit replay-capable Bifrost operational workaround.",
+    "Main Codex/global provider routing is still direct OpenCodex; user-facing production rollout to all projects is NOT claimed.",
+    "New private canary auto-restart/supervisor not verified; running PID readback only.",
+    "Historical separate r11 root native Goal blocked; later original pilot Manager and child native Goals are complete. No historical Goal completion is fabricated."
+  ],
+  "backupSourceBranch": "backup/vp49-bifrost-unsafe-replay-r26-20261031"
+}
