@@ -1,0 +1,33 @@
+{
+  "at": "2026-10-30T18:41:23.915693+00:00",
+  "source_sha": "d45ee450b4a9ab1d49bb045ae1b1a8224f5be131",
+  "verdict": "QA_ACCEPT",
+  "scope": "frozen source MVP only",
+  "qa_receipt": "C:\\Users\\\u0420\u0430\u0444\u0438\u043a\\Documents\\DEV\\llm-gateway-bakeoff-20261030\\evidence\\transient-http-r17-independent-qa-d45ee450b4a9.json",
+  "qa_receipt_sha256": "d8f77132b584bcefced43dda71812d9bb052fa24fe9fd017ca52a56f21163a51",
+  "qa_report": "C:\\Users\\\u0420\u0430\u0444\u0438\u043a\\Documents\\DEV\\llm-gateway-bakeoff-20261030\\evidence\\transient-http-r17-independent-qa-d45ee450b4a9.md",
+  "qa_report_sha256": "8ffc2db7bcf6e81e2e901057d0206c2815814be3b18448d6de8b06984021a210",
+  "native_thread": "01a18dba-d3b3-7300-84fe-cbdaff292365",
+  "native_turn": "01a18e14-db1c-7f21-a6d8-2467b7e8cd34",
+  "effective_model": "gpt-6.1-terra",
+  "effective_effort": "high",
+  "model_verification": "outer app-server thread/resume readback plus explicit turn/start",
+  "goal_accounting_limitation": "original completed R16 record preserved; native reactivation/objective update unavailable",
+  "source_review_layers": [
+    "blind accepted source",
+    "edge accepted source",
+    "acceptance audit passed source"
+  ],
+  "logs_verified": {
+    "r17-qa-core-list.txt": "8f64f467b32843d538be5fe70ac8851d25d2650052f65c15c66e462c9193f718",
+    "r17-qa-core.txt": "b786ce727b8b832d065574860db044870143b498b5e1fac05c3cb2c4207bd89c",
+    "r17-qa-module.txt": "79542dd8c6a4caa79ca997b97f982ca9ca49061834164c2d8e053334db55006a",
+    "r17-qa-openai-list.txt": "9f944e8eba4a5ad3e50f64969a58cdea291f2995d78705d2f4921e6dd5f5a9f0",
+    "r17-qa-openai-named.txt": "9d524879915f3ead9eef714023392ab28a41e134233091606dc2d53a8d823ed6",
+    "r17-qa-openai.txt": "32bd38b32e673cff3aaa957eb62db27420decdf0fbdda58e69a829928a196eb3",
+    "r17-qa-utils-list.txt": "f80ffa3ea35a4bad268ec87d89e10a8e422676ac58719583faa01b1b5d881d6a",
+    "r17-qa-utils.txt": "8a8ebe5c4c8f3ebc704598a2f81a78669b15c1d95828deea7b838d99e6ccab6d"
+  },
+  "physical_cases_verified": 32,
+  "server_done": false
+}

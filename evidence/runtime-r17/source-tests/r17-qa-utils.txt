@@ -1,0 +1,148 @@
+=== RUN   TestContextTransport_ChunkedStreamReleasesConnForReuse
+--- PASS: TestContextTransport_ChunkedStreamReleasesConnForReuse (0.00s)
+=== RUN   TestContextTransport_TruncatedChunkedStreamReportsUnexpectedEOFAndDiscardsConn
+--- PASS: TestContextTransport_TruncatedChunkedStreamReportsUnexpectedEOFAndDiscardsConn (0.00s)
+=== RUN   TestContextTransport_TruncatedContentLengthStreamReportsUnexpectedEOFAndDiscardsConn
+=== RUN   TestContextTransport_TruncatedContentLengthStreamReportsUnexpectedEOFAndDiscardsConn/received_0_bytes
+    makerequest_test.go:666: body = "", err = unexpected EOF, fullyRead = false
+=== RUN   TestContextTransport_TruncatedContentLengthStreamReportsUnexpectedEOFAndDiscardsConn/received_2_bytes
+    makerequest_test.go:666: body = "{}", err = unexpected EOF, fullyRead = false
+--- PASS: TestContextTransport_TruncatedContentLengthStreamReportsUnexpectedEOFAndDiscardsConn (0.00s)
+    --- PASS: TestContextTransport_TruncatedContentLengthStreamReportsUnexpectedEOFAndDiscardsConn/received_0_bytes (0.00s)
+    --- PASS: TestContextTransport_TruncatedContentLengthStreamReportsUnexpectedEOFAndDiscardsConn/received_2_bytes (0.00s)
+=== RUN   TestContextTransport_ContentLengthAndIdentityBodies
+--- PASS: TestContextTransport_ContentLengthAndIdentityBodies (0.00s)
+=== RUN   TestContextTransport_HeadAnd204SkipBody
+--- PASS: TestContextTransport_HeadAnd204SkipBody (0.00s)
+=== RUN   TestContextTransport_InterimResponsesSkipped
+--- PASS: TestContextTransport_InterimResponsesSkipped (0.00s)
+=== RUN   TestContextTransport_CloseWithErrorInterruptsBlockedRead
+--- PASS: TestContextTransport_CloseWithErrorInterruptsBlockedRead (0.10s)
+=== RUN   TestContextTransport_MatchesDefaultForBufferedBodies
+--- PASS: TestContextTransport_MatchesDefaultForBufferedBodies (0.00s)
+=== RUN   TestContextTransport_BufferedLateCancelDoesNotPoisonPool
+--- PASS: TestContextTransport_BufferedLateCancelDoesNotPoisonPool (0.05s)
+=== RUN   TestStreamPassthrough_HTTPErrorIgnoresTerminalEvents
+=== RUN   TestStreamPassthrough_HTTPErrorIgnoresTerminalEvents/429
+=== RUN   TestStreamPassthrough_HTTPErrorIgnoresTerminalEvents/502
+=== RUN   TestStreamPassthrough_HTTPErrorIgnoresTerminalEvents/509
+--- PASS: TestStreamPassthrough_HTTPErrorIgnoresTerminalEvents (0.00s)
+    --- PASS: TestStreamPassthrough_HTTPErrorIgnoresTerminalEvents/429 (0.00s)
+    --- PASS: TestStreamPassthrough_HTTPErrorIgnoresTerminalEvents/502 (0.00s)
+    --- PASS: TestStreamPassthrough_HTTPErrorIgnoresTerminalEvents/509 (0.00s)
+=== RUN   TestStreamPassthrough_NonRetryStatusKeepsTerminalEvents
+--- PASS: TestStreamPassthrough_NonRetryStatusKeepsTerminalEvents (0.00s)
+=== RUN   TestStreamPassthrough_EndsStreamAbandonsParkedUpstream
+--- PASS: TestStreamPassthrough_EndsStreamAbandonsParkedUpstream (0.00s)
+=== RUN   TestStreamPassthrough_EndsStreamFinalizesBeforeClientHangup
+--- PASS: TestStreamPassthrough_EndsStreamFinalizesBeforeClientHangup (0.00s)
+=== RUN   TestCheckStreamPreambleNilClassifierCancellation
+--- PASS: TestCheckStreamPreambleNilClassifierCancellation (0.00s)
+=== RUN   TestCheckStreamPreambleDeadlineAllowsFallbacks
+--- PASS: TestCheckStreamPreambleDeadlineAllowsFallbacks (0.00s)
+=== RUN   TestCheckStreamPreambleCancellation
+=== RUN   TestCheckStreamPreambleCancellation/startup
+=== RUN   TestCheckStreamPreambleCancellation/replay
+--- PASS: TestCheckStreamPreambleCancellation (0.01s)
+    --- PASS: TestCheckStreamPreambleCancellation/startup (0.01s)
+    --- PASS: TestCheckStreamPreambleCancellation/replay (0.00s)
+=== RUN   TestCheckStreamPreambleForError
+=== RUN   TestCheckStreamPreambleForError/empty
+=== RUN   TestCheckStreamPreambleForError/preamble_then_EOF
+=== RUN   TestCheckStreamPreambleForError/error_after_three_preambles
+=== RUN   TestCheckStreamPreambleForError/output_then_error_stays_in_stream
+=== RUN   TestCheckStreamPreambleForError/chunk_limit_commits
+=== RUN   TestCheckStreamPreambleForError/byte_limit_commits
+--- PASS: TestCheckStreamPreambleForError (0.00s)
+    --- PASS: TestCheckStreamPreambleForError/empty (0.00s)
+    --- PASS: TestCheckStreamPreambleForError/preamble_then_EOF (0.00s)
+    --- PASS: TestCheckStreamPreambleForError/error_after_three_preambles (0.00s)
+    --- PASS: TestCheckStreamPreambleForError/output_then_error_stays_in_stream (0.00s)
+    --- PASS: TestCheckStreamPreambleForError/chunk_limit_commits (0.00s)
+    --- PASS: TestCheckStreamPreambleForError/byte_limit_commits (0.00s)
+=== RUN   TestCheckFirstStreamChunk_ErrorInFirstChunk
+--- PASS: TestCheckFirstStreamChunk_ErrorInFirstChunk (0.00s)
+=== RUN   TestCheckFirstStreamChunk_ValidFirstChunk
+--- PASS: TestCheckFirstStreamChunk_ValidFirstChunk (0.00s)
+=== RUN   TestCheckFirstStreamChunk_NilStream
+--- PASS: TestCheckFirstStreamChunk_NilStream (0.00s)
+=== RUN   TestCheckFirstStreamChunk_EmptyStream
+--- PASS: TestCheckFirstStreamChunk_EmptyStream (0.00s)
+=== RUN   TestCheckFirstStreamChunk_ErrorInSecondChunk
+--- PASS: TestCheckFirstStreamChunk_ErrorInSecondChunk (0.00s)
+=== RUN   TestCheckFirstStreamChunk_ErrorDrainsSource
+--- PASS: TestCheckFirstStreamChunk_ErrorDrainsSource (0.00s)
+=== RUN   TestCheckFirstStreamChunk_ErrorWithEmptyMessage
+--- PASS: TestCheckFirstStreamChunk_ErrorWithEmptyMessage (0.00s)
+=== RUN   TestCheckFirstStreamChunk_CtxCancelUnblocksWrapper
+--- PASS: TestCheckFirstStreamChunk_CtxCancelUnblocksWrapper (0.00s)
+=== RUN   TestCheckFirstStreamChunk_CodeOnlyError
+--- PASS: TestCheckFirstStreamChunk_CodeOnlyError (0.00s)
+=== RUN   TestCheckFirstStreamChunk_CtxCancelUnblocksPeek
+--- PASS: TestCheckFirstStreamChunk_CtxCancelUnblocksPeek (0.00s)
+=== RUN   TestCheckFirstStreamChunk_DeadlineAllowsFallbacks
+--- PASS: TestCheckFirstStreamChunk_DeadlineAllowsFallbacks (0.00s)
+=== RUN   TestCheckFirstStreamChunk_BufferedChunkWinsOverCancelledCtx
+--- PASS: TestCheckFirstStreamChunk_BufferedChunkWinsOverCancelledCtx (0.00s)
+=== RUN   TestAttemptAbort_NilIsInert
+--- PASS: TestAttemptAbort_NilIsInert (0.00s)
+=== RUN   TestAttemptAbort_Expire
+--- PASS: TestAttemptAbort_Expire (0.00s)
+=== RUN   TestAttemptAbort_FireAndDisarmHaveOneWinner
+--- PASS: TestAttemptAbort_FireAndDisarmHaveOneWinner (0.00s)
+=== RUN   TestCheckStreamPreamble_FirstTokenDeadlineCutsOffStartupOnlyStream
+--- PASS: TestCheckStreamPreamble_FirstTokenDeadlineCutsOffStartupOnlyStream (0.10s)
+=== RUN   TestCheckStreamPreamble_ByteOverflowKeepsFirstTokenDeadline
+--- PASS: TestCheckStreamPreamble_ByteOverflowKeepsFirstTokenDeadline (0.10s)
+=== RUN   TestCheckStreamPreamble_FullBufferUnderDeadlineIsAnEarlyMiss
+=== RUN   TestCheckStreamPreamble_FullBufferUnderDeadlineIsAnEarlyMiss/chunk_cap
+=== RUN   TestCheckStreamPreamble_FullBufferUnderDeadlineIsAnEarlyMiss/byte_budget
+--- PASS: TestCheckStreamPreamble_FullBufferUnderDeadlineIsAnEarlyMiss (0.01s)
+    --- PASS: TestCheckStreamPreamble_FullBufferUnderDeadlineIsAnEarlyMiss/chunk_cap (0.00s)
+    --- PASS: TestCheckStreamPreamble_FullBufferUnderDeadlineIsAnEarlyMiss/byte_budget (0.00s)
+=== RUN   TestCheckStreamPreamble_ByteOverflowCommitsWithoutDeadline
+--- PASS: TestCheckStreamPreamble_ByteOverflowCommitsWithoutDeadline (0.00s)
+=== RUN   TestCheckStreamPreamble_ContentBeforeDeadlineCommits
+--- PASS: TestCheckStreamPreamble_ContentBeforeDeadlineCommits (0.00s)
+=== RUN   TestCheckFirstStreamChunk_ChunkAfterFiredDeadlineIsAMiss
+--- PASS: TestCheckFirstStreamChunk_ChunkAfterFiredDeadlineIsAMiss (0.00s)
+=== RUN   TestCheckFirstStreamChunk_EmptyCloseAfterFiredDeadlineIsAMiss
+--- PASS: TestCheckFirstStreamChunk_EmptyCloseAfterFiredDeadlineIsAMiss (0.31s)
+=== RUN   TestCheckStreamPreamble_CloseAfterFiredDeadlineIsAMiss
+--- PASS: TestCheckStreamPreamble_CloseAfterFiredDeadlineIsAMiss (0.62s)
+=== RUN   TestCheckFirstStreamChunk_FirstTokenDeadlineCutsOffSilentStream
+--- PASS: TestCheckFirstStreamChunk_FirstTokenDeadlineCutsOffSilentStream (0.05s)
+=== RUN   TestCheckFirstStreamChunk_FirstChunkBeforeDeadlineDisarms
+--- PASS: TestCheckFirstStreamChunk_FirstChunkBeforeDeadlineDisarms (0.00s)
+=== RUN   TestStreamStartupStateAgreesWithStartupChecks
+=== RUN   TestStreamStartupStateAgreesWithStartupChecks/error_after_output
+=== RUN   TestStreamStartupStateAgreesWithStartupChecks/error_after_startup_byte_overflow
+=== RUN   TestStreamStartupStateAgreesWithStartupChecks/error_after_startup_chunk_cap
+=== RUN   TestStreamStartupStateAgreesWithStartupChecks/error_after_overflow_under_deadline
+=== RUN   TestStreamStartupStateAgreesWithStartupChecks/error_after_output_under_deadline
+=== RUN   TestStreamStartupStateAgreesWithStartupChecks/error_as_first_chunk
+=== RUN   TestStreamStartupStateAgreesWithStartupChecks/error_after_first_chunk
+=== RUN   TestStreamStartupStateAgreesWithStartupChecks/error_after_startup_event
+--- PASS: TestStreamStartupStateAgreesWithStartupChecks (0.01s)
+    --- PASS: TestStreamStartupStateAgreesWithStartupChecks/error_after_output (0.00s)
+    --- PASS: TestStreamStartupStateAgreesWithStartupChecks/error_after_startup_byte_overflow (0.00s)
+    --- PASS: TestStreamStartupStateAgreesWithStartupChecks/error_after_startup_chunk_cap (0.00s)
+    --- PASS: TestStreamStartupStateAgreesWithStartupChecks/error_after_overflow_under_deadline (0.01s)
+    --- PASS: TestStreamStartupStateAgreesWithStartupChecks/error_after_output_under_deadline (0.00s)
+    --- PASS: TestStreamStartupStateAgreesWithStartupChecks/error_as_first_chunk (0.00s)
+    --- PASS: TestStreamStartupStateAgreesWithStartupChecks/error_after_first_chunk (0.00s)
+    --- PASS: TestStreamStartupStateAgreesWithStartupChecks/error_after_startup_event (0.00s)
+=== RUN   TestStreamStartupStateIgnoresSkippedChunks
+--- PASS: TestStreamStartupStateIgnoresSkippedChunks (0.00s)
+=== RUN   TestCheckFirstStreamChunk_CommitMarkerCommitsWithoutForwarding
+--- PASS: TestCheckFirstStreamChunk_CommitMarkerCommitsWithoutForwarding (0.00s)
+=== RUN   TestCheckStreamPreamble_CommitMarkerCommitsAndReplaysPreamble
+--- PASS: TestCheckStreamPreamble_CommitMarkerCommitsAndReplaysPreamble (0.00s)
+=== RUN   TestContextTransport_FreshDialCloseBeforeHeadersNotRetried
+--- PASS: TestContextTransport_FreshDialCloseBeforeHeadersNotRetried (0.00s)
+=== RUN   TestContextTransport_PooledStaleConnStillRetried
+--- PASS: TestContextTransport_PooledStaleConnStillRetried (0.15s)
+=== RUN   TestContextTransport_PooledConnTruncatedBodyNotRetried
+--- PASS: TestContextTransport_PooledConnTruncatedBodyNotRetried (0.00s)
+PASS
+ok  	github.com/maximhq/bifrost/core/providers/utils	1.742s

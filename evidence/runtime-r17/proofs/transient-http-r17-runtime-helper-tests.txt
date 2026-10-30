@@ -1,0 +1,16 @@
+{"sourceSha": "d45ee450b4a9ab1d49bb045ae1b1a8224f5be131", "testsPass": true, "testsRun": 9, "failures": 0, "errors": 0, "physicalProbeCases": [{"status": 200, "terminal": "completed", "physicalPOSTs": 1}, {"status": 200, "terminal": "failed", "physicalPOSTs": 1}, {"status": 429, "terminal": "completed", "physicalPOSTs": 1}], "realProviderCalls": 0, "bifrostProcessesStarted": 0, "helperHashes": {"probe_transient_http_r14_live.py": "357a05e0e54d660620d854cbc995e5631269286e978b548069010565638eb624", "activate_transient_http_r14.py": "c4b73a8f8c4d04b565c9cb544193c860c4c60cc553a479faf1296756b6e6408f", "rehearse_transient_http_r17.py": "8a507c5ac6c5b5adb351fc2b8fe3c4c486363117ef7395095473b1d1206223b3"}, "testCodeSha256": "bbbc93ba23957960aafa6ab347c9613bad186cdde3a5ca1ca53a8423952d0863"}
+
+test_drain_requires_expected_series_and_finite_zero (__main__.HelperContracts.test_drain_requires_expected_series_and_finite_zero) ... ok
+test_invalid_probe_arguments_make_no_request (__main__.HelperContracts.test_invalid_probe_arguments_make_no_request) ... ok
+test_invalid_proofs_fail_before_runtime (__main__.HelperContracts.test_invalid_proofs_fail_before_runtime) ... ok
+test_no_client_retry_physical_posts (__main__.HelperContracts.test_no_client_retry_physical_posts) ... ok
+test_rehearsal_receipt_binds_same_helpers_and_binary (__main__.HelperContracts.test_rehearsal_receipt_binds_same_helpers_and_binary) ... ok
+test_rollback_ownership_survives_failed_health (__main__.HelperContracts.test_rollback_ownership_survives_failed_health) ... ok
+test_sse_comments_multiline_tool_events_and_crlf (__main__.HelperContracts.test_sse_comments_multiline_tool_events_and_crlf) ... ok
+test_terminal_status_and_malformed_sse_fail (__main__.HelperContracts.test_terminal_status_and_malformed_sse_fail) ... ok
+test_valid_proof_contract (__main__.HelperContracts.test_valid_proof_contract) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.581s
+
+OK

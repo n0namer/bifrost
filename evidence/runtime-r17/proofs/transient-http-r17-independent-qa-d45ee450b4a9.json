@@ -1,0 +1,52 @@
+{
+  "source_sha": "d45ee450b4a9ab1d49bb045ae1b1a8224f5be131",
+  "verdict": "QA_ACCEPT",
+  "scope": "frozen source MVP only",
+  "reviewer_thread": "01a18dba-d3b3-7300-84fe-cbdaff292365",
+  "effective_model": "UNVERIFIED",
+  "effective_effort": "UNVERIFIED",
+  "requested_model_effort": "Terra/high",
+  "goal_status": "original completed R16 record preserved; native reactivation/objective update unavailable",
+  "goal_created_at": 1793379227,
+  "goal_prior_tokens": 112522,
+  "goal_prior_seconds": 488,
+  "physical_cases": 32,
+  "primary_sends_per_case": 1,
+  "fallback_sends_per_case": 0,
+  "tests": {
+    "openai_named": "PASS 0.382s",
+    "openai": "PASS 17.356s",
+    "utils_selected": "PASS 1.742s",
+    "core": "PASS 9.880s"
+  },
+  "compatibility": "Native ambiguous POST and TTFT no longer replay; explicit complete transient HTTP retry retained",
+  "fasthttp": "v1.77.1-0.20261028061327-329917ed143c; no replacement",
+  "limitations": [
+    "Broad utils suite not passing; three disclosed failures and proxy timeout not all proven pre-existing",
+    "No binary/build/29 fixtures/live E2E/canary or CrewSync DONE",
+    "No independent proof of effective model/effort or absolute absence of a writer",
+    "Native Goal reactivation not supported by exposed API"
+  ],
+  "logs": {
+    "r17-qa-core-list.txt": "8f64f467b32843d538be5fe70ac8851d25d2650052f65c15c66e462c9193f718",
+    "r17-qa-core.txt": "b786ce727b8b832d065574860db044870143b498b5e1fac05c3cb2c4207bd89c",
+    "r17-qa-module.txt": "79542dd8c6a4caa79ca997b97f982ca9ca49061834164c2d8e053334db55006a",
+    "r17-qa-openai-list.txt": "9f944e8eba4a5ad3e50f64969a58cdea291f2995d78705d2f4921e6dd5f5a9f0",
+    "r17-qa-openai-named.txt": "9d524879915f3ead9eef714023392ab28a41e134233091606dc2d53a8d823ed6",
+    "r17-qa-openai.txt": "32bd38b32e673cff3aaa957eb62db27420decdf0fbdda58e69a829928a196eb3",
+    "r17-qa-utils-list.txt": "f80ffa3ea35a4bad268ec87d89e10a8e422676ac58719583faa01b1b5d881d6a",
+    "r17-qa-utils.txt": "8a8ebe5c4c8f3ebc704598a2f81a78669b15c1d95828deea7b838d99e6ccab6d"
+  },
+  "report_sha256": "8ffc2db7bcf6e81e2e901057d0206c2815814be3b18448d6de8b06984021a210",
+  "commands": [
+    "go test ./providers/openai -list Test",
+    "go test . -list <selected core regex>",
+    "go test ./providers/utils -list <selected utils regex>",
+    "go test ./providers/openai -count=1 -timeout=120s",
+    "go test . -run '^(TestNativeStreamAmbiguousPOSTNeverReplays|TestStreamTTFT.*|TestPassthrough.*|TestStreamFinalErrorRecovery|TestStreamRetriesExhaustedRunErrorPostHooksOnce|TestStreamRetryRunsPostHooksOnlyForServedAttempt|TestStreamErrorAfterContentDoesNotFallBack|TestStreamFallbackAfterFirstChunkError|TestStreamRetryAfterFirstChunkError|TestStream.*Preamble.*)$' -count=1 -timeout=120s -v",
+    "go test ./providers/utils -run '^(TestContextTransport_.*|TestStreamPassthrough_.*|TestCheckStreamPreamble.*|TestCheckFirstStreamChunk.*|TestAttemptAbort_.*|TestStreamStartupState.*)$' -count=1 -timeout=90s -v",
+    "go test ./providers/openai -run '^(TestChatStreamTruncatedPreFirstByte|TestChatStreamTruncatedMidStream|TestTextCompletionStreamTruncated|TestResponsesStreamTruncatedBeforeCompleted|TestChatStreamCleanDoneUnaffected|TestCustomToolStreamRestorer|TestCustomToolStreamRestorer_InterleavedSequenceNumbers)$' -count=1 -timeout=60s -v",
+    "go list -m -json github.com/valyala/fasthttp",
+    "git diff --check"
+  ]
+}

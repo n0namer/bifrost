@@ -1,0 +1,50 @@
+{
+  "at": "2026-10-30T19:43:35.831656+00:00",
+  "task_key": "bifrost-canary:runtime-helper-repair-r17",
+  "sourceSha": "d45ee450b4a9ab1d49bb045ae1b1a8224f5be131",
+  "state": "HELPER_CANDIDATE_QA_PENDING",
+  "helperHashes": {
+    "probe_transient_http_r14_live.py": "357a05e0e54d660620d854cbc995e5631269286e978b548069010565638eb624",
+    "activate_transient_http_r14.py": "c4b73a8f8c4d04b565c9cb544193c860c4c60cc553a479faf1296756b6e6408f",
+    "rehearse_transient_http_r17.py": "8a507c5ac6c5b5adb351fc2b8fe3c4c486363117ef7395095473b1d1206223b3"
+  },
+  "testCodeSha256": "bbbc93ba23957960aafa6ab347c9613bad186cdde3a5ca1ca53a8423952d0863",
+  "testReceiptSha256": "00d45a153f055c127936786535e1aa4c6d0d429dd7ab1dcddc47c1ce1dd9abe5",
+  "testsPass": true,
+  "testsRun": 9,
+  "physicalProbeCases": [
+    {
+      "status": 200,
+      "terminal": "completed",
+      "physicalPOSTs": 1
+    },
+    {
+      "status": 200,
+      "terminal": "failed",
+      "physicalPOSTs": 1
+    },
+    {
+      "status": 429,
+      "terminal": "completed",
+      "physicalPOSTs": 1
+    }
+  ],
+  "testLogSha256": "e60b6718034025a0a4c9f9411dec93398902e932022c20e7d790d729916a653b",
+  "backup": "C:\\Users\\Рафик\\Documents\\DEV\\llm-gateway-bakeoff-20261030\\evidence\\transient-http-r17-runtime-helper-coordinator-before-20261030T194332838700Z",
+  "beforeHashes": {
+    "activate_transient_http_r14.py": "e5e89db0d65283b670d62f94dfb8cf1bf471e3b0dfb7c5a772f2f7683a4481c3",
+    "probe_transient_http_r14_live.py": "22d93ed4318d08cc9e99734a69e36df8d024d89c1c314b97bbcec2f624526f18"
+  },
+  "sourceTrackedClean": true,
+  "protectedFilesUnchanged": true,
+  "runtimeEntryPointsExecuted": false,
+  "realProviderCalls": 0,
+  "nativeContribution": {
+    "thread": "01a18e3f-67ea-7851-9f67-38068920775d",
+    "goal": "blocked",
+    "retained": "backup and initial probe contract"
+  },
+  "coordinatorContribution": "Finish helpers and local tests after verified terminal handoff",
+  "independentQa": "PENDING",
+  "serverDone": false
+}

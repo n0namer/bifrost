@@ -1,0 +1,32 @@
+{
+  "sourceSha": "d45ee450b4a9ab1d49bb045ae1b1a8224f5be131",
+  "testsPass": true,
+  "testsRun": 9,
+  "failures": 0,
+  "errors": 0,
+  "physicalProbeCases": [
+    {
+      "status": 200,
+      "terminal": "completed",
+      "physicalPOSTs": 1
+    },
+    {
+      "status": 200,
+      "terminal": "failed",
+      "physicalPOSTs": 1
+    },
+    {
+      "status": 429,
+      "terminal": "completed",
+      "physicalPOSTs": 1
+    }
+  ],
+  "realProviderCalls": 0,
+  "bifrostProcessesStarted": 0,
+  "helperHashes": {
+    "probe_transient_http_r14_live.py": "357a05e0e54d660620d854cbc995e5631269286e978b548069010565638eb624",
+    "activate_transient_http_r14.py": "c4b73a8f8c4d04b565c9cb544193c860c4c60cc553a479faf1296756b6e6408f",
+    "rehearse_transient_http_r17.py": "8a507c5ac6c5b5adb351fc2b8fe3c4c486363117ef7395095473b1d1206223b3"
+  },
+  "testCodeSha256": "bbbc93ba23957960aafa6ab347c9613bad186cdde3a5ca1ca53a8423952d0863"
+}
