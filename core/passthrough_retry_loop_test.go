@@ -472,17 +472,19 @@ func TestPassthroughLoopStreamLateReplayRefusedMarkerNeverReplays(t *testing.T) 
 // POST is safe to replay. Count actual requests through core, including fallbacks.
 func TestNativeStreamAmbiguousPOSTNeverReplays(t *testing.T) {
 	for _, responses := range []bool{false, true} {
-		for _, mode := range []string{"empty", "comment", "incomplete-event", "partial-output", "complete"} {
+		for _, mode := range []string{"empty", "comment", "incomplete-event", "partial-output", "complete", "comment-mutated-empty", "comment-timeout", "non-sse-empty", "non-sse-body"} {
 			for _, brokenHTTP := range []bool{false, true} {
-				if mode == "complete" && brokenHTTP {
-					continue // terminal-event transport-tail handling has separate provider coverage
+				if (mode == "complete" || mode == "comment-timeout") && brokenHTTP {
+					continue // terminal-event tails and timed aborts have separate paths
 				}
 				t.Run(fmt.Sprintf("responses=%v/%s/broken-http=%v", responses, mode, brokenHTTP), func(t *testing.T) {
 					var primarySends, fallbackSends atomic.Int32
 					body := ""
 					switch mode {
-					case "comment":
+					case "comment", "comment-mutated-empty", "comment-timeout":
 						body = ": keepalive\n\n"
+					case "non-sse-body":
+						body = `{"output":"already processed"}`
 					case "incomplete-event":
 						body = "data: {\"id\":\"partial\""
 					case "partial-output", "complete":
@@ -503,11 +505,22 @@ func TestNativeStreamAmbiguousPOSTNeverReplays(t *testing.T) {
 							t.Errorf("unexpected upstream method %s", req.Method)
 						}
 						primarySends.Add(1)
-						w.Header().Set("Content-Type", "text/event-stream")
+						if strings.HasPrefix(mode, "non-sse-") {
+							w.Header().Set("Content-Type", "application/json")
+						} else {
+							w.Header().Set("Content-Type", "text/event-stream")
+						}
 						w.WriteHeader(http.StatusOK)
 						w.(http.Flusher).Flush()
 						fmt.Fprint(w, body)
 						w.(http.Flusher).Flush()
+						if mode == "comment-timeout" {
+							select {
+							case <-req.Context().Done():
+							case <-time.After(time.Second):
+							}
+							return
+						}
 						if brokenHTTP {
 							panic(http.ErrAbortHandler) // omit terminating zero chunk
 						}
@@ -530,11 +543,17 @@ func TestNativeStreamAmbiguousPOSTNeverReplays(t *testing.T) {
 					// Replacement models a plugin that discards the original cause and flags.
 					// The transport's replay prohibition must still survive it.
 					var plugins []schemas.LLMPlugin
+					var mutationCalls atomic.Int32
 					if mode == "comment" {
 						plugins = append(plugins, &retryReplacingStreamPlugin{mutate: brokenHTTP})
+					} else if mode == "comment-mutated-empty" {
+						plugins = append(plugins, &retryReplacingStreamPlugin{mutate: true, returnEmpty: true, calls: &mutationCalls})
 					}
 					client := newStreamTestClient(t, account, plugins...)
 					ctx := schemas.NewBifrostContext(context.Background(), time.Now().Add(10*time.Second))
+					if mode == "comment-timeout" {
+						ctx.SetValue(schemas.BifrostContextKeyStreamFirstTokenTimeout, 100*time.Millisecond)
+					}
 					req := &schemas.BifrostChatRequest{
 						Provider: schemas.OpenAI, Model: "gpt-4o-mini",
 						Input:     []schemas.ChatMessage{{Role: schemas.ChatMessageRoleUser, Content: &schemas.ChatMessageContent{ContentStr: schemas.Ptr("hi")}}},
@@ -547,20 +566,66 @@ func TestNativeStreamAmbiguousPOSTNeverReplays(t *testing.T) {
 					} else {
 						stream, err = client.ChatCompletionStreamRequest(ctx, req)
 					}
-					sawError := err != nil
+					errorCount := 0
+					if err != nil {
+						errorCount++
+					}
+					var content strings.Builder
+					terminalEvents := 0
 					if stream != nil {
 						for chunk := range stream {
-							if chunk != nil && chunk.BifrostError != nil {
-								sawError = true
+							if chunk == nil {
+								continue
+							}
+							if chunk.BifrostError != nil {
+								errorCount++
+							}
+							if response := chunk.BifrostResponsesStreamResponse; response != nil {
+								if response.Type == schemas.ResponsesStreamResponseTypeOutputTextDelta && response.Delta != nil {
+									content.WriteString(*response.Delta)
+								}
+								if response.Type == schemas.ResponsesStreamResponseTypeCompleted {
+									terminalEvents++
+								}
+							}
+							if response := chunk.BifrostChatResponse; response != nil {
+								for _, choice := range response.Choices {
+									if choice.ChatStreamResponseChoice != nil && choice.Delta != nil && choice.Delta.Content != nil {
+										content.WriteString(*choice.Delta.Content)
+									}
+									if choice.FinishReason != nil && *choice.FinishReason != "" {
+										if *choice.FinishReason != "stop" {
+											t.Errorf("unexpected finish reason %q", *choice.FinishReason)
+										}
+										terminalEvents++
+									}
+								}
 							}
 						}
 					}
-					t.Logf("physical POST sends: primary=%d fallback=%d; sawError=%v", primarySends.Load(), fallbackSends.Load(), sawError)
+					wantContent, wantTerminal := "", 0
+					if mode == "partial-output" || mode == "complete" {
+						wantContent = "hello"
+					}
+					if mode == "complete" {
+						wantTerminal = 1
+					}
+					if content.String() != wantContent || terminalEvents != wantTerminal {
+						t.Errorf("payload=%q terminal events=%d; want %q and %d", content.String(), terminalEvents, wantContent, wantTerminal)
+					}
+					t.Logf("physical POST sends: primary=%d fallback=%d; errors=%d", primarySends.Load(), fallbackSends.Load(), errorCount)
+					if mode == "comment-mutated-empty" && mutationCalls.Load() != 1 {
+						t.Errorf("mutating nil-result hook calls=%d, want 1", mutationCalls.Load())
+					}
 					if primarySends.Load() != 1 || fallbackSends.Load() != 0 {
 						t.Errorf("unsafe replay: primary=%d fallback=%d; want 1+0", primarySends.Load(), fallbackSends.Load())
 					}
-					if sawError != (mode != "complete") {
-						t.Errorf("sawError=%v, mode=%s; incomplete SSE must not become success", sawError, mode)
+					wantErrors := 1
+					if mode == "complete" {
+						wantErrors = 0
+					}
+					if errorCount != wantErrors {
+						t.Errorf("errors=%d, want %d for mode %s", errorCount, wantErrors, mode)
 					}
 				})
 			}
@@ -568,7 +633,10 @@ func TestNativeStreamAmbiguousPOSTNeverReplays(t *testing.T) {
 	}
 }
 
-type retryReplacingStreamPlugin struct{ mutate bool }
+type retryReplacingStreamPlugin struct {
+	mutate, returnEmpty bool
+	calls               *atomic.Int32
+}
 
 func (*retryReplacingStreamPlugin) GetName() string { return "retry-replacing-stream" }
 func (*retryReplacingStreamPlugin) Cleanup() error  { return nil }
@@ -584,7 +652,13 @@ func (p *retryReplacingStreamPlugin) PostLLMHook(_ *schemas.BifrostContext, resp
 	}
 	replacement := schemas.BifrostError{StatusCode: schemas.Ptr(502), Error: &schemas.ErrorField{Message: "plugin replacement"}, AllowFallbacks: schemas.Ptr(true)}
 	if p.mutate {
+		if p.calls != nil {
+			p.calls.Add(1)
+		}
 		*err = replacement
+		if p.returnEmpty {
+			return nil, nil, nil
+		}
 		return resp, err, nil
 	}
 	return resp, &replacement, nil

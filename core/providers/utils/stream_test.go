@@ -769,8 +769,8 @@ func assertFirstTokenTimeoutError(t *testing.T, err *schemas.BifrostError) {
 	if !err.IsBifrostError {
 		t.Fatal("a TTFT miss must skip same-provider retries (IsBifrostError)")
 	}
-	if err.AllowFallbacks != nil && !*err.AllowFallbacks {
-		t.Fatal("a TTFT miss must allow fallbacks")
+	if !err.ReplayUnsafe || err.AllowFallbacks == nil || *err.AllowFallbacks {
+		t.Fatal("an ambiguous TTFT miss must forbid retries and fallbacks")
 	}
 	if !errors.Is(err.Error.Error, ErrStreamFirstTokenTimeout) {
 		t.Fatalf("wrapped error = %v, want ErrStreamFirstTokenTimeout", err.Error.Error)

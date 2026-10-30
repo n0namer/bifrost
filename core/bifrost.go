@@ -7159,8 +7159,8 @@ func (bifrost *Bifrost) pickFromRotatingPool(ctx *schemas.BifrostContext, pool [
 //
 // A header wait the deadline cut short surfaces from the provider as whatever
 // its client made of the closed socket (a network error, or a cancellation on
-// net/http). It is relabelled as the TTFT miss it is, so the retry loop stops
-// and the next fallback runs. The handle is cleared only now: the first-chunk
+// net/http). It is relabelled as the TTFT miss it is, without replaying a POST
+// whose outcome remains unknown. The handle is cleared only now: the first-chunk
 // check has waited for a cut-off stream to drain, so no provider goroutine of
 // this attempt can still be looking for it.
 func settleAttemptAbort(ctx *schemas.BifrostContext, abort *providerUtils.AttemptAbort, bifrostError *schemas.BifrostError, providerKey schemas.ModelProvider, model string) *schemas.BifrostError {
@@ -7172,6 +7172,10 @@ func settleAttemptAbort(ctx *schemas.BifrostContext, abort *providerUtils.Attemp
 	if !isFirstTokenTimeoutError(bifrostError) {
 		bifrostError = providerUtils.NewFirstTokenTimeoutError(abort.Timeout())
 	}
+	// The provider may already have supplied the TTFT code on another error.
+	// The expired attempt is still ambiguous regardless of that classification.
+	bifrostError.ReplayUnsafe = true
+	bifrostError.AllowFallbacks = schemas.Ptr(false)
 	if trail, ok := ctx.Value(schemas.BifrostContextKeyAttemptTrail).([]schemas.KeyAttemptRecord); ok && len(trail) > 0 {
 		reason := schemas.FirstTokenTimeoutErrorCode
 		trail[len(trail)-1].FailReason = &reason
@@ -9913,6 +9917,7 @@ func (p *PluginPipeline) RunPostLLMHooks(ctx *schemas.BifrostContext, resp *sche
 	var err error
 	// Keep transport certainty across replacements, mutations, and temporary
 	// recovery by a hook. A later hook must not re-enable an unsafe POST replay.
+	originalErr := bifrostErr
 	replayUnsafe := bifrostErr != nil && bifrostErr.ReplayUnsafe
 	for i := runFrom - 1; i >= 0; i-- {
 		plugin := p.llmPlugins[i]
@@ -9969,6 +9974,12 @@ func (p *PluginPipeline) RunPostLLMHooks(ctx *schemas.BifrostContext, resp *sche
 		}
 		// If a plugin recovers from an error (sets bifrostErr to nil and sets resp), allow that
 		// If a plugin invalidates a response (sets resp to nil and sets bifrostErr), allow that
+	}
+	// A caller retains the original error if hooks return neither a response
+	// nor an error. Restore its safety decision even after an in-place mutation.
+	if replayUnsafe && originalErr != nil {
+		originalErr.ReplayUnsafe = true
+		originalErr.AllowFallbacks = schemas.Ptr(false)
 	}
 	// Increment chunk count for streaming
 	if isStreaming {

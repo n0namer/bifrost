@@ -1,0 +1,143 @@
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/empty/broken-http=false
+    passthrough_retry_loop_test.go:612: physical POST sends: primary=1 fallback=0; sawError=true
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/empty/broken-http=true
+    passthrough_retry_loop_test.go:612: physical POST sends: primary=1 fallback=0; sawError=true
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/comment/broken-http=false
+    passthrough_retry_loop_test.go:612: physical POST sends: primary=1 fallback=0; sawError=true
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/comment/broken-http=true
+    passthrough_retry_loop_test.go:612: physical POST sends: primary=1 fallback=0; sawError=true
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/incomplete-event/broken-http=false
+    passthrough_retry_loop_test.go:612: physical POST sends: primary=1 fallback=0; sawError=true
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/incomplete-event/broken-http=true
+    passthrough_retry_loop_test.go:612: physical POST sends: primary=1 fallback=0; sawError=true
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/partial-output/broken-http=false
+    passthrough_retry_loop_test.go:612: physical POST sends: primary=1 fallback=0; sawError=true
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/partial-output/broken-http=true
+    passthrough_retry_loop_test.go:612: physical POST sends: primary=1 fallback=0; sawError=true
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/complete/broken-http=false
+    passthrough_retry_loop_test.go:612: physical POST sends: primary=1 fallback=0; sawError=false
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/comment-mutated-empty/broken-http=false
+    passthrough_retry_loop_test.go:610: payload="hello" terminal events=1; want "" and 0
+    passthrough_retry_loop_test.go:612: physical POST sends: primary=1 fallback=1; sawError=false
+    passthrough_retry_loop_test.go:614: unsafe replay: primary=1 fallback=1; want 1+0
+    passthrough_retry_loop_test.go:617: sawError=false, mode=comment-mutated-empty; incomplete SSE must not become success
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/comment-mutated-empty/broken-http=true
+    passthrough_retry_loop_test.go:610: payload="hello" terminal events=1; want "" and 0
+    passthrough_retry_loop_test.go:612: physical POST sends: primary=1 fallback=1; sawError=false
+    passthrough_retry_loop_test.go:614: unsafe replay: primary=1 fallback=1; want 1+0
+    passthrough_retry_loop_test.go:617: sawError=false, mode=comment-mutated-empty; incomplete SSE must not become success
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/comment-timeout/broken-http=false
+    passthrough_retry_loop_test.go:610: payload="hello" terminal events=1; want "" and 0
+    passthrough_retry_loop_test.go:612: physical POST sends: primary=1 fallback=1; sawError=false
+    passthrough_retry_loop_test.go:614: unsafe replay: primary=1 fallback=1; want 1+0
+    passthrough_retry_loop_test.go:617: sawError=false, mode=comment-timeout; incomplete SSE must not become success
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/non-sse-empty/broken-http=false
+    passthrough_retry_loop_test.go:610: payload="hello" terminal events=1; want "" and 0
+    passthrough_retry_loop_test.go:612: physical POST sends: primary=3 fallback=1; sawError=false
+    passthrough_retry_loop_test.go:614: unsafe replay: primary=3 fallback=1; want 1+0
+    passthrough_retry_loop_test.go:617: sawError=false, mode=non-sse-empty; incomplete SSE must not become success
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/non-sse-empty/broken-http=true
+    passthrough_retry_loop_test.go:610: payload="hello" terminal events=1; want "" and 0
+    passthrough_retry_loop_test.go:612: physical POST sends: primary=3 fallback=1; sawError=false
+    passthrough_retry_loop_test.go:614: unsafe replay: primary=3 fallback=1; want 1+0
+    passthrough_retry_loop_test.go:617: sawError=false, mode=non-sse-empty; incomplete SSE must not become success
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/non-sse-body/broken-http=false
+    passthrough_retry_loop_test.go:610: payload="hello" terminal events=1; want "" and 0
+    passthrough_retry_loop_test.go:612: physical POST sends: primary=3 fallback=1; sawError=false
+    passthrough_retry_loop_test.go:614: unsafe replay: primary=3 fallback=1; want 1+0
+    passthrough_retry_loop_test.go:617: sawError=false, mode=non-sse-body; incomplete SSE must not become success
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/non-sse-body/broken-http=true
+    passthrough_retry_loop_test.go:610: payload="hello" terminal events=1; want "" and 0
+    passthrough_retry_loop_test.go:612: physical POST sends: primary=3 fallback=1; sawError=false
+    passthrough_retry_loop_test.go:614: unsafe replay: primary=3 fallback=1; want 1+0
+    passthrough_retry_loop_test.go:617: sawError=false, mode=non-sse-body; incomplete SSE must not become success
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/empty/broken-http=false
+    passthrough_retry_loop_test.go:612: physical POST sends: primary=1 fallback=0; sawError=true
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/empty/broken-http=true
+    passthrough_retry_loop_test.go:612: physical POST sends: primary=1 fallback=0; sawError=true
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/comment/broken-http=false
+    passthrough_retry_loop_test.go:612: physical POST sends: primary=1 fallback=0; sawError=true
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/comment/broken-http=true
+    passthrough_retry_loop_test.go:612: physical POST sends: primary=1 fallback=0; sawError=true
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/incomplete-event/broken-http=false
+    passthrough_retry_loop_test.go:612: physical POST sends: primary=1 fallback=0; sawError=true
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/incomplete-event/broken-http=true
+    passthrough_retry_loop_test.go:612: physical POST sends: primary=1 fallback=0; sawError=true
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/partial-output/broken-http=false
+    passthrough_retry_loop_test.go:612: physical POST sends: primary=1 fallback=0; sawError=true
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/partial-output/broken-http=true
+    passthrough_retry_loop_test.go:612: physical POST sends: primary=1 fallback=0; sawError=true
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/complete/broken-http=false
+    passthrough_retry_loop_test.go:612: physical POST sends: primary=1 fallback=0; sawError=false
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/comment-mutated-empty/broken-http=false
+    passthrough_retry_loop_test.go:610: payload="hello" terminal events=1; want "" and 0
+    passthrough_retry_loop_test.go:612: physical POST sends: primary=1 fallback=1; sawError=false
+    passthrough_retry_loop_test.go:614: unsafe replay: primary=1 fallback=1; want 1+0
+    passthrough_retry_loop_test.go:617: sawError=false, mode=comment-mutated-empty; incomplete SSE must not become success
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/comment-mutated-empty/broken-http=true
+    passthrough_retry_loop_test.go:610: payload="hello" terminal events=1; want "" and 0
+    passthrough_retry_loop_test.go:612: physical POST sends: primary=1 fallback=1; sawError=false
+    passthrough_retry_loop_test.go:614: unsafe replay: primary=1 fallback=1; want 1+0
+    passthrough_retry_loop_test.go:617: sawError=false, mode=comment-mutated-empty; incomplete SSE must not become success
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/comment-timeout/broken-http=false
+    passthrough_retry_loop_test.go:610: payload="hello" terminal events=1; want "" and 0
+    passthrough_retry_loop_test.go:612: physical POST sends: primary=1 fallback=1; sawError=false
+    passthrough_retry_loop_test.go:614: unsafe replay: primary=1 fallback=1; want 1+0
+    passthrough_retry_loop_test.go:617: sawError=false, mode=comment-timeout; incomplete SSE must not become success
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/non-sse-empty/broken-http=false
+    passthrough_retry_loop_test.go:610: payload="hello" terminal events=1; want "" and 0
+    passthrough_retry_loop_test.go:612: physical POST sends: primary=3 fallback=1; sawError=false
+    passthrough_retry_loop_test.go:614: unsafe replay: primary=3 fallback=1; want 1+0
+    passthrough_retry_loop_test.go:617: sawError=false, mode=non-sse-empty; incomplete SSE must not become success
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/non-sse-empty/broken-http=true
+    passthrough_retry_loop_test.go:610: payload="hello" terminal events=1; want "" and 0
+    passthrough_retry_loop_test.go:612: physical POST sends: primary=3 fallback=1; sawError=false
+    passthrough_retry_loop_test.go:614: unsafe replay: primary=3 fallback=1; want 1+0
+    passthrough_retry_loop_test.go:617: sawError=false, mode=non-sse-empty; incomplete SSE must not become success
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/non-sse-body/broken-http=false
+    passthrough_retry_loop_test.go:610: payload="hello" terminal events=1; want "" and 0
+    passthrough_retry_loop_test.go:612: physical POST sends: primary=3 fallback=1; sawError=false
+    passthrough_retry_loop_test.go:614: unsafe replay: primary=3 fallback=1; want 1+0
+    passthrough_retry_loop_test.go:617: sawError=false, mode=non-sse-body; incomplete SSE must not become success
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/non-sse-body/broken-http=true
+    passthrough_retry_loop_test.go:610: payload="hello" terminal events=1; want "" and 0
+    passthrough_retry_loop_test.go:612: physical POST sends: primary=3 fallback=1; sawError=false
+    passthrough_retry_loop_test.go:614: unsafe replay: primary=3 fallback=1; want 1+0
+    passthrough_retry_loop_test.go:617: sawError=false, mode=non-sse-body; incomplete SSE must not become success
+--- FAIL: TestNativeStreamAmbiguousPOSTNeverReplays (0.52s)
+    --- PASS: TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/empty/broken-http=false (0.02s)
+    --- PASS: TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/empty/broken-http=true (0.00s)
+    --- PASS: TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/comment/broken-http=false (0.00s)
+    --- PASS: TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/comment/broken-http=true (0.00s)
+    --- PASS: TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/incomplete-event/broken-http=false (0.04s)
+    --- PASS: TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/incomplete-event/broken-http=true (0.00s)
+    --- PASS: TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/partial-output/broken-http=false (0.02s)
+    --- PASS: TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/partial-output/broken-http=true (0.00s)
+    --- PASS: TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/complete/broken-http=false (0.00s)
+    --- FAIL: TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/comment-mutated-empty/broken-http=false (0.06s)
+    --- FAIL: TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/comment-mutated-empty/broken-http=true (0.00s)
+    --- FAIL: TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/comment-timeout/broken-http=false (0.10s)
+    --- FAIL: TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/non-sse-empty/broken-http=false (0.01s)
+    --- FAIL: TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/non-sse-empty/broken-http=true (0.01s)
+    --- FAIL: TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/non-sse-body/broken-http=false (0.01s)
+    --- FAIL: TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/non-sse-body/broken-http=true (0.01s)
+    --- PASS: TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/empty/broken-http=false (0.01s)
+    --- PASS: TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/empty/broken-http=true (0.00s)
+    --- PASS: TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/comment/broken-http=false (0.00s)
+    --- PASS: TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/comment/broken-http=true (0.00s)
+    --- PASS: TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/incomplete-event/broken-http=false (0.04s)
+    --- PASS: TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/incomplete-event/broken-http=true (0.00s)
+    --- PASS: TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/partial-output/broken-http=false (0.00s)
+    --- PASS: TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/partial-output/broken-http=true (0.00s)
+    --- PASS: TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/complete/broken-http=false (0.05s)
+    --- FAIL: TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/comment-mutated-empty/broken-http=false (0.00s)
+    --- FAIL: TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/comment-mutated-empty/broken-http=true (0.00s)
+    --- FAIL: TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/comment-timeout/broken-http=false (0.10s)
+    --- FAIL: TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/non-sse-empty/broken-http=false (0.01s)
+    --- FAIL: TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/non-sse-empty/broken-http=true (0.01s)
+    --- FAIL: TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/non-sse-body/broken-http=false (0.01s)
+    --- FAIL: TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/non-sse-body/broken-http=true (0.01s)
+FAIL
+FAIL	github.com/maximhq/bifrost/core	0.719s
+FAIL

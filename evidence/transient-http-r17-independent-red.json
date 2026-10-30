@@ -1,0 +1,19 @@
+{
+  "at": "2026-10-30T18:19:14.199344+00:00",
+  "finished": "2026-10-30T18:19:21.640853+00:00",
+  "head": "0e78102d1ffbc1f18955c165045f6ed6c7a15905",
+  "head_after": "0e78102d1ffbc1f18955c165045f6ed6c7a15905",
+  "diff_sha256": "e1fd1f6871f3573882e6fb724c6ef0ff192279db840d8d7a4a74abe2df470921",
+  "go": "C:\\Users\\\u0420\u0430\u0444\u0438\u043a\\go\\pkg\\mod\\golang.org\\toolchain@v0.0.1-go1.27.3.windows-amd64\\bin\\go.exe",
+  "args": [
+    "test",
+    ".",
+    "-run",
+    "^TestNativeStreamAmbiguousPOSTNeverReplays$",
+    "-count=1",
+    "-timeout=90s",
+    "-v"
+  ],
+  "exit_code": 1,
+  "log": "C:\\Users\\\u0420\u0430\u0444\u0438\u043a\\Documents\\DEV\\llm-gateway-bakeoff-20261030\\bifrost-sparse\\evidence\\transient-http-r17-independent-red.txt"
+}

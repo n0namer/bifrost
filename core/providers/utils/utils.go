@@ -3945,7 +3945,7 @@ func SetupStreamCancellation(ctx *schemas.BifrostContext, bodyStream io.Reader, 
 			select {
 			case <-abortDone:
 				// The attempt missed its first-token deadline. The request itself is
-				// still live (a fallback follows), so close only this attempt's body.
+				// still live for error finalization, so close only this attempt's body.
 				if prev, _ := ctx.GetAndSetValue(schemas.BifrostContextKeyConnectionClosed, true).(bool); prev {
 					return
 				}
@@ -4341,12 +4341,13 @@ func ProcessAndSendNonSSEStreamError(
 	postHookSpanFinalizer func(context.Context),
 ) {
 	err := info.Err()
-	// This is an upstream failure, not a Bifrost one: executeRequestWithRetries
-	// peeks at the first stream chunk and halts before retry classification when
-	// IsBifrostError is set, so leaving it false lets the 502 take the transient
-	// retry path and lets a rate-limit envelope in the message rotate keys.
+	// HTTP 200 with an unreadable or non-SSE body does not establish that the
+	// generation POST was rejected. Keep the upstream 502 diagnostic, but do
+	// not retry or select a fallback from sampled or incomplete body evidence.
 	bifrostError := &schemas.BifrostError{
 		IsBifrostError: false,
+		ReplayUnsafe:   true,
+		AllowFallbacks: schemas.Ptr(false),
 		StatusCode:     schemas.Ptr(fasthttp.StatusBadGateway),
 		Error: &schemas.ErrorField{
 			Message: err.Error(),

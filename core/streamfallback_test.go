@@ -1574,9 +1574,24 @@ func ttftContext(timeout time.Duration) *schemas.BifrostContext {
 
 var anthropicFallback = schemas.Fallback{Provider: schemas.Anthropic, Model: "claude-3-5-haiku-20241022"}
 
+func assertTTFTReplayRefused(t *testing.T, stream chan *schemas.BifrostStreamChunk, err *schemas.BifrostError) {
+	t.Helper()
+	if stream != nil {
+		t.Fatal("an ambiguous TTFT failure must not return a successful stream")
+	}
+	if err == nil || err.StatusCode == nil || *err.StatusCode != 504 ||
+		err.Error == nil || err.Error.Code == nil || *err.Error.Code != schemas.FirstTokenTimeoutErrorCode ||
+		err.Error.Type == nil || *err.Error.Type != schemas.RequestTimedOut || !err.IsBifrostError {
+		t.Fatalf("expected the preserved 504/ttft_timeout contract, got %+v", err)
+	}
+	if !err.ReplayUnsafe || err.AllowFallbacks == nil || *err.AllowFallbacks {
+		t.Fatalf("TTFT must forbid an ambiguous POST replay: %+v", err)
+	}
+}
+
 // A primary that opens the stream but sends only startup events is cut off at
-// the TTFT deadline, without a same-provider retry, and the fallback serves the
-// whole stream. The primary's socket is closed, not left to the idle timeout.
+// the TTFT deadline. Its dispatched POST is ambiguous, so neither retry nor
+// fallback is allowed. The socket must still close promptly.
 func TestStreamTTFTCutsOffStartupOnlyPrimary(t *testing.T) {
 	primary, fallback := newTTFTUpstream(), newTTFTUpstream()
 	client := newTTFTTestClient(t, primary.slowOpenAIHandler(10*time.Second), fallback.slowAnthropicHandler(0))
@@ -1584,21 +1599,15 @@ func TestStreamTTFTCutsOffStartupOnlyPrimary(t *testing.T) {
 	ctx := ttftContext(300 * time.Millisecond)
 	start := time.Now()
 	stream, bifrostErr := client.ChatCompletionStreamRequest(ctx, ttftChatRequest(anthropicFallback))
-	if bifrostErr != nil {
-		t.Fatalf("expected the fallback to serve the stream, got %s", bifrostErr.Error.Message)
-	}
-	content, errs := drainChatStream(stream)
+	assertTTFTReplayRefused(t, stream, bifrostErr)
 	if elapsed := time.Since(start); elapsed > 5*time.Second {
 		t.Fatalf("TTFT cutoff took %v; the primary was not cut off at 300ms", elapsed)
-	}
-	if content != "hello" || len(errs) > 0 {
-		t.Fatalf("content = %q errs = %v, want the fallback's %q", content, errs, "hello")
 	}
 	if got := primary.hits.Load(); got != 1 {
 		t.Fatalf("primary hits = %d, want 1: a TTFT miss must not retry the same provider", got)
 	}
-	if got := fallback.hits.Load(); got != 1 {
-		t.Fatalf("fallback hits = %d, want 1", got)
+	if got := fallback.hits.Load(); got != 0 {
+		t.Fatalf("fallback hits = %d, want 0: an ambiguous POST must not be replayed", got)
 	}
 	select {
 	case <-primary.hangups:
@@ -1630,16 +1639,17 @@ func TestStreamTTFTCutsOffSilentPrimaryHeaderWait(t *testing.T) {
 	client := newTTFTTestClient(t, silent, fallback.slowAnthropicHandler(0))
 
 	start := time.Now()
-	stream, bifrostErr := client.ChatCompletionStreamRequest(ttftContext(300*time.Millisecond), ttftChatRequest(anthropicFallback))
-	if bifrostErr != nil {
-		t.Fatalf("expected the fallback to serve the stream, got %s", bifrostErr.Error.Message)
-	}
-	content, _ := drainChatStream(stream)
+	ctx := ttftContext(300 * time.Millisecond)
+	stream, bifrostErr := client.ChatCompletionStreamRequest(ctx, ttftChatRequest(anthropicFallback))
+	assertTTFTReplayRefused(t, stream, bifrostErr)
 	if elapsed := time.Since(start); elapsed > 5*time.Second {
 		t.Fatalf("TTFT cutoff took %v during the header wait", elapsed)
 	}
-	if content != "hello" {
-		t.Fatalf("content = %q, want the fallback's %q", content, "hello")
+	if got := fallback.hits.Load(); got != 0 {
+		t.Fatalf("fallback hits = %d, want 0 after an ambiguous header wait", got)
+	}
+	if ctx.Value(schemas.BifrostContextKeyStreamAttemptAbort) != nil {
+		t.Fatal("the attempt abort handle leaked past its attempt")
 	}
 	if got := primary.hits.Load(); got != 1 {
 		t.Fatalf("primary hits = %d, want 1: a TTFT miss must not retry the same provider", got)
@@ -1656,13 +1666,22 @@ func TestStreamTTFTCutsOffSilentPrimaryHeaderWait(t *testing.T) {
 func TestStreamTTFTNeverCutsOffLastAttempt(t *testing.T) {
 	t.Run("last fallback", func(t *testing.T) {
 		primary, fallback := newTTFTUpstream(), newTTFTUpstream()
-		client := newTTFTTestClient(t, primary.slowOpenAIHandler(10*time.Second), fallback.slowAnthropicHandler(time.Second))
+		rejected := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			primary.hits.Add(1)
+			w.Header().Set("Content-Type", "application/json")
+			w.WriteHeader(http.StatusBadRequest)
+			fmt.Fprint(w, `{"error":{"message":"unsupported request","type":"invalid_request_error"}}`)
+		})
+		client := newTTFTTestClient(t, rejected, fallback.slowAnthropicHandler(time.Second))
 		stream, bifrostErr := client.ChatCompletionStreamRequest(ttftContext(200*time.Millisecond), ttftChatRequest(anthropicFallback))
 		if bifrostErr != nil {
 			t.Fatalf("the last fallback was cut off: %s", bifrostErr.Error.Message)
 		}
-		if content, _ := drainChatStream(stream); content != "hello" {
-			t.Fatalf("content = %q, want %q", content, "hello")
+		if content, errs := drainChatStream(stream); content != "hello" || len(errs) != 0 {
+			t.Fatalf("content = %q, errors = %v, want hello without errors", content, errs)
+		}
+		if primary.hits.Load() != 1 || fallback.hits.Load() != 1 {
+			t.Fatalf("explicit rejection must select one fallback: primary=%d fallback=%d", primary.hits.Load(), fallback.hits.Load())
 		}
 	})
 	t.Run("primary without fallbacks", func(t *testing.T) {

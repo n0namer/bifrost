@@ -1,0 +1,21 @@
+{
+  "at": "2026-10-30T18:21:14.737110+00:00",
+  "finished": "2026-10-30T18:21:50.086883+00:00",
+  "head": "0e78102d1ffbc1f18955c165045f6ed6c7a15905",
+  "head_after": "0e78102d1ffbc1f18955c165045f6ed6c7a15905",
+  "diff_sha256": "71630b0cb48111d6a3063e8099312ccb98422df2af9838d1b07daf632ca00160",
+  "go": "C:\\Users\\\u0420\u0430\u0444\u0438\u043a\\go\\pkg\\mod\\golang.org\\toolchain@v0.0.1-go1.27.3.windows-amd64\\bin\\go.exe",
+  "args": [
+    "test",
+    ".",
+    "./providers/openai",
+    "./providers/utils",
+    "-run",
+    "^(TestNativeStreamAmbiguousPOSTNeverReplays|TestStreamTTFT.*|TestCheckStreamPreamble.*|TestCheckFirstStreamChunk.*|TestAttemptAbort_.*|TestChatStreamTruncatedPreFirstByte|TestChatStreamTruncatedMidStream|TestTextCompletionStreamTruncated|TestResponsesStreamTruncatedBeforeCompleted|TestChatStream.*ContentLength.*|TestPassthroughStreamReadFailureNeverReplays|TestContextTransport_.*|TestStreamPassthrough_.*|TestPassthroughTransientPhysicalSends|TestPassthroughLoop.*|TestStreamFallbackAfterFirstChunkError|TestStreamRetryAfterFirstChunkError)$",
+    "-count=1",
+    "-timeout=90s",
+    "-v"
+  ],
+  "exit_code": 0,
+  "log": "C:\\Users\\\u0420\u0430\u0444\u0438\u043a\\Documents\\DEV\\llm-gateway-bakeoff-20261030\\bifrost-sparse\\evidence\\transient-http-r17-independent-green.txt"
+}

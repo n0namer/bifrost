@@ -95,3 +95,22 @@ Only after QA and same-binary evidence may the isolated canary switch with drain
 fresh process/config checks and a verified rollback. The old canary and OpenCodex
 remain running. Global Codex routing is unchanged. The existing CrewSync reducer
 and authoritative DONE readback remain mandatory; none is claimed here.
+
+## Independent review repair, iteration 2
+
+The independent BMad blind, edge and acceptance reviews of frozen `0e78102d1ffbc1f18955c165045f6ed6c7a15905` found three replay paths. Their source findings were reproduced before production changes in `transient-http-r17-independent-red.txt/.json`: all original 18 cases passed, while 14 new cases failed. A mutating hook returning neither response nor error and a first-token timeout each produced primary/fallback counts 1/1. HTTP 200 with an empty or non-SSE body produced 3/1 with MaxRetries=2.
+
+Repairs are limited to existing paths:
+- Preserve the latched replay prohibition on the original error object as well as returned errors, because the caller may retain that original object after an empty hook result.
+- Mark synthetic first-token timeouts as unsafe to replay, and enforce the same decision when settling an expired attempt that already carries the timeout code. Keep 504, RequestTimedOut, ttft_timeout and the wrapped cause.
+- Mark every HTTP-200 non-SSE failure kind as unsafe, preserving the existing 502 diagnostic, raw-response sample and billing information. A sampled JSON error under HTTP 200 does not prove complete rejection.
+
+**Intentional compatibility decision:** an ambiguous first-token timeout no longer selects another provider. Missing headers or tokens do not establish that the POST was unprocessed, and this path has no verified idempotency contract. Existing cutoff, socket closure, abort cleanup and race/drain tests remain. The last-fallback positive control now enters through a complete HTTP400 rejection and still succeeds after a delay longer than the configured first-token deadline. Timely and unconfigured streaming behavior remains unchanged.
+
+The expanded physical matrix covers 32 cases (Chat and Responses), preserves the complete/partial text `hello`, checks terminal events and exact error counts, and checks that the mutating empty-result hook actually ran once. The recorded focused green run `transient-http-r17-independent-green.txt/.json` passes all three packages and the original four OpenAI tests, TTFT checks, passthrough physical counters, first-chunk/preamble checks and transport regressions. A final frozen-SHA run remains required after commit.
+
+Independent triage dismissed the carrier-precedence concern: the actual Bedrock invokeStreamException exposes no Unwrap or Is method, and decoded exception carriers are separate from framing errors. The ordinary two-hook recovery chain and fallback continuation guard also preserve the marker in the inspected source.
+
+The earlier full OpenAI PASS and expanded-utils failures remain honestly recorded above. This repair does not claim that the full utils suite passes. No build, real model E2E, canary switch, rollback exercise, native QA acceptance or CrewSync SERVER_DONE is inferred from these source tests.
+
+The final pre-commit hook-contract run transient-http-r17-hook-contracts-green.txt/.json also passes: exact single-error and mutation-invocation assertions, payload preservation, safe explicit rejection recovery, TTFT socket cleanup and existing plugin recovery contracts.

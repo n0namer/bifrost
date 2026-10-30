@@ -1,0 +1,19 @@
+{
+  "at": "2026-10-30T18:24:07.708423+00:00",
+  "finished": "2026-10-30T18:24:30.012081+00:00",
+  "head": "0e78102d1ffbc1f18955c165045f6ed6c7a15905",
+  "head_after": "0e78102d1ffbc1f18955c165045f6ed6c7a15905",
+  "diff_sha256": "58a7f2f5ac0cd112cadc69c57b5774aab146b68c8719fd1453026f1112139574",
+  "go": "C:\\Users\\\u0420\u0430\u0444\u0438\u043a\\go\\pkg\\mod\\golang.org\\toolchain@v0.0.1-go1.27.3.windows-amd64\\bin\\go.exe",
+  "args": [
+    "test",
+    ".",
+    "-run",
+    "^(TestNativeStreamAmbiguousPOSTNeverReplays|TestStreamTTFT.*|TestStreamFinalErrorRecovery|TestStreamRetriesExhaustedRunErrorPostHooksOnce|TestStreamRetryRunsPostHooksOnlyForServedAttempt|TestStreamErrorAfterContentDoesNotFallBack|TestStreamFallbackAfterFirstChunkError|TestStreamRetryAfterFirstChunkError|TestStream.*Preamble.*)$",
+    "-count=1",
+    "-timeout=90s",
+    "-v"
+  ],
+  "exit_code": 0,
+  "log": "C:\\Users\\\u0420\u0430\u0444\u0438\u043a\\Documents\\DEV\\llm-gateway-bakeoff-20261030\\bifrost-sparse\\evidence\\transient-http-r17-hook-contracts-green.txt"
+}

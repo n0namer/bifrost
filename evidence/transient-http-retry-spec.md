@@ -4,7 +4,7 @@ type: bugfix
 created: '2026-10-30'
 status: ready-for-review
 baseline_commit: '943261a78e543741e59e87b4acdc9d8d7714cbfe'
-review_loop_iteration: 1
+review_loop_iteration: 2
 authority: 'CrewSync global note bifrost-canary:transient-http-retry:spec'
 authority_revision: 'r17-native-sse-no-replay-repair'
 task_key: 'bifrost-canary:transient-http-retry'
@@ -57,11 +57,11 @@ This is the implementation projection of the existing CrewSync spec, not a separ
 
 ## Tasks & Acceptance
 
-- [ ] Reproduce the four named native regressions on baseline and save a red receipt.
-- [ ] Add minimal physical native POST-count cases to an existing test file for clean and malformed HTTP completion with nonterminal SSE; demonstrate the expected defect before repair.
-- [ ] Implement the smallest compatible classification/no-replay fix within approved scope; retain complete explicit HTTP retries and passthrough read-error safety.
-- [ ] Verify happy SSE, streaming tool-call and terminal-event behavior using existing local fixtures.
-- [ ] Run targeted passthrough/transport/native suites, exact named cases, formatting and diff checks; record runtime cost and retained-memory bound, reusing relevant existing benchmarks.
+- [x] Reproduce the four named native regressions on baseline and save a red receipt.
+- [x] Add minimal physical native POST-count cases to an existing test file for clean and malformed HTTP completion with nonterminal SSE; demonstrate the expected defect before repair.
+- [x] Implement the smallest compatible classification/no-replay fix within approved scope; retain complete explicit HTTP retries and passthrough read-error safety.
+- [x] Verify happy SSE, streaming tool-call and terminal-event behavior using existing local fixtures.
+- [x] Run targeted passthrough/transport/native suites, exact named cases, formatting and diff checks; record runtime cost and retained-memory bound, reusing relevant existing benchmarks.
 - [ ] Return candidate diff, exact tests and receipts to coordinator; do not stage, commit, push or accept.
 
 **Acceptance Criteria:**
@@ -91,3 +91,13 @@ Frozen SHA, backup readback, independent native QA, same-binary 29-case fixture,
 ## Execution reconcile and candidate readback
 
 The original native worker's authorized Terra/high turn failed 429 before edits. The existing CrewSync r17 spec/plan/checkpoint now authorizes the coordinator as sole local source executor under the same task/session; the original Goal identity, accounting and failure history are preserved. This supersedes only the native-worker-only execution wording above. The approved repair intent and runtime gates are unchanged. See transient-http-r17-repair.md for actual red/green evidence, physical POST counts, the full OpenAI PASS and the expanded utils-suite limitations. Candidate preparation is complete; independent SHA acceptance and runtime delivery remain pending.
+
+### Review Findings
+
+- [x] [Review][Patch] Preserve unsafe replay state when a hook mutates the original error and returns no result — physically reproduced 1/1 sends; fixed in core/bifrost.go.
+- [x] [Review][Patch] Fail closed when first-token timeout synthesis or normalization replaces the error — physically reproduced 1/1 sends; fixed in the TTFT constructor and attempt finalization.
+- [x] [Review][Patch] Forbid replay of HTTP200 non-SSE failures — physically reproduced 3/1 sends; fixed in ProcessAndSendNonSSEStreamError.
+- [x] [Review][Dismiss] Bedrock carrier precedence — actual decoded exception carrier does not unwrap to transport EOF; no reachable conflict found.
+- [x] [Review][Evidence] Assert payload, successful terminals, exact error count and mutating-hook invocation in the physical matrix.
+
+The user-approved no-ambiguous-POST rule resolves the TTFT compatibility decision: preserve504/ttft_timeout and prompt socket cleanup, but no automatic fallback without affirmative idempotency or zero-dispatch proof. Explicit complete HTTP rejection recovery and normal successful streaming remain required. See transient-http-r17-repair.md, iteration2, for red/green receipts. Source review and runtime acceptance gates remain open.

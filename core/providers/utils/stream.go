@@ -135,9 +135,8 @@ func forwardPassthroughChunks(ctx context.Context, chunks []*schemas.BifrostStre
 var ErrStreamFirstTokenTimeout = errors.New(schemas.ErrStreamFirstTokenTimeout)
 
 // AttemptAbort cuts off one stream attempt that produces no output before its
-// first-token deadline, without cancelling the request context the primary,
-// retries and fallbacks share. Cancelling that context would end the whole
-// request and block fallbacks (RequestCancelled).
+// first-token deadline, without cancelling the shared request context. This
+// preserves a distinct TTFT error and lets the attempt drain before teardown.
 //
 // Bifrost stores it on the context under BifrostContextKeyStreamAttemptAbort
 // for one attempt. The header-wait watcher (contextTransport), the body
@@ -246,11 +245,14 @@ func AttemptAbortFromContext(ctx context.Context) *AttemptAbort {
 }
 
 // NewFirstTokenTimeoutError is the error for a stream attempt that missed its
-// first-token deadline. IsBifrostError stops the retry loop on the same
-// provider, and AllowFallbacks stays unset so the next fallback runs.
+// first-token deadline. No token or response header is not proof that the POST
+// was unprocessed. Preserve the timeout classification, but forbid automatic
+// replay without a proven idempotency mechanism.
 func NewFirstTokenTimeoutError(d time.Duration) *schemas.BifrostError {
 	err := NewBifrostTimeoutError(fmt.Sprintf("%s of %s", schemas.ErrStreamFirstTokenTimeout, d), ErrStreamFirstTokenTimeout)
 	err.Error.Code = new(schemas.FirstTokenTimeoutErrorCode)
+	err.ReplayUnsafe = true
+	err.AllowFallbacks = schemas.Ptr(false)
 	return err
 }
 
@@ -523,7 +525,7 @@ func CheckStreamPreambleForError(
 					}
 					// Committing would disarm the deadline with no output, and
 					// buffering on would be unbounded. End the attempt as a TTFT
-					// miss now; the next fallback runs.
+					// miss now, without replaying the ambiguous POST.
 					abort.Expire()
 					return nil, drain(), NewFirstTokenTimeoutError(abort.Timeout())
 				}

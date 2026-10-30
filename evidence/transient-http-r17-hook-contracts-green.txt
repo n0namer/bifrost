@@ -1,0 +1,138 @@
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/empty/broken-http=false
+    passthrough_retry_loop_test.go:616: physical POST sends: primary=1 fallback=0; errors=1
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/empty/broken-http=true
+    passthrough_retry_loop_test.go:616: physical POST sends: primary=1 fallback=0; errors=1
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/comment/broken-http=false
+    passthrough_retry_loop_test.go:616: physical POST sends: primary=1 fallback=0; errors=1
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/comment/broken-http=true
+    passthrough_retry_loop_test.go:616: physical POST sends: primary=1 fallback=0; errors=1
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/incomplete-event/broken-http=false
+    passthrough_retry_loop_test.go:616: physical POST sends: primary=1 fallback=0; errors=1
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/incomplete-event/broken-http=true
+    passthrough_retry_loop_test.go:616: physical POST sends: primary=1 fallback=0; errors=1
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/partial-output/broken-http=false
+    passthrough_retry_loop_test.go:616: physical POST sends: primary=1 fallback=0; errors=1
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/partial-output/broken-http=true
+    passthrough_retry_loop_test.go:616: physical POST sends: primary=1 fallback=0; errors=1
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/complete/broken-http=false
+    passthrough_retry_loop_test.go:616: physical POST sends: primary=1 fallback=0; errors=0
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/comment-mutated-empty/broken-http=false
+    passthrough_retry_loop_test.go:616: physical POST sends: primary=1 fallback=0; errors=1
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/comment-mutated-empty/broken-http=true
+    passthrough_retry_loop_test.go:616: physical POST sends: primary=1 fallback=0; errors=1
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/comment-timeout/broken-http=false
+    passthrough_retry_loop_test.go:616: physical POST sends: primary=1 fallback=0; errors=1
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/non-sse-empty/broken-http=false
+    passthrough_retry_loop_test.go:616: physical POST sends: primary=1 fallback=0; errors=1
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/non-sse-empty/broken-http=true
+    passthrough_retry_loop_test.go:616: physical POST sends: primary=1 fallback=0; errors=1
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/non-sse-body/broken-http=false
+    passthrough_retry_loop_test.go:616: physical POST sends: primary=1 fallback=0; errors=1
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/non-sse-body/broken-http=true
+    passthrough_retry_loop_test.go:616: physical POST sends: primary=1 fallback=0; errors=1
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/empty/broken-http=false
+    passthrough_retry_loop_test.go:616: physical POST sends: primary=1 fallback=0; errors=1
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/empty/broken-http=true
+    passthrough_retry_loop_test.go:616: physical POST sends: primary=1 fallback=0; errors=1
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/comment/broken-http=false
+    passthrough_retry_loop_test.go:616: physical POST sends: primary=1 fallback=0; errors=1
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/comment/broken-http=true
+    passthrough_retry_loop_test.go:616: physical POST sends: primary=1 fallback=0; errors=1
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/incomplete-event/broken-http=false
+    passthrough_retry_loop_test.go:616: physical POST sends: primary=1 fallback=0; errors=1
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/incomplete-event/broken-http=true
+    passthrough_retry_loop_test.go:616: physical POST sends: primary=1 fallback=0; errors=1
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/partial-output/broken-http=false
+    passthrough_retry_loop_test.go:616: physical POST sends: primary=1 fallback=0; errors=1
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/partial-output/broken-http=true
+    passthrough_retry_loop_test.go:616: physical POST sends: primary=1 fallback=0; errors=1
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/complete/broken-http=false
+    passthrough_retry_loop_test.go:616: physical POST sends: primary=1 fallback=0; errors=0
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/comment-mutated-empty/broken-http=false
+    passthrough_retry_loop_test.go:616: physical POST sends: primary=1 fallback=0; errors=1
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/comment-mutated-empty/broken-http=true
+    passthrough_retry_loop_test.go:616: physical POST sends: primary=1 fallback=0; errors=1
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/comment-timeout/broken-http=false
+    passthrough_retry_loop_test.go:616: physical POST sends: primary=1 fallback=0; errors=1
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/non-sse-empty/broken-http=false
+    passthrough_retry_loop_test.go:616: physical POST sends: primary=1 fallback=0; errors=1
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/non-sse-empty/broken-http=true
+    passthrough_retry_loop_test.go:616: physical POST sends: primary=1 fallback=0; errors=1
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/non-sse-body/broken-http=false
+    passthrough_retry_loop_test.go:616: physical POST sends: primary=1 fallback=0; errors=1
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/non-sse-body/broken-http=true
+    passthrough_retry_loop_test.go:616: physical POST sends: primary=1 fallback=0; errors=1
+--- PASS: TestNativeStreamAmbiguousPOSTNeverReplays (0.43s)
+    --- PASS: TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/empty/broken-http=false (0.03s)
+    --- PASS: TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/empty/broken-http=true (0.00s)
+    --- PASS: TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/comment/broken-http=false (0.00s)
+    --- PASS: TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/comment/broken-http=true (0.00s)
+    --- PASS: TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/incomplete-event/broken-http=false (0.04s)
+    --- PASS: TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/incomplete-event/broken-http=true (0.00s)
+    --- PASS: TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/partial-output/broken-http=false (0.01s)
+    --- PASS: TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/partial-output/broken-http=true (0.00s)
+    --- PASS: TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/complete/broken-http=false (0.00s)
+    --- PASS: TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/comment-mutated-empty/broken-http=false (0.00s)
+    --- PASS: TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/comment-mutated-empty/broken-http=true (0.00s)
+    --- PASS: TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/comment-timeout/broken-http=false (0.10s)
+    --- PASS: TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/non-sse-empty/broken-http=false (0.00s)
+    --- PASS: TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/non-sse-empty/broken-http=true (0.00s)
+    --- PASS: TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/non-sse-body/broken-http=false (0.00s)
+    --- PASS: TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/non-sse-body/broken-http=true (0.00s)
+    --- PASS: TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/empty/broken-http=false (0.01s)
+    --- PASS: TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/empty/broken-http=true (0.00s)
+    --- PASS: TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/comment/broken-http=false (0.00s)
+    --- PASS: TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/comment/broken-http=true (0.00s)
+    --- PASS: TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/incomplete-event/broken-http=false (0.04s)
+    --- PASS: TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/incomplete-event/broken-http=true (0.00s)
+    --- PASS: TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/partial-output/broken-http=false (0.00s)
+    --- PASS: TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/partial-output/broken-http=true (0.00s)
+    --- PASS: TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/complete/broken-http=false (0.05s)
+    --- PASS: TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/comment-mutated-empty/broken-http=false (0.00s)
+    --- PASS: TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/comment-mutated-empty/broken-http=true (0.00s)
+    --- PASS: TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/comment-timeout/broken-http=false (0.10s)
+    --- PASS: TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/non-sse-empty/broken-http=false (0.00s)
+    --- PASS: TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/non-sse-empty/broken-http=true (0.00s)
+    --- PASS: TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/non-sse-body/broken-http=false (0.00s)
+    --- PASS: TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/non-sse-body/broken-http=true (0.00s)
+=== RUN   TestStreamFallbackAfterFirstChunkError
+--- PASS: TestStreamFallbackAfterFirstChunkError (0.06s)
+=== RUN   TestStreamRetryAfterFirstChunkError
+--- PASS: TestStreamRetryAfterFirstChunkError (0.00s)
+=== RUN   TestStreamRetryRunsPostHooksOnlyForServedAttempt
+=== RUN   TestStreamRetryRunsPostHooksOnlyForServedAttempt/openai_error_as_first_event
+=== RUN   TestStreamRetryRunsPostHooksOnlyForServedAttempt/openai_error_after_startup_event
+=== RUN   TestStreamRetryRunsPostHooksOnlyForServedAttempt/anthropic_error_as_first_event
+--- PASS: TestStreamRetryRunsPostHooksOnlyForServedAttempt (0.02s)
+    --- PASS: TestStreamRetryRunsPostHooksOnlyForServedAttempt/openai_error_as_first_event (0.00s)
+    --- PASS: TestStreamRetryRunsPostHooksOnlyForServedAttempt/openai_error_after_startup_event (0.01s)
+    --- PASS: TestStreamRetryRunsPostHooksOnlyForServedAttempt/anthropic_error_as_first_event (0.00s)
+=== RUN   TestStreamRetriesExhaustedRunErrorPostHooksOnce
+--- PASS: TestStreamRetriesExhaustedRunErrorPostHooksOnce (0.00s)
+=== RUN   TestStreamFinalErrorRecovery
+=== RUN   TestStreamFinalErrorRecovery/startup_error
+=== RUN   TestStreamFinalErrorRecovery/HTTP_setup_error
+--- PASS: TestStreamFinalErrorRecovery (0.00s)
+    --- PASS: TestStreamFinalErrorRecovery/startup_error (0.00s)
+    --- PASS: TestStreamFinalErrorRecovery/HTTP_setup_error (0.00s)
+=== RUN   TestStreamTTFTCutsOffStartupOnlyPrimary
+--- PASS: TestStreamTTFTCutsOffStartupOnlyPrimary (0.30s)
+=== RUN   TestStreamTTFTCutsOffSilentPrimaryHeaderWait
+--- PASS: TestStreamTTFTCutsOffSilentPrimaryHeaderWait (0.30s)
+=== RUN   TestStreamTTFTNeverCutsOffLastAttempt
+=== RUN   TestStreamTTFTNeverCutsOffLastAttempt/last_fallback
+=== RUN   TestStreamTTFTNeverCutsOffLastAttempt/primary_without_fallbacks
+--- PASS: TestStreamTTFTNeverCutsOffLastAttempt (2.01s)
+    --- PASS: TestStreamTTFTNeverCutsOffLastAttempt/last_fallback (1.00s)
+    --- PASS: TestStreamTTFTNeverCutsOffLastAttempt/primary_without_fallbacks (1.00s)
+=== RUN   TestStreamTTFTLeavesTimelyOrUnconfiguredPrimaryAlone
+=== RUN   TestStreamTTFTLeavesTimelyOrUnconfiguredPrimaryAlone/first_token_before_deadline
+=== RUN   TestStreamTTFTLeavesTimelyOrUnconfiguredPrimaryAlone/no_deadline_configured
+--- PASS: TestStreamTTFTLeavesTimelyOrUnconfiguredPrimaryAlone (1.06s)
+    --- PASS: TestStreamTTFTLeavesTimelyOrUnconfiguredPrimaryAlone/first_token_before_deadline (0.05s)
+    --- PASS: TestStreamTTFTLeavesTimelyOrUnconfiguredPrimaryAlone/no_deadline_configured (1.00s)
+=== RUN   TestStreamErrorAfterContentDoesNotFallBack
+--- PASS: TestStreamErrorAfterContentDoesNotFallBack (0.00s)
+PASS
+ok  	github.com/maximhq/bifrost/core	4.499s

@@ -1,35 +1,24 @@
 {
-  "baseline": "943261a78e543741e59e87b4acdc9d8d7714cbfe",
-  "at": "2026-10-30T18:05:10.248662+00:00",
+  "at": "2026-10-30T18:27:05.591483+00:00",
+  "parent_sha": "0e78102d1ffbc1f18955c165045f6ed6c7a15905",
+  "original_baseline": "943261a78e543741e59e87b4acdc9d8d7714cbfe",
+  "review_iteration": 2,
   "source_sha256": {
-    "core/bifrost.go": "441e620de87d60324f13a54745993c380340ddbc6bfa890784c3097da70f2786",
-    "core/passthrough_retry_loop_test.go": "081830a56b4be4d7d988aed84397b73ea4cbb9cedd9f929608bc049fcdd23475",
-    "core/providers/openai/streamtruncation_test.go": "00a2db574fdbe01bb8787f01c14455a0ff4d266835f17fc582995fbaedadf871",
-    "core/providers/utils/utils.go": "3009c4f79b6b8c071ce2539e978d7074e3e65d6c660e8a85019789e0fc4bc645",
+    "core/bifrost.go": "dc00a649fc5b7da94edc00cdd3db9238979b65a34f17d4937ed85f440c30ebb5",
     "core/schemas/bifrost.go": "c3005854d962140d0a64f28d68285e7ede81c0a394a36945593315c3e796f4b9",
-    "evidence/transient-http-r14-fixture.mjs": "4476c01491fc10bc118804cf1e69de642285c5f72bfe40fb22bd13a062ae8e56",
-    "tests/e2e/api/collections/provider-harness.json": "79f3ebe4998475cb0a1d07304bdd7fadf1c7433516c31a7794dbba05f6284862"
-  },
-  "focused_receipt": {
-    "at": "2026-10-30T17:52:07.390644+00:00",
-    "finished": "2026-10-30T17:52:55.793970+00:00",
-    "head": "943261a78e543741e59e87b4acdc9d8d7714cbfe",
-    "head_after": "943261a78e543741e59e87b4acdc9d8d7714cbfe",
-    "diff_sha256": "42836813736c38f416608c5892f6bd02664e505982c866a390eaed29cc3d8f7f",
-    "go": "C:\\Users\\\u0420\u0430\u0444\u0438\u043a\\go\\pkg\\mod\\golang.org\\toolchain@v0.0.1-go1.27.3.windows-amd64\\bin\\go.exe",
-    "args": [
-      "test",
-      ".",
-      "./providers/openai",
-      "./providers/utils",
-      "-run",
-      "^(TestNativeStreamAmbiguousPOSTNeverReplays|TestChatStreamTruncatedPreFirstByte|TestChatStreamTruncatedMidStream|TestTextCompletionStreamTruncated|TestResponsesStreamTruncatedBeforeCompleted|TestChatStreamContentLengthTruncationAfterFinishReason|TestPassthroughStreamReadFailureNeverReplays|TestContextTransport_.*|TestStreamPassthrough_.*|TestPassthroughTransientPhysicalSends|TestPassthroughLoop.*|TestStreamFallbackAfterFirstChunkError|TestOpenAI.*FallbackAfterPreamble|TestAzure.*FallbackAfterPreamble)$",
-      "-count=1",
-      "-v",
-      "-timeout=120s"
-    ],
-    "exit_code": 0,
-    "log": "C:\\Users\\\u0420\u0430\u0444\u0438\u043a\\Documents\\DEV\\llm-gateway-bakeoff-20261030\\bifrost-sparse\\evidence\\transient-http-r17-focused-green-2.txt"
+    "core/passthrough_retry_loop_test.go": "d5bee412074e1cdb7b177a025b2eb1862d52f2760e863c782ed24d9148808cc5",
+    "core/streamfallback_test.go": "8dee86a4e425961cd0a0b42465f6283e1d1e0d0db91d1ec6425e901b44bb2121",
+    "core/providers/utils/stream.go": "366fb0fb91172f8cd1f2f7e776c1d482d60421b50c70a39b9d18862305848fef",
+    "core/providers/utils/stream_test.go": "a62df54147f5fda6fab758c4cf1e67c9fe746f6c872cf0cc952b4939b181e163",
+    "core/providers/utils/utils.go": "8ae3cd05fbce67af68cb77aeb21ee117ddd3b98098106cd888d7d6dccf157a96",
+    "core/providers/utils/roundtripper.go": "8ec0bc6c9f45e1402561a629873a1b72f4ddffb3bf17d2b22b2b0b054c3808c5",
+    "core/providers/openai/streamtruncation_test.go": "00a2db574fdbe01bb8787f01c14455a0ff4d266835f17fc582995fbaedadf871",
+    "core/go.mod": "7a3c140d18b25a1ac850ac83732832f9723cb78b4910b4909a1d21b355ff27c5",
+    "core/go.sum": "00b03a6328181aa304dbc3604a16a66900d32973eab2b20f2f346090399782ed",
+    "transports/go.mod": "4f09e62fe0812f2a99b9ed2c9369a2eba9942ebe8b868357cf67145134a519e7",
+    "transports/go.sum": "1954231d35e2dc87c43fe7c83afd5b32862fe7411f9c13a35b39fdbabae16571",
+    "tests/e2e/api/collections/provider-harness.json": "79f3ebe4998475cb0a1d07304bdd7fadf1c7433516c31a7794dbba05f6284862",
+    "evidence/transient-http-r14-fixture.mjs": "4476c01491fc10bc118804cf1e69de642285c5f72bfe40fb22bd13a062ae8e56"
   },
   "qa_accepted": false,
   "server_done": false
