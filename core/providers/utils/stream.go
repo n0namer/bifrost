@@ -17,7 +17,7 @@ const maxPassthrough429RetryChunks = 1024
 // bufferPassthrough429ForRetry consumes only an initial raw HTTP 429 response,
 // allowing its retry classifier to inspect a bounded complete body. It returns
 // original chunks for exact forwarding when retry is refused or bounds overflow.
-func bufferPassthrough429ForRetry(first *schemas.BifrostStreamChunk, rest chan *schemas.BifrostStreamChunk, classify func(*schemas.BifrostStreamChunk) *schemas.BifrostError) (chan *schemas.BifrostStreamChunk, <-chan struct{}, *schemas.BifrostError, bool) {
+func bufferPassthrough429ForRetry(ctx context.Context, first *schemas.BifrostStreamChunk, rest chan *schemas.BifrostStreamChunk, classify func(*schemas.BifrostStreamChunk) *schemas.BifrostError) (chan *schemas.BifrostStreamChunk, <-chan struct{}, *schemas.BifrostError, bool) {
 	if first == nil || first.BifrostPassthroughResponse == nil || first.BifrostPassthroughResponse.StatusCode != 429 || classify == nil {
 		return nil, nil, nil, false
 	}
@@ -45,7 +45,7 @@ func bufferPassthrough429ForRetry(first *schemas.BifrostStreamChunk, rest chan *
 	if overflow || len(chunks) > maxPassthrough429RetryChunks || len(body) > maxPassthrough429RetryBodyBytes {
 		// Bounds are exceeded: never retry an incompletely inspected POST. Stream
 		// all retained chunks and the unread tail without further buffering.
-		forwarded, done := forwardPassthroughChunks(chunks, rest)
+		forwarded, done := forwardPassthroughChunks(ctx, chunks, rest)
 		return forwarded, done, nil, true
 	}
 	combined := *first.BifrostPassthroughResponse
@@ -67,17 +67,44 @@ func bufferPassthrough429ForRetry(first *schemas.BifrostStreamChunk, rest chan *
 	return forwarded, done, nil, true
 }
 
-func forwardPassthroughChunks(chunks []*schemas.BifrostStreamChunk, rest chan *schemas.BifrostStreamChunk) (chan *schemas.BifrostStreamChunk, <-chan struct{}) {
+func forwardPassthroughChunks(ctx context.Context, chunks []*schemas.BifrostStreamChunk, rest chan *schemas.BifrostStreamChunk) (chan *schemas.BifrostStreamChunk, <-chan struct{}) {
 	out := make(chan *schemas.BifrostStreamChunk)
 	done := make(chan struct{})
 	go func() {
 		defer close(done)
 		defer close(out)
-		for _, chunk := range chunks {
-			out <- chunk
+		drain := func() {
+			for range rest {
+			}
 		}
-		for chunk := range rest {
-			out <- chunk
+		send := func(chunk *schemas.BifrostStreamChunk) bool {
+			select {
+			case out <- chunk:
+				return true
+			case <-ctx.Done():
+				return false
+			}
+		}
+		for _, chunk := range chunks {
+			if !send(chunk) {
+				drain()
+				return
+			}
+		}
+		for {
+			select {
+			case <-ctx.Done():
+				drain()
+				return
+			case chunk, ok := <-rest:
+				if !ok {
+					return
+				}
+				if !send(chunk) {
+					drain()
+					return
+				}
+			}
 		}
 	}()
 	return out, done
@@ -603,7 +630,7 @@ func CheckFirstStreamChunkForError(
 	}
 
 	if len(firstChunkRetry) > 0 && firstChunkRetry[0] != nil {
-		if checked, complete, retryErr, handled := bufferPassthrough429ForRetry(firstChunk, stream, firstChunkRetry[0]); handled {
+		if checked, complete, retryErr, handled := bufferPassthrough429ForRetry(ctx, firstChunk, stream, firstChunkRetry[0]); handled {
 			if retryErr != nil {
 				return nil, complete, retryErr
 			}

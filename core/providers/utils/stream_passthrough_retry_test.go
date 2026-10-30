@@ -4,6 +4,7 @@ import (
 	"context"
 	"strings"
 	"testing"
+	"time"
 
 	"github.com/maximhq/bifrost/core/schemas"
 )
@@ -34,7 +35,7 @@ func TestFirstStreamChunkPassthrough429BufferOverflowFailsClosed(t *testing.T) {
 	rest <- last
 	close(rest)
 	classified := false
-	got, done, retryErr, handled := bufferPassthrough429ForRetry(first, rest, func(*schemas.BifrostStreamChunk) *schemas.BifrostError {
+	got, done, retryErr, handled := bufferPassthrough429ForRetry(context.Background(), first, rest, func(*schemas.BifrostStreamChunk) *schemas.BifrostError {
 		classified = true
 		return nil
 	})
@@ -49,6 +50,54 @@ func TestFirstStreamChunkPassthrough429BufferOverflowFailsClosed(t *testing.T) {
 	if len(chunks) != 2 || chunks[0] != first || chunks[1] != last || chunks[0].BifrostPassthroughResponse.StatusCode != 429 || chunks[0].BifrostPassthroughResponse.Headers["X-Origin"] != "kept" || string(chunks[1].BifrostPassthroughResponse.Body) != lastBody {
 		t.Fatalf("overflow did not preserve the original stream: chunks=%d", len(chunks))
 	}
+}
+
+func TestFirstStreamChunkPassthrough429BufferOverflowCancellationDrainsTail(t *testing.T) {
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
+	first := &schemas.BifrostStreamChunk{BifrostPassthroughResponse: &schemas.BifrostPassthroughResponse{StatusCode: 429, Body: []byte("first")}}
+	large := &schemas.BifrostStreamChunk{BifrostPassthroughResponse: &schemas.BifrostPassthroughResponse{StatusCode: 429, Body: []byte(strings.Repeat("x", maxPassthrough429RetryBodyBytes))}}
+	// Keep the tail send active until the forwarder starts draining it.
+	rest := make(chan *schemas.BifrostStreamChunk)
+	producerDone := make(chan struct{})
+	go func() {
+		defer close(producerDone)
+		rest <- large
+		rest <- &schemas.BifrostStreamChunk{}
+		close(rest)
+	}()
+
+	got, done, err := CheckFirstStreamChunkForError(ctx, streamWithFirst(first, rest), func(*schemas.BifrostStreamChunk) *schemas.BifrostError { return nil })
+	if err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+	// The first send is intentionally left unread. Cancellation must abandon
+	// output forwarding and drain the active source producer.
+	cancel()
+	select {
+	case <-done:
+	case <-time.After(time.Second):
+		t.Fatal("overflow forwarder did not finish after cancellation")
+	}
+	select {
+	case <-producerDone:
+	case <-time.After(time.Second):
+		t.Fatal("overflow forwarder did not drain the source tail")
+	}
+	for range got {
+	}
+}
+
+func streamWithFirst(first *schemas.BifrostStreamChunk, rest chan *schemas.BifrostStreamChunk) chan *schemas.BifrostStreamChunk {
+	stream := make(chan *schemas.BifrostStreamChunk)
+	go func() {
+		defer close(stream)
+		stream <- first
+		for chunk := range rest {
+			stream <- chunk
+		}
+	}()
+	return stream
 }
 
 func TestFirstStreamChunkPassthroughNoRetryPreservesRawStream(t *testing.T) {
