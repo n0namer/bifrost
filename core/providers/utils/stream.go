@@ -11,38 +11,58 @@ import (
 	schemas "github.com/maximhq/bifrost/core/schemas"
 )
 
-const maxPassthrough429RetryBodyBytes = 1 << 20
-const maxPassthrough429RetryChunks = 1024
+// MaxPassthroughRetryBodyBytes bounds complete error bodies inspected before replay.
+const MaxPassthroughRetryBodyBytes = 1 << 20
+const maxPassthroughRetryChunks = 1024
 
-// bufferPassthrough429ForRetry consumes only an initial raw HTTP 429 response,
+// IsPassthroughRetryStatus is the explicit complete-HTTP-error retry allowlist.
+func IsPassthroughRetryStatus(status int) bool {
+	switch status {
+	case 429, 500, 502, 503, 504, 509, 529:
+		return true
+	default:
+		return false
+	}
+}
+
+// bufferPassthroughHTTPForRetry consumes only an initial explicit transient HTTP error response,
 // allowing its retry classifier to inspect a bounded complete body. It returns
 // original chunks for exact forwarding when retry is refused or bounds overflow.
-func bufferPassthrough429ForRetry(ctx context.Context, first *schemas.BifrostStreamChunk, rest chan *schemas.BifrostStreamChunk, classify func(*schemas.BifrostStreamChunk) *schemas.BifrostError) (chan *schemas.BifrostStreamChunk, <-chan struct{}, *schemas.BifrostError, bool) {
-	if first == nil || first.BifrostPassthroughResponse == nil || first.BifrostPassthroughResponse.StatusCode != 429 || classify == nil {
+func bufferPassthroughHTTPForRetry(ctx context.Context, first *schemas.BifrostStreamChunk, rest chan *schemas.BifrostStreamChunk, classify func(*schemas.BifrostStreamChunk) *schemas.BifrostError) (chan *schemas.BifrostStreamChunk, <-chan struct{}, *schemas.BifrostError, bool) {
+	if first == nil || first.BifrostPassthroughResponse == nil || !IsPassthroughRetryStatus(first.BifrostPassthroughResponse.StatusCode) || classify == nil {
 		return nil, nil, nil, false
 	}
 	chunks := []*schemas.BifrostStreamChunk{first}
 	body := first.BifrostPassthroughResponse.Body
-	overflow := len(body) > maxPassthrough429RetryBodyBytes
-	for len(chunks) <= maxPassthrough429RetryChunks && len(body) <= maxPassthrough429RetryBodyBytes {
+	overflow := len(body) > MaxPassthroughRetryBodyBytes
+	for len(chunks) <= maxPassthroughRetryChunks && len(body) <= MaxPassthroughRetryBodyBytes {
 		if overflow {
 			break
 		}
-		chunk, ok := <-rest
+		var chunk *schemas.BifrostStreamChunk
+		var ok bool
+		select {
+		case <-ctx.Done():
+			forwarded, done := forwardPassthroughChunks(ctx, chunks, rest)
+			return forwarded, done, nil, true
+		case chunk, ok = <-rest:
+		}
 		if !ok {
 			break
 		}
 		chunks = append(chunks, chunk)
-		if chunk != nil && chunk.BifrostPassthroughResponse != nil {
-			nextBody := chunk.BifrostPassthroughResponse.Body
-			if len(nextBody) > maxPassthrough429RetryBodyBytes-len(body) {
-				overflow = true
-			} else {
-				body = append(body, nextBody...)
-			}
+		if chunk == nil || chunk.BifrostError != nil || chunk.BifrostPassthroughResponse == nil {
+			overflow = true // An incomplete/error body can never authorize replay.
+			break
+		}
+		nextBody := chunk.BifrostPassthroughResponse.Body
+		if len(nextBody) > MaxPassthroughRetryBodyBytes-len(body) {
+			overflow = true
+		} else {
+			body = append(body, nextBody...)
 		}
 	}
-	if overflow || len(chunks) > maxPassthrough429RetryChunks || len(body) > maxPassthrough429RetryBodyBytes {
+	if ctx.Err() != nil || overflow || len(chunks) > maxPassthroughRetryChunks || len(body) > MaxPassthroughRetryBodyBytes {
 		// Bounds are exceeded: never retry an incompletely inspected POST. Stream
 		// all retained chunks and the unread tail without further buffering.
 		forwarded, done := forwardPassthroughChunks(ctx, chunks, rest)
@@ -630,7 +650,7 @@ func CheckFirstStreamChunkForError(
 	}
 
 	if len(firstChunkRetry) > 0 && firstChunkRetry[0] != nil {
-		if checked, complete, retryErr, handled := bufferPassthrough429ForRetry(ctx, firstChunk, stream, firstChunkRetry[0]); handled {
+		if checked, complete, retryErr, handled := bufferPassthroughHTTPForRetry(ctx, firstChunk, stream, firstChunkRetry[0]); handled {
 			if retryErr != nil {
 				return nil, complete, retryErr
 			}
@@ -638,7 +658,7 @@ func CheckFirstStreamChunkForError(
 		}
 	}
 
-	// A rejected first HTTP 429 is a retry signal only if no bytes have
+	// A rejected complete HTTP error is a retry signal only if no bytes have
 	// committed. Drain the former attempt, never expose its chunks.
 	if len(firstChunkRetry) > 0 && firstChunkRetry[0] != nil {
 		if retryErr := firstChunkRetry[0](firstChunk); retryErr != nil {

@@ -14,7 +14,7 @@ require (
 	github.com/golang-jwt/jwt/v5 v5.3.1
 	github.com/google/pprof v0.0.0-20260802141513-ef3492d7dac3
 	github.com/google/uuid v1.6.0
-	github.com/klauspost/compress v1.20.0
+	github.com/klauspost/compress v1.20.3
 	github.com/mark3labs/mcp-go v1.3.0
 	github.com/maximhq/bifrost/core v1.14.1
 	github.com/maximhq/bifrost/framework v1.11.1
@@ -39,7 +39,7 @@ require (
 	github.com/stretchr/testify v1.12.1
 	github.com/tidwall/gjson v1.18.0
 	github.com/tidwall/sjson v1.2.5
-	github.com/valyala/fasthttp v1.74.0
+	github.com/valyala/fasthttp v1.77.1-0.20261028061327-329917ed143c
 	go.uber.org/automaxprocs v1.6.0
 	golang.org/x/sync v0.24.0
 	golang.org/x/text v0.43.0
@@ -159,7 +159,7 @@ require (
 	github.com/mattn/go-sqlite3 v1.14.32 // indirect
 	github.com/maximhq/bifrost/plugins/mocker v1.6.14 // indirect
 	github.com/maximhq/maxim-go v0.2.1 // indirect
-	github.com/molecule-man/go-brrr v1.0.1 // indirect
+	github.com/molecule-man/go-brrr v1.3.1 // indirect
 	github.com/munnerz/goautoneg v0.0.0-20191010083416-a7dc8b61c822 // indirect
 	github.com/oapi-codegen/runtime v1.1.1 // indirect
 	github.com/oklog/ulid/v2 v2.1.2 // indirect

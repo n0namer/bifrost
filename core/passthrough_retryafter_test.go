@@ -13,7 +13,7 @@ func TestPassthrough429RetryAfterHint(t *testing.T) {
 		Headers:    map[string]string{"Retry-After": "1"},
 		Body:       []byte(`{"error":{"code":"rate_limit_exceeded"}}`),
 	}
-	err := passthrough429RetryError(response)
+	err := passthroughHTTPRetryError(response)
 	if err == nil {
 		t.Fatal("expected retry error")
 	}

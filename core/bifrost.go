@@ -7692,11 +7692,13 @@ func executeRequestWithRetries[T any](
 
 		result, bifrostError = requestHandler(currentKey)
 
-		// Passthrough's raw HTTP 429 is a response, not a BifrostError.
+		passthroughHTTPRetry := false
+		// Passthrough raw HTTP errors are responses, not BifrostErrors.
 		// Retry only before the last attempt; otherwise return original status, bytes and headers.
 		if bifrostError == nil && requestType == schemas.PassthroughRequest && attempts < config.NetworkConfig.MaxRetries {
 			if response, ok := any(result).(*schemas.BifrostResponse); ok && response != nil {
-				bifrostError = passthrough429RetryError(response.PassthroughResponse)
+				bifrostError = passthroughHTTPRetryError(response.PassthroughResponse)
+				passthroughHTTPRetry = bifrostError != nil
 			}
 		}
 
@@ -7725,7 +7727,9 @@ func executeRequestWithRetries[T any](
 							if chunk == nil {
 								return nil
 							}
-							return passthrough429RetryError(chunk.BifrostPassthroughResponse)
+							retryErr := passthroughHTTPRetryError(chunk.BifrostPassthroughResponse)
+							passthroughHTTPRetry = retryErr != nil
+							return retryErr
 						}
 					}
 					checkedStream, drainDone, firstChunkErr = providerUtils.CheckFirstStreamChunkForError(ctx, streamChan, firstChunkRetry)
@@ -7848,6 +7852,9 @@ func executeRequestWithRetries[T any](
 		// same key will not help. A permanent per-key failure also excludes the key for the
 		// rest of the request, without backoff.
 		class := ClassifyFailure(bifrostError)
+		if passthroughHTTPRetry && *bifrostError.StatusCode != 429 {
+			class = schemas.FailureClassTransient
+		}
 		isPerKeyFailure := class.IsPerKey()
 		// Without a key provider there is nothing to rotate to, so the failure earns only
 		// the same-key retry it has always earned.

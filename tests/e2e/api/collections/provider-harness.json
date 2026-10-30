@@ -298482,6 +298482,252 @@
           "response": []
         }
       ]
+    },
+    {
+      "name": "297. Bounded explicit transient HTTP passthrough retry (transient-http-retry)",
+      "description": "Local synthetic fixture only, no paid calls. Set transientHTTPFixture=1 after starting evidence/transient-http-r14-fixture.mjs on 127.0.0.1:18791 and an isolated candidate gateway whose openai network_config.base_url is http://127.0.0.1:18791, max_retries=2, retry_backoff_initial=1, retry_backoff_max=5 (milliseconds). Enable passthrough for /v1/responses. Each unique probe gets a complete HTTP 502/509 on its first send, then a 200 JSON or SSE response with sends=2. The pre-fix gateway returns the first failure. Other cases stay opted out unless this dedicated fixture profile is selected. Do not point this at a paid provider.",
+      "item": [
+        {
+          "name": "openai gpt-test transient-http-retry 502 once stream=false",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "if (pm.variables.get('transientHTTPFixture') !== '1') { pm.execution.skipRequest(); }",
+                  "pm.variables.set('transientHTTPProbe', 'retry-' + Date.now() + '-' + Math.floor(Math.random() * 1e9));"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('explicit transient HTTP error recovered to 200', function () { pm.expect(pm.response.code, pm.response.text()).to.eql(200); });",
+                  "pm.test('second physical send served the response', function () { pm.expect(pm.response.text(), pm.response.text()).to.include('\"sends\":2'); pm.expect(pm.response.headers.get('x-fixture-sends'), pm.response.text()).to.eql('2'); });",
+                  "pm.test('the first transient error was not forwarded', function () { pm.expect(pm.response.text(), pm.response.text()).to.not.include('temporary_fixture_error'); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"model\": \"gpt-test\", \"input\": \"fixture only\", \"stream\": false}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/openai_passthrough/v1/responses?status=502&probe={{transientHTTPProbe}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "openai_passthrough",
+                "v1",
+                "responses"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "502"
+                },
+                {
+                  "key": "probe",
+                  "value": "{{transientHTTPProbe}}"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "openai gpt-test transient-http-retry 502 once stream=true",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "if (pm.variables.get('transientHTTPFixture') !== '1') { pm.execution.skipRequest(); }",
+                  "pm.variables.set('transientHTTPProbe', 'retry-' + Date.now() + '-' + Math.floor(Math.random() * 1e9));"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('explicit transient HTTP error recovered to 200', function () { pm.expect(pm.response.code, pm.response.text()).to.eql(200); });",
+                  "pm.test('second physical send served the response', function () { pm.expect(pm.response.text(), pm.response.text()).to.include('\"sends\":2'); pm.expect(pm.response.headers.get('x-fixture-sends'), pm.response.text()).to.eql('2'); });",
+                  "pm.test('the first transient error was not forwarded', function () { pm.expect(pm.response.text(), pm.response.text()).to.not.include('temporary_fixture_error'); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"model\": \"gpt-test\", \"input\": \"fixture only\", \"stream\": true}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/openai_passthrough/v1/responses?status=502&probe={{transientHTTPProbe}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "openai_passthrough",
+                "v1",
+                "responses"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "502"
+                },
+                {
+                  "key": "probe",
+                  "value": "{{transientHTTPProbe}}"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "openai gpt-test transient-http-retry 509 once stream=false",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "if (pm.variables.get('transientHTTPFixture') !== '1') { pm.execution.skipRequest(); }",
+                  "pm.variables.set('transientHTTPProbe', 'retry-' + Date.now() + '-' + Math.floor(Math.random() * 1e9));"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('explicit transient HTTP error recovered to 200', function () { pm.expect(pm.response.code, pm.response.text()).to.eql(200); });",
+                  "pm.test('second physical send served the response', function () { pm.expect(pm.response.text(), pm.response.text()).to.include('\"sends\":2'); pm.expect(pm.response.headers.get('x-fixture-sends'), pm.response.text()).to.eql('2'); });",
+                  "pm.test('the first transient error was not forwarded', function () { pm.expect(pm.response.text(), pm.response.text()).to.not.include('temporary_fixture_error'); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"model\": \"gpt-test\", \"input\": \"fixture only\", \"stream\": false}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/openai_passthrough/v1/responses?status=509&probe={{transientHTTPProbe}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "openai_passthrough",
+                "v1",
+                "responses"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "509"
+                },
+                {
+                  "key": "probe",
+                  "value": "{{transientHTTPProbe}}"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "openai gpt-test transient-http-retry 509 once stream=true",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "if (pm.variables.get('transientHTTPFixture') !== '1') { pm.execution.skipRequest(); }",
+                  "pm.variables.set('transientHTTPProbe', 'retry-' + Date.now() + '-' + Math.floor(Math.random() * 1e9));"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('explicit transient HTTP error recovered to 200', function () { pm.expect(pm.response.code, pm.response.text()).to.eql(200); });",
+                  "pm.test('second physical send served the response', function () { pm.expect(pm.response.text(), pm.response.text()).to.include('\"sends\":2'); pm.expect(pm.response.headers.get('x-fixture-sends'), pm.response.text()).to.eql('2'); });",
+                  "pm.test('the first transient error was not forwarded', function () { pm.expect(pm.response.text(), pm.response.text()).to.not.include('temporary_fixture_error'); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"model\": \"gpt-test\", \"input\": \"fixture only\", \"stream\": true}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/openai_passthrough/v1/responses?status=509&probe={{transientHTTPProbe}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "openai_passthrough",
+                "v1",
+                "responses"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "509"
+                },
+                {
+                  "key": "probe",
+                  "value": "{{transientHTTPProbe}}"
+                }
+              ]
+            }
+          }
+        }
+      ]
     }
   ]
 }

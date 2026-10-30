@@ -18,8 +18,68 @@ import (
 const responsesStreamBody = "event: response.created\ndata: {\"type\":\"response.created\"}\n\n" +
 	"event: response.completed\ndata: {\"type\":\"response.completed\",\"response\":{\"usage\":{\"input_tokens\":5,\"output_tokens\":3}}}\n\n"
 
+func TestStreamPassthrough_HTTPErrorIgnoresTerminalEvents(t *testing.T) {
+	for _, status := range []int{429, 502, 509} {
+		t.Run(fmt.Sprint(status), func(t *testing.T) {
+			// A terminal-looking SSE event in an HTTP error must not hide a later no-replay marker.
+			body := "event: error\ndata: {\"type\":\"error\"}\n\n" + "data: {\"code\":\"upstream_reset_replay_refused\"}\n\n"
+			ctx := schemas.NewBifrostContext(context.Background(), schemas.NoDeadline)
+			ctx.SetValue(schemas.BifrostContextKeyTracer, &schemas.NoOpTracer{})
+			runner := func(_ *schemas.BifrostContext, r *schemas.BifrostResponse, e *schemas.BifrostError) (*schemas.BifrostResponse, *schemas.BifrostError) {
+				return r, e
+			}
+			// Force the marker into a later read, after a complete terminal-looking frame.
+			reader := io.MultiReader(strings.NewReader(body[:39]), strings.NewReader(body[39:]))
+			ch := streamPassthrough(ctx, runner, nil, func() {}, reader, PassthroughStreamParams{StatusCode: status, StartTime: time.Now(), EndsStream: func([]byte) bool { return true }})
+			var got strings.Builder
+			for chunk := range ch {
+				if chunk.BifrostPassthroughResponse != nil {
+					got.Write(chunk.BifrostPassthroughResponse.Body)
+				}
+			}
+			if got.String() != body {
+				t.Fatalf("HTTP error body truncated: got=%q want=%q", got.String(), body)
+			}
+		})
+	}
+}
+
+func TestStreamPassthrough_NonRetryStatusKeepsTerminalEvents(t *testing.T) {
+	ctx := schemas.NewBifrostContext(context.Background(), schemas.NoDeadline)
+	ctx.SetValue(schemas.BifrostContextKeyTracer, &schemas.NoOpTracer{})
+	runner := func(_ *schemas.BifrostContext, r *schemas.BifrostResponse, e *schemas.BifrostError) (*schemas.BifrostResponse, *schemas.BifrostError) {
+		return r, e
+	}
+	first := "event: error\ndata: {\"type\":\"error\"}\n\n"
+	reader := io.MultiReader(strings.NewReader(first), strings.NewReader("unread tail"))
+	ch := streamPassthrough(ctx, runner, nil, func() {}, reader, PassthroughStreamParams{StatusCode: 400, StartTime: time.Now(), EndsStream: func([]byte) bool { return true }})
+	var got strings.Builder
+	for chunk := range ch {
+		if chunk.BifrostPassthroughResponse != nil {
+			got.Write(chunk.BifrostPassthroughResponse.Body)
+		}
+	}
+	if got.String() != first {
+		t.Fatalf("nonretry status terminal handling changed: got=%q", got.String())
+	}
+}
+
 func endsResponsesStream(event []byte) bool {
 	return strings.Contains(string(event), `"type":"response.completed"`)
+}
+
+func BenchmarkStreamPassthroughSuccess(b *testing.B) {
+	runner := func(_ *schemas.BifrostContext, r *schemas.BifrostResponse, e *schemas.BifrostError) (*schemas.BifrostResponse, *schemas.BifrostError) {
+		return r, e
+	}
+	b.ReportAllocs()
+	for b.Loop() {
+		ctx := schemas.NewBifrostContext(context.Background(), schemas.NoDeadline)
+		ctx.SetValue(schemas.BifrostContextKeyTracer, &schemas.NoOpTracer{})
+		ch := streamPassthrough(ctx, runner, nil, func() {}, strings.NewReader(responsesStreamBody), PassthroughStreamParams{StatusCode: 200, StartTime: time.Now(), EndsStream: endsResponsesStream})
+		for range ch {
+		}
+	}
 }
 
 // hangupBody makes a read that the cancellation close interrupts fail the way a live connection

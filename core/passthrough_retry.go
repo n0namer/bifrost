@@ -10,11 +10,11 @@ import (
 	"github.com/maximhq/bifrost/core/schemas"
 )
 
-// passthrough429RetryError translates only a retryable upstream 429 into the
+// passthroughHTTPRetryError translates an explicit retryable upstream HTTP error into the
 // existing Bifrost retry loop. The caller must invoke this only while there
 // is retry budget; on the final attempt it must forward the original response.
-func passthrough429RetryError(resp *schemas.BifrostPassthroughResponse) *schemas.BifrostError {
-	if resp == nil || resp.StatusCode != http.StatusTooManyRequests {
+func passthroughHTTPRetryError(resp *schemas.BifrostPassthroughResponse) *schemas.BifrostError {
+	if resp == nil || !providerUtils.IsPassthroughRetryStatus(resp.StatusCode) || len(resp.Body) > providerUtils.MaxPassthroughRetryBodyBytes {
 		return nil
 	}
 	for header, value := range resp.Headers {
@@ -30,11 +30,11 @@ func passthrough429RetryError(resp *schemas.BifrostPassthroughResponse) *schemas
 		bytes.Contains(resp.Body, []byte("insufficient_quota")) {
 		return nil
 	}
-	status := http.StatusTooManyRequests
+	status := resp.StatusCode
 	retryErr := &schemas.BifrostError{
 		IsBifrostError: false,
 		StatusCode:     &status,
-		Error:          &schemas.ErrorField{Message: "retryable upstream HTTP 429 (passthrough)"},
+		Error:          &schemas.ErrorField{Message: "retryable upstream HTTP error (passthrough)"},
 	}
 	// Reuse the existing upstream hint parser; headers are already filtered for
 	// safe passthrough forwarding, so this does not expose credentials.

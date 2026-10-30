@@ -114,6 +114,7 @@ func streamPassthrough(
 		var usage *schemas.BifrostPassthroughUsage
 
 		success := params.StatusCode >= 200 && params.StatusCode < 300
+		detectTerminal := !IsPassthroughRetryStatus(params.StatusCode)
 
 		observe := func(payload []byte) (terminal bool) {
 			if len(bytes.TrimSpace(payload)) == 0 {
@@ -125,12 +126,12 @@ func streamPassthrough(
 					usage = u
 				}
 			}
-			if params.EndsStream != nil && params.EndsStream(payload) {
+			if detectTerminal && params.EndsStream != nil && params.EndsStream(payload) {
 				// Upstream may keep the body open after the end event; release must abandon it, not drain it.
 				ctx.SetValue(schemas.BifrostContextKeyStreamParkedAfterFinish, true)
 				return true
 			}
-			return params.UseTerminalDetector && isTerminalSSEPayload(payload)
+			return detectTerminal && params.UseTerminalDetector && isTerminalSSEPayload(payload)
 		}
 
 		// observeUndelimited handles streams that carry no SSE framing. Vertex
@@ -181,7 +182,7 @@ func streamPassthrough(
 					return true
 				}
 			}
-			if params.UseTerminalDetector && observeUndelimited(pending.Bytes()) {
+			if detectTerminal && params.UseTerminalDetector && observeUndelimited(pending.Bytes()) {
 				return true
 			}
 			// Bound the buffer. A single SSE event can be large — e.g. an
