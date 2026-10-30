@@ -1,0 +1,140 @@
+{
+  "capturedAt": "2026-10-30T20:30:26.915Z",
+  "source_sha": "d45ee450b4a9ab1d49bb045ae1b1a8224f5be131",
+  "runtime_evidence_commit": "d66465c0a3c578536ac714fed4fa57956003a0d5",
+  "authority": "CrewSync server via installed same-server CLI task show after task done reducers",
+  "serverDone": true,
+  "mainTask": {
+    "key": "bifrost-canary:transient-http-retry",
+    "status": "done",
+    "updated_at": "2026-10-30T20:30:20Z",
+    "claimed_by": "coordinator",
+    "claimed_session": "bifrost-central-canary-20261030",
+    "result": {
+      "verdict": "MVP_ACCEPT",
+      "source_sha": "d45ee450b4a9ab1d49bb045ae1b1a8224f5be131",
+      "evidence_commit": "d66465c0a3c578536ac714fed4fa57956003a0d5",
+      "evidence_url": "https://github.com/n0namer/bifrost/tree/backup/vp49-bifrost-r17-delivery-20261030/evidence/runtime-r17",
+      "binary_sha256": "e69e9a679b19070ced7783b28ae63174adca50aaa99537a5a475abdb10b6db23",
+      "sourceQA": {
+        "verdict": "QA_ACCEPT",
+        "thread": "01a18dba-d3b3-7300-84fe-cbdaff292365",
+        "turn": "01a18e14-db1c-7f21-a6d8-2467b7e8cd34",
+        "receipt_sha256": "d8f77132b584bcefced43dda71812d9bb052fa24fe9fd017ca52a56f21163a51"
+      },
+      "tests": {
+        "binary_fixture": "29/29 PASS",
+        "native_no_replay": "32cases primary1/fallback0",
+        "openai": "full suite and4original truncation cases PASS",
+        "runtime": "candidate SSE + old rollback SSE + active canary SSE PASS"
+      },
+      "runtime": {
+        "pid": 107928,
+        "port": 15185,
+        "status": "ACTIVE_VERIFIED",
+        "globalRouteChanged": false,
+        "openCodexPid": 11352,
+        "rollbackRehearsed": true
+      },
+      "receipts": {
+        "rehearsal": "259e1e2c04c354a31fdca4b958d982060abfbc998ce8fc08516f1cc1d19120c2",
+        "activation": "7f758e811a95fbb5584f128f2d919603ba254d3908c937a46ab0e645725b6f85",
+        "finalRuntime": "622a9a74b64fabb2b04fdafe2e3a0f219ca3243bd69ba4a3dde25800de6ee16e"
+      },
+      "execution": {
+        "originalWorker": "01a18d42-ea96-7b62-ab31-a185e0f7a99e",
+        "workerGoal": "blocked; historical429 retained",
+        "sourceExecutor": "coordinator integration",
+        "sourceReviewerGoal": "original completedR16 accounting retained; actualR17review turn completed"
+      },
+      "limitations": [
+        "Global Codex routing remains direct OpenCodex; isolated test gateway only",
+        "Broad utils failures disclosed; acceptance covers bounded OpenAI/passthrough MVP",
+        "Supplemental helper review deferred by explicit user MVP rescope; no helper QA_ACCEPT or native completion fabricated"
+      ]
+    }
+  },
+  "qaTask": {
+    "key": "bifrost-canary:transient-http-retry-qa",
+    "status": "done",
+    "updated_at": "2026-10-30T20:30:24Z",
+    "claimed_by": "coordinator",
+    "claimed_session": "bifrost-central-canary-20261030",
+    "result": {
+      "verdict": "QA_ACCEPT",
+      "source_sha": "d45ee450b4a9ab1d49bb045ae1b1a8224f5be131",
+      "evidence_commit": "d66465c0a3c578536ac714fed4fa57956003a0d5",
+      "reviewer_thread": "01a18dba-d3b3-7300-84fe-cbdaff292365",
+      "reviewer_turn": "01a18e14-db1c-7f21-a6d8-2467b7e8cd34",
+      "reviewer_turn_status": "completed",
+      "scope": "frozen source MVP only",
+      "receipt_sha256": "d8f77132b584bcefced43dda71812d9bb052fa24fe9fd017ca52a56f21163a51",
+      "report_sha256": "8ffc2db7bcf6e81e2e901057d0206c2815814be3b18448d6de8b06984021a210",
+      "tests": {
+        "openai_named": "PASS 0.382s",
+        "openai": "PASS 17.356s",
+        "utils_selected": "PASS 1.742s",
+        "core": "PASS 9.880s"
+      },
+      "physical_cases": 32,
+      "primary_sends_per_case": 1,
+      "fallback_sends_per_case": 0,
+      "native_goal_accounting": "original completed R16 record preserved; native reactivation/objective update unavailable",
+      "limitations": [
+        "Broad utils suite not passing; three disclosed failures and proxy timeout not all proven pre-existing",
+        "No binary/build/29 fixtures/live E2E/canary or CrewSync DONE",
+        "No independent proof of effective model/effort or absolute absence of a writer",
+        "Native Goal reactivation not supported by exposed API"
+      ],
+      "main_dependency_readback": "done",
+      "runtime_evidence_commit": "d66465c0a3c578536ac714fed4fa57956003a0d5"
+    }
+  },
+  "runtime": {
+    "at": "2026-10-30T20:30:20.057403+00:00",
+    "pid": 107928,
+    "ready": {
+      "pid": 11352,
+      "status": "ready",
+      "version": "2.94.0"
+    },
+    "idle": {
+      "at": "2026-10-30T20:30:19.057258+00:00",
+      "metrics": [
+        "bifrost_active_requests{method=\"passthrough_stream\"} 0"
+      ],
+      "listeners": [
+        {
+          "OwningProcess": 107928,
+          "LocalAddress": "127.0.0.1",
+          "LocalPort": 15185
+        }
+      ],
+      "established": []
+    },
+    "sourceCommit": "d45ee450b4a9ab1d49bb045ae1b1a8224f5be131"
+  },
+  "checkpoint": {
+    "at": "2026-10-30T20:30:25.633Z",
+    "state": "SERVER_DONE",
+    "task_key": "bifrost-canary:transient-http-retry",
+    "qa_task_key": "bifrost-canary:transient-http-retry-qa",
+    "source_sha": "d45ee450b4a9ab1d49bb045ae1b1a8224f5be131",
+    "evidence_commit": "d66465c0a3c578536ac714fed4fa57956003a0d5",
+    "canaryPid": 107928,
+    "canaryPort": 15185,
+    "source_qa": "QA_ACCEPT",
+    "binary_fixture": "29/29PASS",
+    "physical_no_replay": "32casesPASS",
+    "real_sse": "candidate/rollback/activePASS",
+    "globalRouteChanged": false,
+    "projectRootDone": false
+  },
+  "rawLocalReceiptSha256": "5aa070b8045b1e6848c10a8ec9932ecd8cb59259d5f2513d504d68920f9c69f9",
+  "wholeProjectDone": false,
+  "otherRequiredTasks": [
+    "bifrost-canary:pilot",
+    "bifrost-canary:pilot-rollback-qa",
+    "bifrost-canary:ocx-reset-repair"
+  ]
+}

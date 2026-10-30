@@ -24,7 +24,7 @@ Independent QA_ACCEPT applies to the Bifrost source SHA. The supplemental native
 
 The wider utils suite is not wholly green: version-guard, host/timing failures and proxy timeout are disclosed in the source QA report and were not all proven pre-existing. Acceptance covers the OpenAI/passthrough MVP contract.
 
-CrewSync is authoritative for task DONE. This publication binds the completed runtime evidence before the final CrewSync completion readback.
+CrewSync server readback confirmed DONE for bifrost-canary:transient-http-retry and bifrost-canary:transient-http-retry-qa. See proofs/transient-http-r17-server-done.json. Broader pilot/reset tasks remain outside this completed retry MVP; the project root is not claimed DONE.
 
 ## Artifact layout
 
