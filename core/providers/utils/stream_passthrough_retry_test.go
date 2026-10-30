@@ -2,6 +2,7 @@ package utils
 
 import (
 	"context"
+	"strings"
 	"testing"
 
 	"github.com/maximhq/bifrost/core/schemas"
@@ -23,6 +24,31 @@ func TestFirstStreamChunkPassthrough429RetryClassifier(t *testing.T) {
 		t.Fatalf("first failure must remain internal: stream=%v err=%v", got, err)
 	}
 	<-done
+}
+
+func TestFirstStreamChunkPassthrough429BufferOverflowFailsClosed(t *testing.T) {
+	first := &schemas.BifrostStreamChunk{BifrostPassthroughResponse: &schemas.BifrostPassthroughResponse{StatusCode: 429, Headers: map[string]string{"X-Origin": "kept"}, Body: []byte("first")}}
+	rest := make(chan *schemas.BifrostStreamChunk, 1)
+	lastBody := strings.Repeat("x", maxPassthrough429RetryBodyBytes)
+	last := &schemas.BifrostStreamChunk{BifrostPassthroughResponse: &schemas.BifrostPassthroughResponse{StatusCode: 429, Body: []byte(lastBody)}}
+	rest <- last
+	close(rest)
+	classified := false
+	got, done, retryErr, handled := bufferPassthrough429ForRetry(first, rest, func(*schemas.BifrostStreamChunk) *schemas.BifrostError {
+		classified = true
+		return nil
+	})
+	if !handled || retryErr != nil || classified {
+		t.Fatalf("overflow must bypass retry classification: handled=%v retryErr=%v classified=%v", handled, retryErr, classified)
+	}
+	var chunks []*schemas.BifrostStreamChunk
+	for chunk := range got {
+		chunks = append(chunks, chunk)
+	}
+	<-done
+	if len(chunks) != 2 || chunks[0] != first || chunks[1] != last || chunks[0].BifrostPassthroughResponse.StatusCode != 429 || chunks[0].BifrostPassthroughResponse.Headers["X-Origin"] != "kept" || string(chunks[1].BifrostPassthroughResponse.Body) != lastBody {
+		t.Fatalf("overflow did not preserve the original stream: chunks=%d", len(chunks))
+	}
 }
 
 func TestFirstStreamChunkPassthroughNoRetryPreservesRawStream(t *testing.T) {
