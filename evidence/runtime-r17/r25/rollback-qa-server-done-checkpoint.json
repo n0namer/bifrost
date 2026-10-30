@@ -1,0 +1,147 @@
+{
+  "schema": "vp49-r25-coordinator-checkpoint-v1",
+  "recorded_at_utc": "2026-10-30 21:48:33 UTC",
+  "provenance": "Coordinator summary of observed CrewSync and native App Server readbacks. This file is not a replacement for the original server receipts or reviewer-authored report.",
+  "source_sha": "d45ee450b4a9ab1d49bb045ae1b1a8224f5be131",
+  "source_backup_ref": "backup/vp49-bifrost-r17-20261030",
+  "prior_delivery_commit": "c5b9d3acc2650647fa3b3ed9b1c15747190923a1",
+  "source_changed": false,
+  "project_server_done": false,
+  "crewsync": {
+    "session": "bifrost-central-canary-20261030",
+    "plan_key": "bifrost-canary:plan:active",
+    "revision": "bifrost-canary-20261031-r25-rollback-qa-done",
+    "new_server_done": [
+      "bifrost-canary:pilot-rollback-qa"
+    ],
+    "remaining_required": [
+      "bifrost-canary:ocx-reset-repair",
+      "bifrost-canary:pilot"
+    ],
+    "current_ready": [
+      "bifrost-canary:ocx-reset-repair"
+    ],
+    "task_readback": {
+      "bifrost-canary:pilot-rollback-qa": {
+        "status": "done",
+        "updated_at": "2026-10-30T21:36:58Z"
+      },
+      "bifrost-canary:ocx-reset-repair": {
+        "status": "claimed",
+        "lease_expires_at": "2026-10-30T23:22:56Z"
+      },
+      "bifrost-canary:pilot": {
+        "status": "open"
+      }
+    },
+    "access_blocker_written_to_crewsync": false
+  },
+  "accepted_rollback_qa": {
+    "verdict": "QA_ACCEPT",
+    "scope": "Existing direct CLI rollback evidence plus accepted R17 old-binary restoration and current canary delivery evidence. Does not accept the unresolved OpenCodex reset repair or the overall pilot.",
+    "reviewer_thread": "01a18c3a-1cdd-74c2-981f-75ec9f0cd52d",
+    "reviewer_turn": "01a18eb6-3983-77b1-af29-64ddac8942cb",
+    "reviewer_turn_status": "completed",
+    "turn_status_source": "Owning App Server turn/completed event",
+    "reviewer_native_goal_status": "complete",
+    "native_goal_readback": "evidence/original-goals-r24-2026-10-30T213310146Z.json",
+    "manager_thread": "01a18c38-b708-7c80-91cb-405f24d2748c",
+    "manager_turn": "01a18eb5-908f-7b51-8d6a-6e6c65a27340",
+    "manager_turn_status": "completed",
+    "manager_native_goal_status": "paused",
+    "manager_receipt": "evidence/pilot-rollback-r24-native.json",
+    "server_acceptance_receipt": "evidence/pilot-rollback-r24-acceptance.json",
+    "reviewer_report": "evidence/pilot-rollback-qa.md",
+    "reviewer_report_sha256": "a73799b9aec111f667f23502f381a9ed8f2d1ba20553d4f93b7c381f34de2ef9",
+    "reviewer_summary": "evidence/pilot-rollback-r24-summary.json",
+    "new_explicit_provider_probes": 0,
+    "native_execution_used_model_requests": true,
+    "reused_tests_are_not_new_test_runs": true,
+    "limitations": [
+      "Effective child sandbox was not exposed: CHILD_SANDBOX_UNVERIFIED.",
+      "Goal completion was independently read back; the observer cached an earlier blocked child Goal and must not be treated as final Goal authority.",
+      "Fresh passive App Server interrupted/notLoaded views were not used to override owning turn/completed events.",
+      "A historical request ID typo in the reviewer summary was disclosed and normalized in the acceptance: e966e924-83db-4cb4-9e21-3cfba68609ff.",
+      "Original reviewer and acceptance files remain on VP49; this commit archives the observed completion summary and their known bindings, not their original bytes."
+    ]
+  },
+  "bound_prior_evidence_sha256": {
+    "pilot-rollback.jsonl": "8b409c1cb62de03b223a1d74f8f42c78f15a84a87f66ed513dfcf2466e325cb7",
+    "pilot-rollback-summary.json": "1111d020d4e440576da69beb5ff178542ff05489c74a300115be300b7d4854c0",
+    "pilot-manager-summary.json": "10fbda3c71f865ef669dab67a9c8915153a421824ceb01b7fdd9e4a0cacae0a1",
+    "transient-http-r17-mvp-rehearsal.json": "259e1e2c04c354a31fdca4b958d982060abfbc998ce8fc08516f1cc1d19120c2",
+    "transient-http-r17-mvp-activation.json": "7f758e811a95fbb5584f128f2d919603ba254d3908c937a46ab0e645725b6f85",
+    "transient-http-r17-mvp-final-runtime.json": "622a9a74b64fabb2b04fdafe2e3a0f219ca3243bd69ba4a3dde25800de6ee16e",
+    "transient-http-r17-crewsync-acceptance.json": "5aa070b8045b1e6848c10a8ec9932ecd8cb59259d5f2513d504d68920f9c69f9",
+    "transient-http-r17-independent-qa-d45ee450b4a9.md": "8ffc2db7bcf6e81e2e901057d0206c2815814be3b18448d6de8b06984021a210"
+  },
+  "previously_accepted_retry_result": {
+    "tasks": [
+      "bifrost-canary:transient-http-retry",
+      "bifrost-canary:transient-http-retry-qa"
+    ],
+    "task_state": "SERVER_DONE",
+    "binary_sha256": "e69e9a679b19070ced7783b28ae63174adca50aaa99537a5a475abdb10b6db23",
+    "validation": "29/29 same-binary fixture scenarios; 32 physical no-replay cases (primary 1, fallback 0); full OpenAI package and four original SSE truncation tests; selected core/utils checks. Broad utils failures were disclosed; this is not an all-suite PASS.",
+    "newly_rerun_in_this_continuation": false
+  },
+  "ocx_recovery": {
+    "manager_thread": "01a18c58-0410-7da0-bcc6-41d7e5619c4f",
+    "original_child_thread": "01a18c5a-df08-79e1-98f6-745e64bd3175",
+    "original_child_path": "/root/ocx_diagnostic",
+    "original_child_goal_status": "blocked",
+    "new_child_start_observed": false,
+    "attempts": [
+      {
+        "turn": "01a18eb3-9119-7160-bd31-2612b9c77769",
+        "status": "failed",
+        "native_goal": "blocked",
+        "error": "Provider high demand",
+        "receipt": "evidence/ocx-reset-r24-native.json",
+        "window_evidence": "evidence/ocx-reset-r24-window-1793395643211.json",
+        "http_window": "Three recorded full HTTP 502 upstream_server_error/upstream-fault responses; later independent pilot response 200. Exact logical-to-physical grouping was not independently correlated.",
+        "owned_transport_cleanup": "evidence/ocx-reset-r24-terminal-cleanup.json"
+      },
+      {
+        "turn": "01a18eb9-32a3-7013-8089-56d9904d57be",
+        "status": "failed",
+        "native_goal": "blocked",
+        "error": "Provider high demand",
+        "receipt": "evidence/ocx-reset-r24-recovery-native.json",
+        "new_child_count": 0,
+        "exact_http_status_not_independently_rechecked": true
+      }
+    ],
+    "last_observed_terminal_observer_pid": 116072,
+    "last_observed_terminal_appserver_pid": 110908,
+    "terminal_observer_cleanup_executed": false,
+    "third_continuation_started": false,
+    "root_cause_localized": false,
+    "production_mitigation_proven": false,
+    "next_discriminating_work": "Inspect completed actions of the exact failed original turn; run existing no-network installed fetch-helpers physical-send seam once; correlate selected transport metadata with installed code. Preserve ambiguous-send refusal. Any actual product repair needs a bounded scope in the same CrewSync plan before dispatch."
+  },
+  "access_blocker": {
+    "service": "Remote Desktop Commander",
+    "reason": "Monthly usage exhausted; tool calls paused",
+    "provider_instruction": "Do not retry or reconnect.",
+    "blocked_before_process_start": [
+      "Existing test_ocx_fresh_connection.ts verification on installed OpenCodex 2.94",
+      "Cleanup of the verified terminal recovery observer and its owned App Server"
+    ],
+    "no_new_vp49_commands_issued_after_denial": true,
+    "native_work_running_claimed": false,
+    "production_runtime_not_stopped": true,
+    "shared_opencodex_not_restarted": true,
+    "global_codex_routing_not_changed": true
+  },
+  "continuation": {
+    "steps": [
+      "Restore the authorized VP49 connector availability, then read the original CrewSync task, plan, lease, exact native IDs and process identities before continuation.",
+      "Do not rerun acceptance for the already-DONE rollback QA task or resurrect deferred R17 helper tasks.",
+      "Reconcile the two failed original OCX turns and any completed actions before a new continuation; do not blindly retry 429 or unknown acknowledgements.",
+      "Upload the original new reviewer/acceptance evidence bytes after access is available, using an explicit secret-checked manifest.",
+      "Fetch/reconcile the advanced delivery backup ref locally before reusing the CAS-based publication helper; do not force-push or rerun an old manifest.",
+      "After independently accepted OCX repair, continue the original pilot Manager and complete the remaining required CrewSync gates. Global routing is outside this delivery."
+    ]
+  }
+}
