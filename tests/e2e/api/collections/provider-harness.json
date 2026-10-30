@@ -298728,6 +298728,238 @@
           }
         }
       ]
+    },
+    {
+      "name": "298. Native ambiguous SSE replay safety (transient-http-retry)",
+      "description": "Local synthetic fixture only. Reuse evidence/transient-http-r14-fixture.mjs on loopback 18791 and the isolated profile described in folder 297 (max_retries=2). Opt in with transientHTTPFixture=1. x-bf-eh-* forwards the probe and mode to the fixture. A complete HTTP 200 containing only SSE comments must terminate as 502 with one physical POST, not three; a missing terminating HTTP chunk must retain the upstream error contract and also send once. The read-only /count endpoint verifies sends independently of gateway error metadata. No real provider calls. Configured-fallback and plugin replacement/mutation cases are additionally covered by TestNativeStreamAmbiguousPOSTNeverReplays.",
+      "item": [
+        {
+          "name": "openai gpt-test POST /v1/chat/completions native ambiguous SSE comment [EXPECT-502] - VP49 R17",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "if (pm.variables.get('transientHTTPFixture') !== '1') { pm.execution.skipRequest(); }",
+                  "pm.variables.set('transientHTTPProbe', 'native-' + Date.now() + '-' + Math.floor(Math.random() * 1e9));"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('truncated native stream remains an upstream 502', function () { pm.expect(pm.response.code, pm.response.text()).to.eql(502); pm.expect(pm.response.json().error.type, pm.response.text()).to.eql('provider_connection_failed'); });",
+                  "pm.sendRequest('http://127.0.0.1:18791/count?probe=' + encodeURIComponent(pm.variables.get('transientHTTPProbe')), function (err, res) { pm.test('exactly one physical POST despite no client token', function () { pm.expect(err).to.eql(null); pm.expect(res.code).to.eql(200); pm.expect(res.json().sends, res.text()).to.eql(1); }); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "x-bf-eh-x-fixture-mode",
+                "value": "comment"
+              },
+              {
+                "key": "x-bf-eh-x-fixture-probe",
+                "value": "{{transientHTTPProbe}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"model\":\"openai/gpt-test\",\"messages\":[{\"role\":\"user\",\"content\":\"fixture only\"}],\"stream\":true}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/v1/chat/completions",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v1",
+                "chat",
+                "completions"
+              ]
+            }
+          }
+        },
+        {
+          "name": "openai gpt-test POST /v1/chat/completions native ambiguous SSE broken-http [EXPECT-502] - VP49 R17",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "if (pm.variables.get('transientHTTPFixture') !== '1') { pm.execution.skipRequest(); }",
+                  "pm.variables.set('transientHTTPProbe', 'native-' + Date.now() + '-' + Math.floor(Math.random() * 1e9));"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('truncated native stream remains an upstream 502', function () { pm.expect(pm.response.code, pm.response.text()).to.eql(502); pm.expect(pm.response.json().error.type, pm.response.text()).to.eql('provider_connection_failed'); });",
+                  "pm.sendRequest('http://127.0.0.1:18791/count?probe=' + encodeURIComponent(pm.variables.get('transientHTTPProbe')), function (err, res) { pm.test('exactly one physical POST despite no client token', function () { pm.expect(err).to.eql(null); pm.expect(res.code).to.eql(200); pm.expect(res.json().sends, res.text()).to.eql(1); }); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "x-bf-eh-x-fixture-mode",
+                "value": "broken-http"
+              },
+              {
+                "key": "x-bf-eh-x-fixture-probe",
+                "value": "{{transientHTTPProbe}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"model\":\"openai/gpt-test\",\"messages\":[{\"role\":\"user\",\"content\":\"fixture only\"}],\"stream\":true}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/v1/chat/completions",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v1",
+                "chat",
+                "completions"
+              ]
+            }
+          }
+        },
+        {
+          "name": "openai gpt-test POST /v1/responses native ambiguous SSE comment [EXPECT-502] - VP49 R17",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "if (pm.variables.get('transientHTTPFixture') !== '1') { pm.execution.skipRequest(); }",
+                  "pm.variables.set('transientHTTPProbe', 'native-' + Date.now() + '-' + Math.floor(Math.random() * 1e9));"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('truncated native stream remains an upstream 502', function () { pm.expect(pm.response.code, pm.response.text()).to.eql(502); pm.expect(pm.response.json().error.type, pm.response.text()).to.eql('provider_connection_failed'); });",
+                  "pm.sendRequest('http://127.0.0.1:18791/count?probe=' + encodeURIComponent(pm.variables.get('transientHTTPProbe')), function (err, res) { pm.test('exactly one physical POST despite no client token', function () { pm.expect(err).to.eql(null); pm.expect(res.code).to.eql(200); pm.expect(res.json().sends, res.text()).to.eql(1); }); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "x-bf-eh-x-fixture-mode",
+                "value": "comment"
+              },
+              {
+                "key": "x-bf-eh-x-fixture-probe",
+                "value": "{{transientHTTPProbe}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"model\":\"openai/gpt-test\",\"input\":\"fixture only\",\"stream\":true}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/v1/responses",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v1",
+                "responses"
+              ]
+            }
+          }
+        },
+        {
+          "name": "openai gpt-test POST /v1/responses native ambiguous SSE broken-http [EXPECT-502] - VP49 R17",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "if (pm.variables.get('transientHTTPFixture') !== '1') { pm.execution.skipRequest(); }",
+                  "pm.variables.set('transientHTTPProbe', 'native-' + Date.now() + '-' + Math.floor(Math.random() * 1e9));"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('truncated native stream remains an upstream 502', function () { pm.expect(pm.response.code, pm.response.text()).to.eql(502); pm.expect(pm.response.json().error.type, pm.response.text()).to.eql('provider_connection_failed'); });",
+                  "pm.sendRequest('http://127.0.0.1:18791/count?probe=' + encodeURIComponent(pm.variables.get('transientHTTPProbe')), function (err, res) { pm.test('exactly one physical POST despite no client token', function () { pm.expect(err).to.eql(null); pm.expect(res.code).to.eql(200); pm.expect(res.json().sends, res.text()).to.eql(1); }); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "x-bf-eh-x-fixture-mode",
+                "value": "broken-http"
+              },
+              {
+                "key": "x-bf-eh-x-fixture-probe",
+                "value": "{{transientHTTPProbe}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"model\":\"openai/gpt-test\",\"input\":\"fixture only\",\"stream\":true}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/v1/responses",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v1",
+                "responses"
+              ]
+            }
+          }
+        }
+      ]
     }
   ]
 }

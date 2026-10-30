@@ -1,0 +1,17 @@
+{
+    "utc":  "2026-10-30T17:24:56.3755415Z",
+    "source_sha":  "943261a78e543741e59e87b4acdc9d8d7714cbfe",
+    "go_executable":  "C:\\Users\\Рафик\\go\\pkg\\mod\\golang.org\\toolchain@v0.0.1-go1.27.3.windows-amd64\\bin\\go.exe",
+    "go_version":  "go version go1.27.3 windows/amd64",
+    "args":  [
+                 "test",
+                 "./providers/openai",
+                 "-run",
+                 "^(TestChatStreamTruncatedPreFirstByte|TestChatStreamTruncatedMidStream|TestTextCompletionStreamTruncated|TestResponsesStreamTruncatedBeforeCompleted)$",
+                 "-count=1",
+                 "-timeout=60s"
+             ],
+    "exit_code":  1,
+    "expected":  "R16 native SSE classification regression; baseline red",
+    "source_head_after":  "943261a78e543741e59e87b4acdc9d8d7714cbfe"
+}

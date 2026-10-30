@@ -3851,8 +3851,15 @@ func ProcessAndSendBifrostError(
 	logger schemas.Logger,
 	postHookSpanFinalizer func(context.Context),
 ) {
+	// A hook may replace or mutate the error. Transport replay safety is monotonic
+	// and independent of the client-visible error classification.
+	replayUnsafe := bifrostErr != nil && bifrostErr.ReplayUnsafe
 	// Run post hooks first so span reflects post-processed data
 	processedResponse, processedError := postHookRunner(ctx, nil, bifrostErr)
+	if processedError != nil && (replayUnsafe || processedError.ReplayUnsafe) {
+		processedError.ReplayUnsafe = true
+		processedError.AllowFallbacks = schemas.Ptr(false)
+	}
 
 	if HandleStreamControlSkip(processedError) {
 		// Even if skipping, complete the deferred span if this is the final chunk
@@ -4377,6 +4384,12 @@ func ProcessAndSendError(
 	logger schemas.Logger,
 	postHookSpanFinalizer func(context.Context),
 ) {
+	// Keep incomplete HTTP framing visible as an upstream stream failure. It
+	// must never become EOF or permission to resend an already-dispatched POST.
+	if errors.Is(err, io.ErrUnexpectedEOF) {
+		SendStreamTruncatedError(ctx, postHookRunner, responseChan, logger, postHookSpanFinalizer, nil)
+		return
+	}
 	var carrier BifrostErrorCarrier
 	if errors.As(err, &carrier) {
 		if typed := carrier.BifrostError(); typed != nil {
@@ -4384,15 +4397,21 @@ func ProcessAndSendError(
 			return
 		}
 	}
-	// Send scanner error through channel
+	// An unclassified read failure also leaves the dispatched request uncertain.
 	bifrostError := &schemas.BifrostError{
 		IsBifrostError: true,
+		ReplayUnsafe:   true,
+		AllowFallbacks: schemas.Ptr(false),
 		Error: &schemas.ErrorField{
 			Message: fmt.Sprintf("Error reading stream: %v", err),
 			Error:   err,
 		},
 	}
 	processedResponse, processedError := postHookRunner(ctx, nil, bifrostError)
+	if processedError != nil {
+		processedError.ReplayUnsafe = true
+		processedError.AllowFallbacks = schemas.Ptr(false)
+	}
 
 	if HandleStreamControlSkip(processedError) {
 		return
@@ -4413,19 +4432,13 @@ func ProcessAndSendError(
 	GateSendChunk(ctx, streamResponse, responseChan)
 }
 
-// SendStreamTruncatedError surfaces an upstream stream that ended without a
-// terminal marker (no "data: [DONE]", no finish_reason / completion event) as a
-// client-visible error instead of letting the caller synthesize a clean final
-// chunk. A dying upstream typically closes the connection on a chunk boundary,
-// which fasthttp reports as a plain io.EOF — indistinguishable at the transport
-// layer from a properly terminated body — so truncation can only be detected
-// semantically, by the absence of a terminal marker.
+// SendStreamTruncatedError reports incomplete HTTP framing or an SSE stream
+// that ended without its terminal marker. Even a completely read HTTP 200 body
+// can contain incomplete SSE after the upstream has processed the POST.
 //
-// The error is deliberately built as a retryable upstream connection failure
-// (502, IsBifrostError=false): when nothing has been forwarded yet this becomes
-// the stream's first chunk, so CheckFirstStreamChunkForError converts it into a
-// synchronous error and executeRequestWithRetries can retry or fall back. An
-// IsBifrostError=true error would break that retry loop instead (see #4496).
+// Preserve the client-visible upstream failure contract (502,
+// IsBifrostError=false), but forbid replay independently of that classification.
+// Receiving no client-visible chunks does not prove that replay is safe.
 func SendStreamTruncatedError(
 	ctx *schemas.BifrostContext,
 	postHookRunner schemas.PostHookRunner,
@@ -4439,6 +4452,8 @@ func SendStreamTruncatedError(
 	}
 
 	truncatedErr := NewBifrostUpstreamConnectionError(schemas.ErrProviderStreamTruncated, io.ErrUnexpectedEOF)
+	truncatedErr.ReplayUnsafe = true
+	truncatedErr.AllowFallbacks = schemas.Ptr(false)
 
 	if ShouldSendBackRawRequest(ctx, false) && len(jsonBody) > 0 {
 		truncatedErr.ExtraFields.RawRequest = compactRawJSON(jsonBody)

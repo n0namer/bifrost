@@ -467,3 +467,125 @@ func TestPassthroughLoopStreamLateReplayRefusedMarkerNeverReplays(t *testing.T) 
 		})
 	}
 }
+
+// A successful HTTP envelope does not prove that an already-sent generation
+// POST is safe to replay. Count actual requests through core, including fallbacks.
+func TestNativeStreamAmbiguousPOSTNeverReplays(t *testing.T) {
+	for _, responses := range []bool{false, true} {
+		for _, mode := range []string{"empty", "comment", "incomplete-event", "partial-output", "complete"} {
+			for _, brokenHTTP := range []bool{false, true} {
+				if mode == "complete" && brokenHTTP {
+					continue // terminal-event transport-tail handling has separate provider coverage
+				}
+				t.Run(fmt.Sprintf("responses=%v/%s/broken-http=%v", responses, mode, brokenHTTP), func(t *testing.T) {
+					var primarySends, fallbackSends atomic.Int32
+					body := ""
+					switch mode {
+					case "comment":
+						body = ": keepalive\n\n"
+					case "incomplete-event":
+						body = "data: {\"id\":\"partial\""
+					case "partial-output", "complete":
+						if responses {
+							body = "event: response.output_text.delta\ndata: {\"type\":\"response.output_text.delta\",\"item_id\":\"msg_1\",\"output_index\":0,\"content_index\":0,\"delta\":\"hello\"}\n\n"
+							if mode == "complete" {
+								body += "event: response.completed\ndata: {\"type\":\"response.completed\",\"response\":{\"id\":\"resp_1\",\"object\":\"response\",\"status\":\"completed\",\"model\":\"gpt-4o-mini\",\"output\":[],\"usage\":{\"input_tokens\":1,\"output_tokens\":1,\"total_tokens\":2}}}\n\n"
+							}
+						} else {
+							body = "data: {\"id\":\"chatcmpl-1\",\"object\":\"chat.completion.chunk\",\"created\":1,\"model\":\"gpt-4o-mini\",\"choices\":[{\"index\":0,\"delta\":{\"content\":\"hello\"},\"finish_reason\":null}]}\n\n"
+							if mode == "complete" {
+								body += "data: {\"id\":\"chatcmpl-1\",\"object\":\"chat.completion.chunk\",\"created\":1,\"model\":\"gpt-4o-mini\",\"choices\":[{\"index\":0,\"delta\":{},\"finish_reason\":\"stop\"}]}\n\ndata: [DONE]\n\n"
+							}
+						}
+					}
+					primary := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, req *http.Request) {
+						if req.Method != http.MethodPost {
+							t.Errorf("unexpected upstream method %s", req.Method)
+						}
+						primarySends.Add(1)
+						w.Header().Set("Content-Type", "text/event-stream")
+						w.WriteHeader(http.StatusOK)
+						w.(http.Flusher).Flush()
+						fmt.Fprint(w, body)
+						w.(http.Flusher).Flush()
+						if brokenHTTP {
+							panic(http.ErrAbortHandler) // omit terminating zero chunk
+						}
+					}))
+					defer primary.Close()
+					fallback := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, req *http.Request) {
+						fallbackSends.Add(1)
+						anthropicMessagesHandler()(w, req)
+					}))
+					defer fallback.Close()
+					account := NewMockAccount()
+					for provider, url := range map[schemas.ModelProvider]string{schemas.OpenAI: primary.URL, schemas.Anthropic: fallback.URL} {
+						account.AddProviderWithBaseURL(provider, 1, 1, url)
+						config := account.configs[provider]
+						config.NetworkConfig.MaxRetries = 2
+						config.NetworkConfig.RetryBackoffInitial = time.Millisecond
+						config.NetworkConfig.RetryBackoffMax = 5 * time.Millisecond
+						account.SetKeysForProvider(provider, []schemas.Key{{ID: string(provider), Value: *schemas.NewSecretVar("test-key"), Models: schemas.WhiteList{"*"}, Weight: 100}})
+					}
+					// Replacement models a plugin that discards the original cause and flags.
+					// The transport's replay prohibition must still survive it.
+					var plugins []schemas.LLMPlugin
+					if mode == "comment" {
+						plugins = append(plugins, &retryReplacingStreamPlugin{mutate: brokenHTTP})
+					}
+					client := newStreamTestClient(t, account, plugins...)
+					ctx := schemas.NewBifrostContext(context.Background(), time.Now().Add(10*time.Second))
+					req := &schemas.BifrostChatRequest{
+						Provider: schemas.OpenAI, Model: "gpt-4o-mini",
+						Input:     []schemas.ChatMessage{{Role: schemas.ChatMessageRoleUser, Content: &schemas.ChatMessageContent{ContentStr: schemas.Ptr("hi")}}},
+						Fallbacks: []schemas.Fallback{{Provider: schemas.Anthropic, Model: "claude-3-5-haiku-20241022"}},
+					}
+					var stream chan *schemas.BifrostStreamChunk
+					var err *schemas.BifrostError
+					if responses {
+						stream, err = client.ResponsesStreamRequest(ctx, req.ToResponsesRequest())
+					} else {
+						stream, err = client.ChatCompletionStreamRequest(ctx, req)
+					}
+					sawError := err != nil
+					if stream != nil {
+						for chunk := range stream {
+							if chunk != nil && chunk.BifrostError != nil {
+								sawError = true
+							}
+						}
+					}
+					t.Logf("physical POST sends: primary=%d fallback=%d; sawError=%v", primarySends.Load(), fallbackSends.Load(), sawError)
+					if primarySends.Load() != 1 || fallbackSends.Load() != 0 {
+						t.Errorf("unsafe replay: primary=%d fallback=%d; want 1+0", primarySends.Load(), fallbackSends.Load())
+					}
+					if sawError != (mode != "complete") {
+						t.Errorf("sawError=%v, mode=%s; incomplete SSE must not become success", sawError, mode)
+					}
+				})
+			}
+		}
+	}
+}
+
+type retryReplacingStreamPlugin struct{ mutate bool }
+
+func (*retryReplacingStreamPlugin) GetName() string { return "retry-replacing-stream" }
+func (*retryReplacingStreamPlugin) Cleanup() error  { return nil }
+func (*retryReplacingStreamPlugin) PreRequestHook(*schemas.BifrostContext, *schemas.BifrostRequest) error {
+	return nil
+}
+func (*retryReplacingStreamPlugin) PreLLMHook(_ *schemas.BifrostContext, req *schemas.BifrostRequest) (*schemas.BifrostRequest, *schemas.LLMPluginShortCircuit, error) {
+	return req, nil, nil
+}
+func (p *retryReplacingStreamPlugin) PostLLMHook(_ *schemas.BifrostContext, resp *schemas.BifrostResponse, err *schemas.BifrostError) (*schemas.BifrostResponse, *schemas.BifrostError, error) {
+	if err == nil {
+		return resp, nil, nil
+	}
+	replacement := schemas.BifrostError{StatusCode: schemas.Ptr(502), Error: &schemas.ErrorField{Message: "plugin replacement"}, AllowFallbacks: schemas.Ptr(true)}
+	if p.mutate {
+		*err = replacement
+		return resp, err, nil
+	}
+	return resp, &replacement, nil
+}

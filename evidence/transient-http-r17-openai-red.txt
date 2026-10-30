@@ -1,0 +1,23 @@
+--- FAIL: TestChatStreamTruncatedPreFirstByte (0.03s)
+    streamtruncation_test.go:324: truncation error must have IsBifrostError=false so the retry loop does not break early
+    streamtruncation_test.go:324: expected StatusCode 502, got <nil>
+    streamtruncation_test.go:324: expected message "provider closed the stream before sending a completion marker (upstream connection ended mid-stream)", got &{Type:<nil> Code:<nil> Message:Error reading stream: unexpected EOF Error:unexpected EOF Param:<nil> EventID:<nil>}
+    streamtruncation_test.go:324: expected error type "provider_connection_failed", got <nil>
+--- FAIL: TestChatStreamTruncatedMidStream (0.06s)
+    streamtruncation_test.go:350: truncation error must have IsBifrostError=false so the retry loop does not break early
+    streamtruncation_test.go:350: expected StatusCode 502, got <nil>
+    streamtruncation_test.go:350: expected message "provider closed the stream before sending a completion marker (upstream connection ended mid-stream)", got &{Type:<nil> Code:<nil> Message:Error reading stream: unexpected EOF Error:unexpected EOF Param:<nil> EventID:<nil>}
+    streamtruncation_test.go:350: expected error type "provider_connection_failed", got <nil>
+--- FAIL: TestTextCompletionStreamTruncated (0.03s)
+    streamtruncation_test.go:1048: truncation error must have IsBifrostError=false so the retry loop does not break early
+    streamtruncation_test.go:1048: expected StatusCode 502, got <nil>
+    streamtruncation_test.go:1048: expected message "provider closed the stream before sending a completion marker (upstream connection ended mid-stream)", got &{Type:<nil> Code:<nil> Message:Error reading stream: unexpected EOF Error:unexpected EOF Param:<nil> EventID:<nil>}
+    streamtruncation_test.go:1048: expected error type "provider_connection_failed", got <nil>
+--- FAIL: TestResponsesStreamTruncatedBeforeCompleted (0.07s)
+    streamtruncation_test.go:1081: truncation error must have IsBifrostError=false so the retry loop does not break early
+    streamtruncation_test.go:1081: expected StatusCode 502, got <nil>
+    streamtruncation_test.go:1081: expected message "provider closed the stream before sending a completion marker (upstream connection ended mid-stream)", got &{Type:<nil> Code:<nil> Message:Error reading stream: unexpected EOF Error:unexpected EOF Param:<nil> EventID:<nil>}
+    streamtruncation_test.go:1081: expected error type "provider_connection_failed", got <nil>
+FAIL
+FAIL	github.com/maximhq/bifrost/core/providers/openai	0.440s
+FAIL

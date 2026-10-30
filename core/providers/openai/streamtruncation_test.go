@@ -17,12 +17,9 @@ import (
 	"github.com/maximhq/bifrost/core/schemas"
 )
 
-// An upstream that dies mid-SSE closes its connection on a chunk boundary, which
-// fasthttp reports as a plain io.EOF — byte-for-byte the same read result as a
-// properly terminated body. These tests pin the semantic detection that replaces
-// the impossible transport-level check: without a terminal marker
-// ([DONE] / finish_reason / a terminal Responses event), the stream is truncated
-// and must surface as an error instead of a synthetic clean completion.
+// Incomplete HTTP framing preserves io.ErrUnexpectedEOF. A fully read HTTP body
+// can also contain incomplete SSE. Both must surface as upstream failures rather
+// than synthetic clean completions, without allowing an uncertain POST to replay.
 // See https://github.com/maximhq/bifrost/issues/5546.
 
 // truncatingSSEServer serves one streaming response that writes prelude (already
@@ -107,19 +104,24 @@ func collectChunks(t *testing.T, stream chan *schemas.BifrostStreamChunk) []*sch
 	}
 }
 
-// assertTruncationError checks the error carries the retryable upstream-connection
-// shape. IsBifrostError must stay false and the status 502 so that
-// executeRequestWithRetries retries / falls back instead of breaking out early.
+// assertTruncationError preserves the upstream-connection error shape while
+// independently forbidding replay of an already-dispatched, uncertain request.
 func assertTruncationError(t *testing.T, err *schemas.BifrostError) {
 	t.Helper()
 	if err == nil {
 		t.Fatal("expected a truncation error, got nil")
 	}
 	if err.IsBifrostError {
-		t.Error("truncation error must have IsBifrostError=false so the retry loop does not break early")
+		t.Error("truncation must be classified as an upstream failure, not a Bifrost failure")
 	}
 	if err.StatusCode == nil || *err.StatusCode != 502 {
 		t.Errorf("expected StatusCode 502, got %v", err.StatusCode)
+	}
+	if !err.ReplayUnsafe || err.AllowFallbacks == nil || *err.AllowFallbacks {
+		t.Error("uncertain stream outcome must forbid both retry and fallback")
+	}
+	if err.Error == nil || !errors.Is(err.Error.Error, io.ErrUnexpectedEOF) {
+		t.Error("truncation must retain the underlying unexpected EOF")
 	}
 	if err.Error == nil || err.Error.Message != schemas.ErrProviderStreamTruncated {
 		t.Errorf("expected message %q, got %+v", schemas.ErrProviderStreamTruncated, err.Error)
@@ -180,7 +182,7 @@ func TestChatStreamContentLengthTruncationAfterFinishReason(t *testing.T) {
 			for _, chunk := range chunks {
 				if chunk.BifrostError != nil {
 					sawError = true
-					if extraBytes == 0 || chunk.BifrostError.Error == nil || !strings.Contains(chunk.BifrostError.Error.Message, io.ErrUnexpectedEOF.Error()) {
+					if extraBytes == 0 || chunk.BifrostError.Error == nil || !errors.Is(chunk.BifrostError.Error.Error, io.ErrUnexpectedEOF) {
 						t.Errorf("unexpected stream error: %+v", chunk.BifrostError)
 					}
 				}

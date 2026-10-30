@@ -1,0 +1,7 @@
+goos: windows
+goarch: amd64
+pkg: github.com/maximhq/bifrost/core
+cpu: 11th Gen Intel(R) Core(TM) i5-11400H @ 2.70GHz
+BenchmarkStreamingPostHooks-2   	   54574	     21593 ns/op	   17105 B/op	     347 allocs/op
+PASS
+ok  	github.com/maximhq/bifrost/core	1.425s

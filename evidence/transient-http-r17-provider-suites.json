@@ -1,0 +1,18 @@
+{
+  "at": "2026-10-30T17:54:49.532747+00:00",
+  "finished": "2026-10-30T17:58:36.167160+00:00",
+  "head": "943261a78e543741e59e87b4acdc9d8d7714cbfe",
+  "head_after": "943261a78e543741e59e87b4acdc9d8d7714cbfe",
+  "diff_sha256": "8917abbba4bc6d8debff9e3099c1fe2036da5dcc9e99b7da9db162a120e951b3",
+  "go": "C:\\Users\\\u0420\u0430\u0444\u0438\u043a\\go\\pkg\\mod\\golang.org\\toolchain@v0.0.1-go1.27.3.windows-amd64\\bin\\go.exe",
+  "args": [
+    "test",
+    "./providers/openai",
+    "./providers/utils",
+    "-count=1",
+    "-v",
+    "-timeout=180s"
+  ],
+  "exit_code": 1,
+  "log": "C:\\Users\\\u0420\u0430\u0444\u0438\u043a\\Documents\\DEV\\llm-gateway-bakeoff-20261030\\bifrost-sparse\\evidence\\transient-http-r17-provider-suites.txt"
+}

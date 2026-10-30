@@ -1,0 +1,21 @@
+{
+  "at": "2026-10-30T17:52:07.390644+00:00",
+  "finished": "2026-10-30T17:52:55.793970+00:00",
+  "head": "943261a78e543741e59e87b4acdc9d8d7714cbfe",
+  "head_after": "943261a78e543741e59e87b4acdc9d8d7714cbfe",
+  "diff_sha256": "42836813736c38f416608c5892f6bd02664e505982c866a390eaed29cc3d8f7f",
+  "go": "C:\\Users\\\u0420\u0430\u0444\u0438\u043a\\go\\pkg\\mod\\golang.org\\toolchain@v0.0.1-go1.27.3.windows-amd64\\bin\\go.exe",
+  "args": [
+    "test",
+    ".",
+    "./providers/openai",
+    "./providers/utils",
+    "-run",
+    "^(TestNativeStreamAmbiguousPOSTNeverReplays|TestChatStreamTruncatedPreFirstByte|TestChatStreamTruncatedMidStream|TestTextCompletionStreamTruncated|TestResponsesStreamTruncatedBeforeCompleted|TestChatStreamContentLengthTruncationAfterFinishReason|TestPassthroughStreamReadFailureNeverReplays|TestContextTransport_.*|TestStreamPassthrough_.*|TestPassthroughTransientPhysicalSends|TestPassthroughLoop.*|TestStreamFallbackAfterFirstChunkError|TestOpenAI.*FallbackAfterPreamble|TestAzure.*FallbackAfterPreamble)$",
+    "-count=1",
+    "-v",
+    "-timeout=120s"
+  ],
+  "exit_code": 0,
+  "log": "C:\\Users\\\u0420\u0430\u0444\u0438\u043a\\Documents\\DEV\\llm-gateway-bakeoff-20261030\\bifrost-sparse\\evidence\\transient-http-r17-focused-green-2.txt"
+}

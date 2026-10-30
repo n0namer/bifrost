@@ -2263,6 +2263,7 @@ type BifrostError struct {
 	StatusCode     *int                    `json:"status_code,omitempty"`
 	Error          *ErrorField             `json:"error"`
 	AllowFallbacks *bool                   `json:"-"` // Optional: Controls fallback behavior (nil = true by default)
+	ReplayUnsafe   bool                    `json:"-"` // Already-dispatched request has an uncertain outcome; forbid retries and fallbacks.
 	StreamControl  *StreamControl          `json:"-"` // Optional: Controls stream behavior
 	ExtraFields    BifrostErrorExtraFields `json:"extra_fields"`
 }

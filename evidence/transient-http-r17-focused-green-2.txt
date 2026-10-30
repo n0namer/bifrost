@@ -1,0 +1,476 @@
+=== RUN   TestPassthroughTransientPhysicalSends
+=== RUN   TestPassthroughTransientPhysicalSends/500/stream=false/recover
+=== RUN   TestPassthroughTransientPhysicalSends/500/stream=false/header
+=== RUN   TestPassthroughTransientPhysicalSends/500/stream=false/split_refused
+=== RUN   TestPassthroughTransientPhysicalSends/500/stream=false/late_quota
+=== RUN   TestPassthroughTransientPhysicalSends/500/stream=false/exhaust
+=== RUN   TestPassthroughTransientPhysicalSends/500/stream=true/recover
+=== RUN   TestPassthroughTransientPhysicalSends/500/stream=true/header
+=== RUN   TestPassthroughTransientPhysicalSends/500/stream=true/split_refused
+=== RUN   TestPassthroughTransientPhysicalSends/500/stream=true/late_quota
+=== RUN   TestPassthroughTransientPhysicalSends/500/stream=true/exhaust
+=== RUN   TestPassthroughTransientPhysicalSends/502/stream=false/recover
+=== RUN   TestPassthroughTransientPhysicalSends/502/stream=false/header
+=== RUN   TestPassthroughTransientPhysicalSends/502/stream=false/split_refused
+=== RUN   TestPassthroughTransientPhysicalSends/502/stream=false/late_quota
+=== RUN   TestPassthroughTransientPhysicalSends/502/stream=false/exhaust
+=== RUN   TestPassthroughTransientPhysicalSends/502/stream=true/recover
+=== RUN   TestPassthroughTransientPhysicalSends/502/stream=true/header
+=== RUN   TestPassthroughTransientPhysicalSends/502/stream=true/split_refused
+=== RUN   TestPassthroughTransientPhysicalSends/502/stream=true/late_quota
+=== RUN   TestPassthroughTransientPhysicalSends/502/stream=true/exhaust
+=== RUN   TestPassthroughTransientPhysicalSends/503/stream=false/recover
+=== RUN   TestPassthroughTransientPhysicalSends/503/stream=false/header
+=== RUN   TestPassthroughTransientPhysicalSends/503/stream=false/split_refused
+=== RUN   TestPassthroughTransientPhysicalSends/503/stream=false/late_quota
+=== RUN   TestPassthroughTransientPhysicalSends/503/stream=false/exhaust
+=== RUN   TestPassthroughTransientPhysicalSends/503/stream=true/recover
+=== RUN   TestPassthroughTransientPhysicalSends/503/stream=true/header
+=== RUN   TestPassthroughTransientPhysicalSends/503/stream=true/split_refused
+=== RUN   TestPassthroughTransientPhysicalSends/503/stream=true/late_quota
+=== RUN   TestPassthroughTransientPhysicalSends/503/stream=true/exhaust
+=== RUN   TestPassthroughTransientPhysicalSends/504/stream=false/recover
+=== RUN   TestPassthroughTransientPhysicalSends/504/stream=false/header
+=== RUN   TestPassthroughTransientPhysicalSends/504/stream=false/split_refused
+=== RUN   TestPassthroughTransientPhysicalSends/504/stream=false/late_quota
+=== RUN   TestPassthroughTransientPhysicalSends/504/stream=false/exhaust
+=== RUN   TestPassthroughTransientPhysicalSends/504/stream=true/recover
+=== RUN   TestPassthroughTransientPhysicalSends/504/stream=true/header
+=== RUN   TestPassthroughTransientPhysicalSends/504/stream=true/split_refused
+=== RUN   TestPassthroughTransientPhysicalSends/504/stream=true/late_quota
+=== RUN   TestPassthroughTransientPhysicalSends/504/stream=true/exhaust
+=== RUN   TestPassthroughTransientPhysicalSends/509/stream=false/recover
+=== RUN   TestPassthroughTransientPhysicalSends/509/stream=false/header
+=== RUN   TestPassthroughTransientPhysicalSends/509/stream=false/split_refused
+=== RUN   TestPassthroughTransientPhysicalSends/509/stream=false/late_quota
+=== RUN   TestPassthroughTransientPhysicalSends/509/stream=false/exhaust
+=== RUN   TestPassthroughTransientPhysicalSends/509/stream=true/recover
+=== RUN   TestPassthroughTransientPhysicalSends/509/stream=true/header
+=== RUN   TestPassthroughTransientPhysicalSends/509/stream=true/split_refused
+=== RUN   TestPassthroughTransientPhysicalSends/509/stream=true/late_quota
+=== RUN   TestPassthroughTransientPhysicalSends/509/stream=true/exhaust
+=== RUN   TestPassthroughTransientPhysicalSends/529/stream=false/recover
+=== RUN   TestPassthroughTransientPhysicalSends/529/stream=false/header
+=== RUN   TestPassthroughTransientPhysicalSends/529/stream=false/split_refused
+=== RUN   TestPassthroughTransientPhysicalSends/529/stream=false/late_quota
+=== RUN   TestPassthroughTransientPhysicalSends/529/stream=false/exhaust
+=== RUN   TestPassthroughTransientPhysicalSends/529/stream=true/recover
+=== RUN   TestPassthroughTransientPhysicalSends/529/stream=true/header
+=== RUN   TestPassthroughTransientPhysicalSends/529/stream=true/split_refused
+=== RUN   TestPassthroughTransientPhysicalSends/529/stream=true/late_quota
+=== RUN   TestPassthroughTransientPhysicalSends/529/stream=true/exhaust
+--- PASS: TestPassthroughTransientPhysicalSends (0.20s)
+    --- PASS: TestPassthroughTransientPhysicalSends/500/stream=false/recover (0.03s)
+    --- PASS: TestPassthroughTransientPhysicalSends/500/stream=false/header (0.00s)
+    --- PASS: TestPassthroughTransientPhysicalSends/500/stream=false/split_refused (0.00s)
+    --- PASS: TestPassthroughTransientPhysicalSends/500/stream=false/late_quota (0.00s)
+    --- PASS: TestPassthroughTransientPhysicalSends/500/stream=false/exhaust (0.01s)
+    --- PASS: TestPassthroughTransientPhysicalSends/500/stream=true/recover (0.01s)
+    --- PASS: TestPassthroughTransientPhysicalSends/500/stream=true/header (0.00s)
+    --- PASS: TestPassthroughTransientPhysicalSends/500/stream=true/split_refused (0.00s)
+    --- PASS: TestPassthroughTransientPhysicalSends/500/stream=true/late_quota (0.00s)
+    --- PASS: TestPassthroughTransientPhysicalSends/500/stream=true/exhaust (0.01s)
+    --- PASS: TestPassthroughTransientPhysicalSends/502/stream=false/recover (0.00s)
+    --- PASS: TestPassthroughTransientPhysicalSends/502/stream=false/header (0.00s)
+    --- PASS: TestPassthroughTransientPhysicalSends/502/stream=false/split_refused (0.00s)
+    --- PASS: TestPassthroughTransientPhysicalSends/502/stream=false/late_quota (0.00s)
+    --- PASS: TestPassthroughTransientPhysicalSends/502/stream=false/exhaust (0.01s)
+    --- PASS: TestPassthroughTransientPhysicalSends/502/stream=true/recover (0.00s)
+    --- PASS: TestPassthroughTransientPhysicalSends/502/stream=true/header (0.00s)
+    --- PASS: TestPassthroughTransientPhysicalSends/502/stream=true/split_refused (0.00s)
+    --- PASS: TestPassthroughTransientPhysicalSends/502/stream=true/late_quota (0.00s)
+    --- PASS: TestPassthroughTransientPhysicalSends/502/stream=true/exhaust (0.01s)
+    --- PASS: TestPassthroughTransientPhysicalSends/503/stream=false/recover (0.00s)
+    --- PASS: TestPassthroughTransientPhysicalSends/503/stream=false/header (0.00s)
+    --- PASS: TestPassthroughTransientPhysicalSends/503/stream=false/split_refused (0.00s)
+    --- PASS: TestPassthroughTransientPhysicalSends/503/stream=false/late_quota (0.00s)
+    --- PASS: TestPassthroughTransientPhysicalSends/503/stream=false/exhaust (0.01s)
+    --- PASS: TestPassthroughTransientPhysicalSends/503/stream=true/recover (0.00s)
+    --- PASS: TestPassthroughTransientPhysicalSends/503/stream=true/header (0.00s)
+    --- PASS: TestPassthroughTransientPhysicalSends/503/stream=true/split_refused (0.00s)
+    --- PASS: TestPassthroughTransientPhysicalSends/503/stream=true/late_quota (0.00s)
+    --- PASS: TestPassthroughTransientPhysicalSends/503/stream=true/exhaust (0.01s)
+    --- PASS: TestPassthroughTransientPhysicalSends/504/stream=false/recover (0.00s)
+    --- PASS: TestPassthroughTransientPhysicalSends/504/stream=false/header (0.00s)
+    --- PASS: TestPassthroughTransientPhysicalSends/504/stream=false/split_refused (0.00s)
+    --- PASS: TestPassthroughTransientPhysicalSends/504/stream=false/late_quota (0.00s)
+    --- PASS: TestPassthroughTransientPhysicalSends/504/stream=false/exhaust (0.01s)
+    --- PASS: TestPassthroughTransientPhysicalSends/504/stream=true/recover (0.00s)
+    --- PASS: TestPassthroughTransientPhysicalSends/504/stream=true/header (0.00s)
+    --- PASS: TestPassthroughTransientPhysicalSends/504/stream=true/split_refused (0.00s)
+    --- PASS: TestPassthroughTransientPhysicalSends/504/stream=true/late_quota (0.00s)
+    --- PASS: TestPassthroughTransientPhysicalSends/504/stream=true/exhaust (0.01s)
+    --- PASS: TestPassthroughTransientPhysicalSends/509/stream=false/recover (0.00s)
+    --- PASS: TestPassthroughTransientPhysicalSends/509/stream=false/header (0.00s)
+    --- PASS: TestPassthroughTransientPhysicalSends/509/stream=false/split_refused (0.00s)
+    --- PASS: TestPassthroughTransientPhysicalSends/509/stream=false/late_quota (0.00s)
+    --- PASS: TestPassthroughTransientPhysicalSends/509/stream=false/exhaust (0.01s)
+    --- PASS: TestPassthroughTransientPhysicalSends/509/stream=true/recover (0.00s)
+    --- PASS: TestPassthroughTransientPhysicalSends/509/stream=true/header (0.00s)
+    --- PASS: TestPassthroughTransientPhysicalSends/509/stream=true/split_refused (0.00s)
+    --- PASS: TestPassthroughTransientPhysicalSends/509/stream=true/late_quota (0.00s)
+    --- PASS: TestPassthroughTransientPhysicalSends/509/stream=true/exhaust (0.01s)
+    --- PASS: TestPassthroughTransientPhysicalSends/529/stream=false/recover (0.00s)
+    --- PASS: TestPassthroughTransientPhysicalSends/529/stream=false/header (0.00s)
+    --- PASS: TestPassthroughTransientPhysicalSends/529/stream=false/split_refused (0.00s)
+    --- PASS: TestPassthroughTransientPhysicalSends/529/stream=false/late_quota (0.00s)
+    --- PASS: TestPassthroughTransientPhysicalSends/529/stream=false/exhaust (0.01s)
+    --- PASS: TestPassthroughTransientPhysicalSends/529/stream=true/recover (0.00s)
+    --- PASS: TestPassthroughTransientPhysicalSends/529/stream=true/header (0.00s)
+    --- PASS: TestPassthroughTransientPhysicalSends/529/stream=true/split_refused (0.00s)
+    --- PASS: TestPassthroughTransientPhysicalSends/529/stream=true/late_quota (0.00s)
+    --- PASS: TestPassthroughTransientPhysicalSends/529/stream=true/exhaust (0.01s)
+=== RUN   TestPassthroughStreamReadFailureNeverReplays
+=== RUN   TestPassthroughStreamReadFailureNeverReplays/200
+=== RUN   TestPassthroughStreamReadFailureNeverReplays/502
+=== RUN   TestPassthroughStreamReadFailureNeverReplays/509
+--- PASS: TestPassthroughStreamReadFailureNeverReplays (0.00s)
+    --- PASS: TestPassthroughStreamReadFailureNeverReplays/200 (0.00s)
+    --- PASS: TestPassthroughStreamReadFailureNeverReplays/502 (0.00s)
+    --- PASS: TestPassthroughStreamReadFailureNeverReplays/509 (0.00s)
+=== RUN   TestPassthroughLoopTransientHTTP
+=== RUN   TestPassthroughLoopTransientHTTP/429/stream=false
+=== RUN   TestPassthroughLoopTransientHTTP/429/stream=true
+=== RUN   TestPassthroughLoopTransientHTTP/500/stream=false
+=== RUN   TestPassthroughLoopTransientHTTP/500/stream=true
+=== RUN   TestPassthroughLoopTransientHTTP/502/stream=false
+=== RUN   TestPassthroughLoopTransientHTTP/502/stream=true
+=== RUN   TestPassthroughLoopTransientHTTP/503/stream=false
+=== RUN   TestPassthroughLoopTransientHTTP/503/stream=true
+=== RUN   TestPassthroughLoopTransientHTTP/504/stream=false
+=== RUN   TestPassthroughLoopTransientHTTP/504/stream=true
+=== RUN   TestPassthroughLoopTransientHTTP/509/stream=false
+=== RUN   TestPassthroughLoopTransientHTTP/509/stream=true
+=== RUN   TestPassthroughLoopTransientHTTP/529/stream=false
+=== RUN   TestPassthroughLoopTransientHTTP/529/stream=true
+=== RUN   TestPassthroughLoopTransientHTTP/400/stream=false
+=== RUN   TestPassthroughLoopTransientHTTP/400/stream=true
+=== RUN   TestPassthroughLoopTransientHTTP/401/stream=false
+=== RUN   TestPassthroughLoopTransientHTTP/401/stream=true
+=== RUN   TestPassthroughLoopTransientHTTP/501/stream=false
+=== RUN   TestPassthroughLoopTransientHTTP/501/stream=true
+=== RUN   TestPassthroughLoopTransientHTTP/505/stream=false
+=== RUN   TestPassthroughLoopTransientHTTP/505/stream=true
+=== RUN   TestPassthroughLoopTransientHTTP/511/stream=false
+=== RUN   TestPassthroughLoopTransientHTTP/511/stream=true
+=== RUN   TestPassthroughLoopTransientHTTP/-1/stream=false
+=== RUN   TestPassthroughLoopTransientHTTP/-1/stream=true
+--- PASS: TestPassthroughLoopTransientHTTP (0.02s)
+    --- PASS: TestPassthroughLoopTransientHTTP/429/stream=false (0.00s)
+    --- PASS: TestPassthroughLoopTransientHTTP/429/stream=true (0.00s)
+    --- PASS: TestPassthroughLoopTransientHTTP/500/stream=false (0.00s)
+    --- PASS: TestPassthroughLoopTransientHTTP/500/stream=true (0.00s)
+    --- PASS: TestPassthroughLoopTransientHTTP/502/stream=false (0.00s)
+    --- PASS: TestPassthroughLoopTransientHTTP/502/stream=true (0.00s)
+    --- PASS: TestPassthroughLoopTransientHTTP/503/stream=false (0.00s)
+    --- PASS: TestPassthroughLoopTransientHTTP/503/stream=true (0.00s)
+    --- PASS: TestPassthroughLoopTransientHTTP/504/stream=false (0.00s)
+    --- PASS: TestPassthroughLoopTransientHTTP/504/stream=true (0.00s)
+    --- PASS: TestPassthroughLoopTransientHTTP/509/stream=false (0.00s)
+    --- PASS: TestPassthroughLoopTransientHTTP/509/stream=true (0.00s)
+    --- PASS: TestPassthroughLoopTransientHTTP/529/stream=false (0.00s)
+    --- PASS: TestPassthroughLoopTransientHTTP/529/stream=true (0.00s)
+    --- PASS: TestPassthroughLoopTransientHTTP/400/stream=false (0.00s)
+    --- PASS: TestPassthroughLoopTransientHTTP/400/stream=true (0.00s)
+    --- PASS: TestPassthroughLoopTransientHTTP/401/stream=false (0.00s)
+    --- PASS: TestPassthroughLoopTransientHTTP/401/stream=true (0.00s)
+    --- PASS: TestPassthroughLoopTransientHTTP/501/stream=false (0.00s)
+    --- PASS: TestPassthroughLoopTransientHTTP/501/stream=true (0.00s)
+    --- PASS: TestPassthroughLoopTransientHTTP/505/stream=false (0.00s)
+    --- PASS: TestPassthroughLoopTransientHTTP/505/stream=true (0.00s)
+    --- PASS: TestPassthroughLoopTransientHTTP/511/stream=false (0.00s)
+    --- PASS: TestPassthroughLoopTransientHTTP/511/stream=true (0.00s)
+    --- PASS: TestPassthroughLoopTransientHTTP/-1/stream=false (0.00s)
+    --- PASS: TestPassthroughLoopTransientHTTP/-1/stream=true (0.00s)
+=== RUN   TestPassthroughLoopTransientGuardsAndExhaustion
+=== RUN   TestPassthroughLoopTransientGuardsAndExhaustion/500/stream=false/header
+=== RUN   TestPassthroughLoopTransientGuardsAndExhaustion/500/stream=false/quota
+=== RUN   TestPassthroughLoopTransientGuardsAndExhaustion/500/stream=false/refused
+=== RUN   TestPassthroughLoopTransientGuardsAndExhaustion/500/stream=false/exhausted
+=== RUN   TestPassthroughLoopTransientGuardsAndExhaustion/500/stream=false/zero_budget
+=== RUN   TestPassthroughLoopTransientGuardsAndExhaustion/500/stream=true/header
+=== RUN   TestPassthroughLoopTransientGuardsAndExhaustion/500/stream=true/quota
+=== RUN   TestPassthroughLoopTransientGuardsAndExhaustion/500/stream=true/refused
+=== RUN   TestPassthroughLoopTransientGuardsAndExhaustion/500/stream=true/exhausted
+=== RUN   TestPassthroughLoopTransientGuardsAndExhaustion/500/stream=true/zero_budget
+=== RUN   TestPassthroughLoopTransientGuardsAndExhaustion/502/stream=false/header
+=== RUN   TestPassthroughLoopTransientGuardsAndExhaustion/502/stream=false/quota
+=== RUN   TestPassthroughLoopTransientGuardsAndExhaustion/502/stream=false/refused
+=== RUN   TestPassthroughLoopTransientGuardsAndExhaustion/502/stream=false/exhausted
+=== RUN   TestPassthroughLoopTransientGuardsAndExhaustion/502/stream=false/zero_budget
+=== RUN   TestPassthroughLoopTransientGuardsAndExhaustion/502/stream=true/header
+=== RUN   TestPassthroughLoopTransientGuardsAndExhaustion/502/stream=true/quota
+=== RUN   TestPassthroughLoopTransientGuardsAndExhaustion/502/stream=true/refused
+=== RUN   TestPassthroughLoopTransientGuardsAndExhaustion/502/stream=true/exhausted
+=== RUN   TestPassthroughLoopTransientGuardsAndExhaustion/502/stream=true/zero_budget
+=== RUN   TestPassthroughLoopTransientGuardsAndExhaustion/503/stream=false/header
+=== RUN   TestPassthroughLoopTransientGuardsAndExhaustion/503/stream=false/quota
+=== RUN   TestPassthroughLoopTransientGuardsAndExhaustion/503/stream=false/refused
+=== RUN   TestPassthroughLoopTransientGuardsAndExhaustion/503/stream=false/exhausted
+=== RUN   TestPassthroughLoopTransientGuardsAndExhaustion/503/stream=false/zero_budget
+=== RUN   TestPassthroughLoopTransientGuardsAndExhaustion/503/stream=true/header
+=== RUN   TestPassthroughLoopTransientGuardsAndExhaustion/503/stream=true/quota
+=== RUN   TestPassthroughLoopTransientGuardsAndExhaustion/503/stream=true/refused
+=== RUN   TestPassthroughLoopTransientGuardsAndExhaustion/503/stream=true/exhausted
+=== RUN   TestPassthroughLoopTransientGuardsAndExhaustion/503/stream=true/zero_budget
+=== RUN   TestPassthroughLoopTransientGuardsAndExhaustion/504/stream=false/header
+=== RUN   TestPassthroughLoopTransientGuardsAndExhaustion/504/stream=false/quota
+=== RUN   TestPassthroughLoopTransientGuardsAndExhaustion/504/stream=false/refused
+=== RUN   TestPassthroughLoopTransientGuardsAndExhaustion/504/stream=false/exhausted
+=== RUN   TestPassthroughLoopTransientGuardsAndExhaustion/504/stream=false/zero_budget
+=== RUN   TestPassthroughLoopTransientGuardsAndExhaustion/504/stream=true/header
+=== RUN   TestPassthroughLoopTransientGuardsAndExhaustion/504/stream=true/quota
+=== RUN   TestPassthroughLoopTransientGuardsAndExhaustion/504/stream=true/refused
+=== RUN   TestPassthroughLoopTransientGuardsAndExhaustion/504/stream=true/exhausted
+=== RUN   TestPassthroughLoopTransientGuardsAndExhaustion/504/stream=true/zero_budget
+=== RUN   TestPassthroughLoopTransientGuardsAndExhaustion/509/stream=false/header
+=== RUN   TestPassthroughLoopTransientGuardsAndExhaustion/509/stream=false/quota
+=== RUN   TestPassthroughLoopTransientGuardsAndExhaustion/509/stream=false/refused
+=== RUN   TestPassthroughLoopTransientGuardsAndExhaustion/509/stream=false/exhausted
+=== RUN   TestPassthroughLoopTransientGuardsAndExhaustion/509/stream=false/zero_budget
+=== RUN   TestPassthroughLoopTransientGuardsAndExhaustion/509/stream=true/header
+=== RUN   TestPassthroughLoopTransientGuardsAndExhaustion/509/stream=true/quota
+=== RUN   TestPassthroughLoopTransientGuardsAndExhaustion/509/stream=true/refused
+=== RUN   TestPassthroughLoopTransientGuardsAndExhaustion/509/stream=true/exhausted
+=== RUN   TestPassthroughLoopTransientGuardsAndExhaustion/509/stream=true/zero_budget
+=== RUN   TestPassthroughLoopTransientGuardsAndExhaustion/529/stream=false/header
+=== RUN   TestPassthroughLoopTransientGuardsAndExhaustion/529/stream=false/quota
+=== RUN   TestPassthroughLoopTransientGuardsAndExhaustion/529/stream=false/refused
+=== RUN   TestPassthroughLoopTransientGuardsAndExhaustion/529/stream=false/exhausted
+=== RUN   TestPassthroughLoopTransientGuardsAndExhaustion/529/stream=false/zero_budget
+=== RUN   TestPassthroughLoopTransientGuardsAndExhaustion/529/stream=true/header
+=== RUN   TestPassthroughLoopTransientGuardsAndExhaustion/529/stream=true/quota
+=== RUN   TestPassthroughLoopTransientGuardsAndExhaustion/529/stream=true/refused
+=== RUN   TestPassthroughLoopTransientGuardsAndExhaustion/529/stream=true/exhausted
+=== RUN   TestPassthroughLoopTransientGuardsAndExhaustion/529/stream=true/zero_budget
+--- PASS: TestPassthroughLoopTransientGuardsAndExhaustion (0.05s)
+    --- PASS: TestPassthroughLoopTransientGuardsAndExhaustion/500/stream=false/header (0.00s)
+    --- PASS: TestPassthroughLoopTransientGuardsAndExhaustion/500/stream=false/quota (0.00s)
+    --- PASS: TestPassthroughLoopTransientGuardsAndExhaustion/500/stream=false/refused (0.00s)
+    --- PASS: TestPassthroughLoopTransientGuardsAndExhaustion/500/stream=false/exhausted (0.00s)
+    --- PASS: TestPassthroughLoopTransientGuardsAndExhaustion/500/stream=false/zero_budget (0.00s)
+    --- PASS: TestPassthroughLoopTransientGuardsAndExhaustion/500/stream=true/header (0.00s)
+    --- PASS: TestPassthroughLoopTransientGuardsAndExhaustion/500/stream=true/quota (0.00s)
+    --- PASS: TestPassthroughLoopTransientGuardsAndExhaustion/500/stream=true/refused (0.00s)
+    --- PASS: TestPassthroughLoopTransientGuardsAndExhaustion/500/stream=true/exhausted (0.00s)
+    --- PASS: TestPassthroughLoopTransientGuardsAndExhaustion/500/stream=true/zero_budget (0.00s)
+    --- PASS: TestPassthroughLoopTransientGuardsAndExhaustion/502/stream=false/header (0.00s)
+    --- PASS: TestPassthroughLoopTransientGuardsAndExhaustion/502/stream=false/quota (0.00s)
+    --- PASS: TestPassthroughLoopTransientGuardsAndExhaustion/502/stream=false/refused (0.00s)
+    --- PASS: TestPassthroughLoopTransientGuardsAndExhaustion/502/stream=false/exhausted (0.00s)
+    --- PASS: TestPassthroughLoopTransientGuardsAndExhaustion/502/stream=false/zero_budget (0.00s)
+    --- PASS: TestPassthroughLoopTransientGuardsAndExhaustion/502/stream=true/header (0.00s)
+    --- PASS: TestPassthroughLoopTransientGuardsAndExhaustion/502/stream=true/quota (0.00s)
+    --- PASS: TestPassthroughLoopTransientGuardsAndExhaustion/502/stream=true/refused (0.00s)
+    --- PASS: TestPassthroughLoopTransientGuardsAndExhaustion/502/stream=true/exhausted (0.00s)
+    --- PASS: TestPassthroughLoopTransientGuardsAndExhaustion/502/stream=true/zero_budget (0.00s)
+    --- PASS: TestPassthroughLoopTransientGuardsAndExhaustion/503/stream=false/header (0.00s)
+    --- PASS: TestPassthroughLoopTransientGuardsAndExhaustion/503/stream=false/quota (0.00s)
+    --- PASS: TestPassthroughLoopTransientGuardsAndExhaustion/503/stream=false/refused (0.00s)
+    --- PASS: TestPassthroughLoopTransientGuardsAndExhaustion/503/stream=false/exhausted (0.00s)
+    --- PASS: TestPassthroughLoopTransientGuardsAndExhaustion/503/stream=false/zero_budget (0.00s)
+    --- PASS: TestPassthroughLoopTransientGuardsAndExhaustion/503/stream=true/header (0.00s)
+    --- PASS: TestPassthroughLoopTransientGuardsAndExhaustion/503/stream=true/quota (0.00s)
+    --- PASS: TestPassthroughLoopTransientGuardsAndExhaustion/503/stream=true/refused (0.00s)
+    --- PASS: TestPassthroughLoopTransientGuardsAndExhaustion/503/stream=true/exhausted (0.00s)
+    --- PASS: TestPassthroughLoopTransientGuardsAndExhaustion/503/stream=true/zero_budget (0.00s)
+    --- PASS: TestPassthroughLoopTransientGuardsAndExhaustion/504/stream=false/header (0.00s)
+    --- PASS: TestPassthroughLoopTransientGuardsAndExhaustion/504/stream=false/quota (0.00s)
+    --- PASS: TestPassthroughLoopTransientGuardsAndExhaustion/504/stream=false/refused (0.00s)
+    --- PASS: TestPassthroughLoopTransientGuardsAndExhaustion/504/stream=false/exhausted (0.00s)
+    --- PASS: TestPassthroughLoopTransientGuardsAndExhaustion/504/stream=false/zero_budget (0.00s)
+    --- PASS: TestPassthroughLoopTransientGuardsAndExhaustion/504/stream=true/header (0.00s)
+    --- PASS: TestPassthroughLoopTransientGuardsAndExhaustion/504/stream=true/quota (0.00s)
+    --- PASS: TestPassthroughLoopTransientGuardsAndExhaustion/504/stream=true/refused (0.00s)
+    --- PASS: TestPassthroughLoopTransientGuardsAndExhaustion/504/stream=true/exhausted (0.00s)
+    --- PASS: TestPassthroughLoopTransientGuardsAndExhaustion/504/stream=true/zero_budget (0.00s)
+    --- PASS: TestPassthroughLoopTransientGuardsAndExhaustion/509/stream=false/header (0.00s)
+    --- PASS: TestPassthroughLoopTransientGuardsAndExhaustion/509/stream=false/quota (0.00s)
+    --- PASS: TestPassthroughLoopTransientGuardsAndExhaustion/509/stream=false/refused (0.00s)
+    --- PASS: TestPassthroughLoopTransientGuardsAndExhaustion/509/stream=false/exhausted (0.00s)
+    --- PASS: TestPassthroughLoopTransientGuardsAndExhaustion/509/stream=false/zero_budget (0.00s)
+    --- PASS: TestPassthroughLoopTransientGuardsAndExhaustion/509/stream=true/header (0.00s)
+    --- PASS: TestPassthroughLoopTransientGuardsAndExhaustion/509/stream=true/quota (0.00s)
+    --- PASS: TestPassthroughLoopTransientGuardsAndExhaustion/509/stream=true/refused (0.00s)
+    --- PASS: TestPassthroughLoopTransientGuardsAndExhaustion/509/stream=true/exhausted (0.00s)
+    --- PASS: TestPassthroughLoopTransientGuardsAndExhaustion/509/stream=true/zero_budget (0.00s)
+    --- PASS: TestPassthroughLoopTransientGuardsAndExhaustion/529/stream=false/header (0.00s)
+    --- PASS: TestPassthroughLoopTransientGuardsAndExhaustion/529/stream=false/quota (0.00s)
+    --- PASS: TestPassthroughLoopTransientGuardsAndExhaustion/529/stream=false/refused (0.00s)
+    --- PASS: TestPassthroughLoopTransientGuardsAndExhaustion/529/stream=false/exhausted (0.00s)
+    --- PASS: TestPassthroughLoopTransientGuardsAndExhaustion/529/stream=false/zero_budget (0.00s)
+    --- PASS: TestPassthroughLoopTransientGuardsAndExhaustion/529/stream=true/header (0.00s)
+    --- PASS: TestPassthroughLoopTransientGuardsAndExhaustion/529/stream=true/quota (0.00s)
+    --- PASS: TestPassthroughLoopTransientGuardsAndExhaustion/529/stream=true/refused (0.00s)
+    --- PASS: TestPassthroughLoopTransientGuardsAndExhaustion/529/stream=true/exhausted (0.00s)
+    --- PASS: TestPassthroughLoopTransientGuardsAndExhaustion/529/stream=true/zero_budget (0.00s)
+=== RUN   TestPassthroughLoopTransientRetryAfter
+=== RUN   TestPassthroughLoopTransientRetryAfter/stream=false/cancel=false
+=== RUN   TestPassthroughLoopTransientRetryAfter/stream=false/cancel=true
+=== RUN   TestPassthroughLoopTransientRetryAfter/stream=true/cancel=false
+=== RUN   TestPassthroughLoopTransientRetryAfter/stream=true/cancel=true
+--- PASS: TestPassthroughLoopTransientRetryAfter (2.10s)
+    --- PASS: TestPassthroughLoopTransientRetryAfter/stream=false/cancel=false (1.00s)
+    --- PASS: TestPassthroughLoopTransientRetryAfter/stream=false/cancel=true (0.05s)
+    --- PASS: TestPassthroughLoopTransientRetryAfter/stream=true/cancel=false (1.00s)
+    --- PASS: TestPassthroughLoopTransientRetryAfter/stream=true/cancel=true (0.05s)
+=== RUN   TestPassthroughLoopRetriesOrdinary429
+--- PASS: TestPassthroughLoopRetriesOrdinary429 (1.00s)
+=== RUN   TestPassthroughLoopRespectsNoRetry
+--- PASS: TestPassthroughLoopRespectsNoRetry (0.00s)
+=== RUN   TestPassthroughLoopExhaustionPreservesRaw429
+--- PASS: TestPassthroughLoopExhaustionPreservesRaw429 (2.00s)
+=== RUN   TestPassthroughLoopStream429BeforeOutput
+--- PASS: TestPassthroughLoopStream429BeforeOutput (0.00s)
+=== RUN   TestPassthroughLoopStreamNoReplayHeader
+--- PASS: TestPassthroughLoopStreamNoReplayHeader (0.00s)
+=== RUN   TestPassthroughLoopStreamLateReplayRefusedMarkerNeverReplays
+=== RUN   TestPassthroughLoopStreamLateReplayRefusedMarkerNeverReplays/429
+=== RUN   TestPassthroughLoopStreamLateReplayRefusedMarkerNeverReplays/429/split_replay_refused
+=== RUN   TestPassthroughLoopStreamLateReplayRefusedMarkerNeverReplays/429/late_insufficient_quota
+=== RUN   TestPassthroughLoopStreamLateReplayRefusedMarkerNeverReplays/502
+=== RUN   TestPassthroughLoopStreamLateReplayRefusedMarkerNeverReplays/502/split_replay_refused
+=== RUN   TestPassthroughLoopStreamLateReplayRefusedMarkerNeverReplays/502/late_insufficient_quota
+=== RUN   TestPassthroughLoopStreamLateReplayRefusedMarkerNeverReplays/509
+=== RUN   TestPassthroughLoopStreamLateReplayRefusedMarkerNeverReplays/509/split_replay_refused
+=== RUN   TestPassthroughLoopStreamLateReplayRefusedMarkerNeverReplays/509/late_insufficient_quota
+--- PASS: TestPassthroughLoopStreamLateReplayRefusedMarkerNeverReplays (0.00s)
+    --- PASS: TestPassthroughLoopStreamLateReplayRefusedMarkerNeverReplays/429 (0.00s)
+        --- PASS: TestPassthroughLoopStreamLateReplayRefusedMarkerNeverReplays/429/split_replay_refused (0.00s)
+        --- PASS: TestPassthroughLoopStreamLateReplayRefusedMarkerNeverReplays/429/late_insufficient_quota (0.00s)
+    --- PASS: TestPassthroughLoopStreamLateReplayRefusedMarkerNeverReplays/502 (0.00s)
+        --- PASS: TestPassthroughLoopStreamLateReplayRefusedMarkerNeverReplays/502/split_replay_refused (0.00s)
+        --- PASS: TestPassthroughLoopStreamLateReplayRefusedMarkerNeverReplays/502/late_insufficient_quota (0.00s)
+    --- PASS: TestPassthroughLoopStreamLateReplayRefusedMarkerNeverReplays/509 (0.00s)
+        --- PASS: TestPassthroughLoopStreamLateReplayRefusedMarkerNeverReplays/509/split_replay_refused (0.00s)
+        --- PASS: TestPassthroughLoopStreamLateReplayRefusedMarkerNeverReplays/509/late_insufficient_quota (0.00s)
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/empty/broken-http=false
+    passthrough_retry_loop_test.go:558: physical POST sends: primary=1 fallback=0; sawError=true
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/empty/broken-http=true
+    passthrough_retry_loop_test.go:558: physical POST sends: primary=1 fallback=0; sawError=true
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/comment/broken-http=false
+    passthrough_retry_loop_test.go:558: physical POST sends: primary=1 fallback=0; sawError=true
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/comment/broken-http=true
+    passthrough_retry_loop_test.go:558: physical POST sends: primary=1 fallback=0; sawError=true
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/incomplete-event/broken-http=false
+    passthrough_retry_loop_test.go:558: physical POST sends: primary=1 fallback=0; sawError=true
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/incomplete-event/broken-http=true
+    passthrough_retry_loop_test.go:558: physical POST sends: primary=1 fallback=0; sawError=true
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/partial-output/broken-http=false
+    passthrough_retry_loop_test.go:558: physical POST sends: primary=1 fallback=0; sawError=true
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/partial-output/broken-http=true
+    passthrough_retry_loop_test.go:558: physical POST sends: primary=1 fallback=0; sawError=true
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/complete/broken-http=false
+    passthrough_retry_loop_test.go:558: physical POST sends: primary=1 fallback=0; sawError=false
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/empty/broken-http=false
+    passthrough_retry_loop_test.go:558: physical POST sends: primary=1 fallback=0; sawError=true
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/empty/broken-http=true
+    passthrough_retry_loop_test.go:558: physical POST sends: primary=1 fallback=0; sawError=true
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/comment/broken-http=false
+    passthrough_retry_loop_test.go:558: physical POST sends: primary=1 fallback=0; sawError=true
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/comment/broken-http=true
+    passthrough_retry_loop_test.go:558: physical POST sends: primary=1 fallback=0; sawError=true
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/incomplete-event/broken-http=false
+    passthrough_retry_loop_test.go:558: physical POST sends: primary=1 fallback=0; sawError=true
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/incomplete-event/broken-http=true
+    passthrough_retry_loop_test.go:558: physical POST sends: primary=1 fallback=0; sawError=true
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/partial-output/broken-http=false
+    passthrough_retry_loop_test.go:558: physical POST sends: primary=1 fallback=0; sawError=true
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/partial-output/broken-http=true
+    passthrough_retry_loop_test.go:558: physical POST sends: primary=1 fallback=0; sawError=true
+=== RUN   TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/complete/broken-http=false
+    passthrough_retry_loop_test.go:558: physical POST sends: primary=1 fallback=0; sawError=false
+--- PASS: TestNativeStreamAmbiguousPOSTNeverReplays (0.27s)
+    --- PASS: TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/empty/broken-http=false (0.01s)
+    --- PASS: TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/empty/broken-http=true (0.00s)
+    --- PASS: TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/comment/broken-http=false (0.00s)
+    --- PASS: TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/comment/broken-http=true (0.00s)
+    --- PASS: TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/incomplete-event/broken-http=false (0.05s)
+    --- PASS: TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/incomplete-event/broken-http=true (0.00s)
+    --- PASS: TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/partial-output/broken-http=false (0.02s)
+    --- PASS: TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/partial-output/broken-http=true (0.00s)
+    --- PASS: TestNativeStreamAmbiguousPOSTNeverReplays/responses=false/complete/broken-http=false (0.00s)
+    --- PASS: TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/empty/broken-http=false (0.02s)
+    --- PASS: TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/empty/broken-http=true (0.00s)
+    --- PASS: TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/comment/broken-http=false (0.00s)
+    --- PASS: TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/comment/broken-http=true (0.00s)
+    --- PASS: TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/incomplete-event/broken-http=false (0.06s)
+    --- PASS: TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/incomplete-event/broken-http=true (0.00s)
+    --- PASS: TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/partial-output/broken-http=false (0.00s)
+    --- PASS: TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/partial-output/broken-http=true (0.00s)
+    --- PASS: TestNativeStreamAmbiguousPOSTNeverReplays/responses=true/complete/broken-http=false (0.08s)
+=== RUN   TestStreamFallbackAfterFirstChunkError
+--- PASS: TestStreamFallbackAfterFirstChunkError (0.09s)
+=== RUN   TestAzureChatFallbackAfterPreamble
+--- PASS: TestAzureChatFallbackAfterPreamble (0.01s)
+=== RUN   TestAzureResponsesFallbackAfterPreamble
+--- PASS: TestAzureResponsesFallbackAfterPreamble (0.17s)
+=== RUN   TestOpenAIChatFallbackAfterPreamble
+--- PASS: TestOpenAIChatFallbackAfterPreamble (0.00s)
+=== RUN   TestOpenAIResponsesFallbackAfterPreamble
+--- PASS: TestOpenAIResponsesFallbackAfterPreamble (0.00s)
+PASS
+ok  	github.com/maximhq/bifrost/core	6.248s
+=== RUN   TestChatStreamContentLengthTruncationAfterFinishReason
+=== RUN   TestChatStreamContentLengthTruncationAfterFinishReason/missing_0_bytes
+=== RUN   TestChatStreamContentLengthTruncationAfterFinishReason/missing_100_bytes
+--- PASS: TestChatStreamContentLengthTruncationAfterFinishReason (0.12s)
+    --- PASS: TestChatStreamContentLengthTruncationAfterFinishReason/missing_0_bytes (0.12s)
+    --- PASS: TestChatStreamContentLengthTruncationAfterFinishReason/missing_100_bytes (0.00s)
+=== RUN   TestChatStreamTruncatedPreFirstByte
+--- PASS: TestChatStreamTruncatedPreFirstByte (0.00s)
+=== RUN   TestChatStreamTruncatedMidStream
+--- PASS: TestChatStreamTruncatedMidStream (0.00s)
+=== RUN   TestTextCompletionStreamTruncated
+--- PASS: TestTextCompletionStreamTruncated (0.04s)
+=== RUN   TestResponsesStreamTruncatedBeforeCompleted
+--- PASS: TestResponsesStreamTruncatedBeforeCompleted (0.10s)
+PASS
+ok  	github.com/maximhq/bifrost/core/providers/openai	0.459s
+=== RUN   TestContextTransport_ChunkedStreamReleasesConnForReuse
+--- PASS: TestContextTransport_ChunkedStreamReleasesConnForReuse (0.00s)
+=== RUN   TestContextTransport_TruncatedChunkedStreamReportsUnexpectedEOFAndDiscardsConn
+--- PASS: TestContextTransport_TruncatedChunkedStreamReportsUnexpectedEOFAndDiscardsConn (0.00s)
+=== RUN   TestContextTransport_TruncatedContentLengthStreamReportsUnexpectedEOFAndDiscardsConn
+=== RUN   TestContextTransport_TruncatedContentLengthStreamReportsUnexpectedEOFAndDiscardsConn/received_0_bytes
+    makerequest_test.go:666: body = "", err = unexpected EOF, fullyRead = false
+=== RUN   TestContextTransport_TruncatedContentLengthStreamReportsUnexpectedEOFAndDiscardsConn/received_2_bytes
+    makerequest_test.go:666: body = "{}", err = unexpected EOF, fullyRead = false
+--- PASS: TestContextTransport_TruncatedContentLengthStreamReportsUnexpectedEOFAndDiscardsConn (0.00s)
+    --- PASS: TestContextTransport_TruncatedContentLengthStreamReportsUnexpectedEOFAndDiscardsConn/received_0_bytes (0.00s)
+    --- PASS: TestContextTransport_TruncatedContentLengthStreamReportsUnexpectedEOFAndDiscardsConn/received_2_bytes (0.00s)
+=== RUN   TestContextTransport_ContentLengthAndIdentityBodies
+--- PASS: TestContextTransport_ContentLengthAndIdentityBodies (0.00s)
+=== RUN   TestContextTransport_HeadAnd204SkipBody
+--- PASS: TestContextTransport_HeadAnd204SkipBody (0.00s)
+=== RUN   TestContextTransport_InterimResponsesSkipped
+--- PASS: TestContextTransport_InterimResponsesSkipped (0.00s)
+=== RUN   TestContextTransport_CloseWithErrorInterruptsBlockedRead
+--- PASS: TestContextTransport_CloseWithErrorInterruptsBlockedRead (0.10s)
+=== RUN   TestContextTransport_MatchesDefaultForBufferedBodies
+--- PASS: TestContextTransport_MatchesDefaultForBufferedBodies (0.00s)
+=== RUN   TestContextTransport_BufferedLateCancelDoesNotPoisonPool
+--- PASS: TestContextTransport_BufferedLateCancelDoesNotPoisonPool (0.05s)
+=== RUN   TestStreamPassthrough_HTTPErrorIgnoresTerminalEvents
+=== RUN   TestStreamPassthrough_HTTPErrorIgnoresTerminalEvents/429
+=== RUN   TestStreamPassthrough_HTTPErrorIgnoresTerminalEvents/502
+=== RUN   TestStreamPassthrough_HTTPErrorIgnoresTerminalEvents/509
+--- PASS: TestStreamPassthrough_HTTPErrorIgnoresTerminalEvents (0.00s)
+    --- PASS: TestStreamPassthrough_HTTPErrorIgnoresTerminalEvents/429 (0.00s)
+    --- PASS: TestStreamPassthrough_HTTPErrorIgnoresTerminalEvents/502 (0.00s)
+    --- PASS: TestStreamPassthrough_HTTPErrorIgnoresTerminalEvents/509 (0.00s)
+=== RUN   TestStreamPassthrough_NonRetryStatusKeepsTerminalEvents
+--- PASS: TestStreamPassthrough_NonRetryStatusKeepsTerminalEvents (0.00s)
+=== RUN   TestStreamPassthrough_EndsStreamAbandonsParkedUpstream
+--- PASS: TestStreamPassthrough_EndsStreamAbandonsParkedUpstream (0.00s)
+=== RUN   TestStreamPassthrough_EndsStreamFinalizesBeforeClientHangup
+--- PASS: TestStreamPassthrough_EndsStreamFinalizesBeforeClientHangup (0.00s)
+=== RUN   TestContextTransport_FreshDialCloseBeforeHeadersNotRetried
+--- PASS: TestContextTransport_FreshDialCloseBeforeHeadersNotRetried (0.00s)
+=== RUN   TestContextTransport_PooledStaleConnStillRetried
+--- PASS: TestContextTransport_PooledStaleConnStillRetried (0.15s)
+=== RUN   TestContextTransport_PooledConnTruncatedBodyNotRetried
+--- PASS: TestContextTransport_PooledConnTruncatedBodyNotRetried (0.00s)
+PASS
+ok  	github.com/maximhq/bifrost/core/providers/utils	0.539s

@@ -5824,7 +5824,7 @@ func (bifrost *Bifrost) shouldTryFallbacks(ctx *schemas.BifrostContext, req *sch
 
 	// Check if this is a short-circuit error that doesn't allow fallbacks
 	// Note: AllowFallbacks = nil is treated as true (allow fallbacks by default)
-	if primaryErr.AllowFallbacks != nil && !*primaryErr.AllowFallbacks {
+	if primaryErr.ReplayUnsafe || (primaryErr.AllowFallbacks != nil && !*primaryErr.AllowFallbacks) {
 		bifrost.logger.Debug("allowFallbacks is false, we should not try fallbacks")
 		return false
 	}
@@ -5993,7 +5993,7 @@ func (bifrost *Bifrost) shouldContinueWithFallbacks(fallback schemas.Fallback, f
 	}
 
 	// Check if it was a short-circuit error that doesn't allow fallbacks
-	if fallbackErr.AllowFallbacks != nil && !*fallbackErr.AllowFallbacks {
+	if fallbackErr.ReplayUnsafe || (fallbackErr.AllowFallbacks != nil && !*fallbackErr.AllowFallbacks) {
 		return false
 	}
 
@@ -7829,6 +7829,7 @@ func executeRequestWithRetries[T any](
 
 		// Check if successful or if we should retry
 		if bifrostError == nil ||
+			bifrostError.ReplayUnsafe ||
 			bifrostError.IsBifrostError ||
 			(bifrostError.Error != nil && bifrostError.Error.Type != nil && *bifrostError.Error.Type == schemas.RequestCancelled) {
 			// A timeout or a cancellation ends the attempt here, before the classification
@@ -9910,6 +9911,9 @@ func (p *PluginPipeline) RunPostLLMHooks(ctx *schemas.BifrostContext, resp *sche
 	ctx.BlockRestrictedWrites()
 	defer ctx.UnblockRestrictedWrites()
 	var err error
+	// Keep transport certainty across replacements, mutations, and temporary
+	// recovery by a hook. A later hook must not re-enable an unsafe POST replay.
+	replayUnsafe := bifrostErr != nil && bifrostErr.ReplayUnsafe
 	for i := runFrom - 1; i >= 0; i-- {
 		plugin := p.llmPlugins[i]
 		pluginName := plugin.GetName()
@@ -9957,6 +9961,11 @@ func (p *PluginPipeline) RunPostLLMHooks(ctx *schemas.BifrostContext, resp *sche
 			}
 			// Restore the parent so the next plugin is a sibling, not chained under this one.
 			ctx.SetValue(schemas.BifrostContextKeySpanID, prevSpanID)
+		}
+		replayUnsafe = replayUnsafe || (bifrostErr != nil && bifrostErr.ReplayUnsafe)
+		if bifrostErr != nil && replayUnsafe {
+			bifrostErr.ReplayUnsafe = true
+			bifrostErr.AllowFallbacks = schemas.Ptr(false)
 		}
 		// If a plugin recovers from an error (sets bifrostErr to nil and sets resp), allow that
 		// If a plugin invalidates a response (sets resp to nil and sets bifrostErr), allow that

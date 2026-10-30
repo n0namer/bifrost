@@ -1,0 +1,19 @@
+{
+  "at": "2026-10-30T17:45:20.182225+00:00",
+  "finished": "2026-10-30T17:47:37.276928+00:00",
+  "head": "943261a78e543741e59e87b4acdc9d8d7714cbfe",
+  "head_after": "943261a78e543741e59e87b4acdc9d8d7714cbfe",
+  "diff_sha256": "5ee7921c1192d76dadd8972a6ffb6ce29e3adf51776bad5f8e4b12ba1e0f3c0f",
+  "go": "C:\\Users\\\u0420\u0430\u0444\u0438\u043a\\go\\pkg\\mod\\golang.org\\toolchain@v0.0.1-go1.27.3.windows-amd64\\bin\\go.exe",
+  "args": [
+    "test",
+    ".",
+    "-run",
+    "^TestNativeStreamAmbiguousPOSTNeverReplays$",
+    "-count=1",
+    "-v",
+    "-timeout=90s"
+  ],
+  "exit_code": 1,
+  "log": "C:\\Users\\\u0420\u0430\u0444\u0438\u043a\\Documents\\DEV\\llm-gateway-bakeoff-20261030\\bifrost-sparse\\evidence\\transient-http-r17-native-physical-red.txt"
+}
