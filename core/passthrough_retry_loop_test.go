@@ -15,19 +15,22 @@ import (
 )
 
 func TestPassthroughTransientPhysicalSends(t *testing.T) {
-	for _, status := range []int{500, 502, 503, 504, 509, 529} {
+	for _, status := range []int{429, 500, 502, 503, 504, 509, 529} {
 		for _, streaming := range []bool{false, true} {
-			for _, mode := range []string{"recover", "header", "split refused", "late quota", "exhaust"} {
+			for _, mode := range []string{"recover", "header", "split refused", "late quota", "exhaust", "unsafe replay", "unsafe exhaust"} {
 				t.Run(fmt.Sprintf("%d/stream=%v/%s", status, streaming, mode), func(t *testing.T) {
+					if mode == "unsafe replay" || mode == "unsafe exhaust" {
+						t.Setenv("BIFROST_UNSAFE_RETRY_AMBIGUOUS_POST", "1")
+					}
 					var sends atomic.Int32
 					srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 						n := sends.Add(1)
 						w.Header().Set("Content-Type", "application/json")
 						w.Header().Set("X-Origin", fmt.Sprint(n))
-						if mode == "header" {
+						if mode == "header" || mode == "unsafe replay" || mode == "unsafe exhaust" {
 							w.Header().Set("X-Should-Retry", "false")
 						}
-						if mode == "recover" && n > 1 {
+						if (mode == "recover" || mode == "unsafe replay") && n > 1 {
 							w.WriteHeader(200)
 							fmt.Fprint(w, `{"ok":true}`)
 							return
@@ -36,6 +39,8 @@ func TestPassthroughTransientPhysicalSends(t *testing.T) {
 						fmt.Fprint(w, "raw-first:")
 						w.(http.Flusher).Flush()
 						switch mode {
+						case "unsafe replay", "unsafe exhaust":
+							fmt.Fprint(w, `{"error":{"code":"upstream_reset_replay_refused"}}`)
 						case "split refused":
 							fmt.Fprint(w, "upstream_reset_")
 							w.(http.Flusher).Flush()
@@ -91,10 +96,13 @@ func TestPassthroughTransientPhysicalSends(t *testing.T) {
 					}
 					wantSends, wantStatus, wantBody := int32(1), status, "raw-first:temporary"
 					switch mode {
-					case "recover":
+					case "recover", "unsafe replay":
 						wantSends, wantStatus, wantBody = 2, 200, `{"ok":true}`
 					case "exhaust":
 						wantSends = 3
+					case "unsafe exhaust":
+						wantSends = 3
+						wantBody = `raw-first:{"error":{"code":"upstream_reset_replay_refused"}}`
 					case "split refused":
 						wantBody = "raw-first:upstream_reset_replay_refused"
 					case "late quota":

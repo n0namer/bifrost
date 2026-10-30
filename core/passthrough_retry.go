@@ -3,6 +3,7 @@ package bifrost
 import (
 	"bytes"
 	"net/http"
+	"os"
 	"strings"
 	"time"
 
@@ -17,17 +18,19 @@ func passthroughHTTPRetryError(resp *schemas.BifrostPassthroughResponse) *schema
 	if resp == nil || !providerUtils.IsPassthroughRetryStatus(resp.StatusCode) || len(resp.Body) > providerUtils.MaxPassthroughRetryBodyBytes {
 		return nil
 	}
+	// Explicit operator opt-in: the upstream may already have executed this POST.
+	// This permits one bounded Bifrost retry sequence of OpenCodex's synthetic
+	// replay refusal, even if OpenCodex sets X-Should-Retry: false. Keep the
+	// default no-replay behavior, unrelated veto headers and quota exhaustion.
+	resetRefused := bytes.Contains(resp.Body, []byte("upstream_reset_replay_refused"))
+	unsafeReplay := resetRefused && os.Getenv("BIFROST_UNSAFE_RETRY_AMBIGUOUS_POST") == "1"
 	for header, value := range resp.Headers {
 		if strings.EqualFold(header, "x-should-retry") &&
-			strings.EqualFold(strings.TrimSpace(value), "false") {
+			strings.EqualFold(strings.TrimSpace(value), "false") && !unsafeReplay {
 			return nil
 		}
 	}
-	// OpenCodex may synthesize 429 for an ambiguous, possibly processed POST.
-	// Do not override its no-replay gate even if a future intermediary drops
-	// the explicit header. Permanent quota depletion cannot recover by waiting.
-	if bytes.Contains(resp.Body, []byte("upstream_reset_replay_refused")) ||
-		bytes.Contains(resp.Body, []byte("insufficient_quota")) {
+	if (resetRefused && !unsafeReplay) || bytes.Contains(resp.Body, []byte("insufficient_quota")) {
 		return nil
 	}
 	status := resp.StatusCode
