@@ -1,0 +1,74 @@
+{
+  "schema": "bifrost-live-r32-checkpoint-v1",
+  "observed_at": "2026-10-31T00:44:54.977Z",
+  "provenance": "Coordinator copy of verified on-device test results and CrewSync readbacks. Original raw logs, harness, native receipt and local checkpoint remain on VP49; this is a summary, not independent QA.",
+  "state": "CANDIDATE_TESTS_PASSED_QA_PENDING",
+  "source_sha": "88b335b92192deab1edcd338c7276ae1a40cc1dd",
+  "binary_sha256": "69089fbe685fc4880adb505188bc7d098961a1502458e0c73cae1d7597d644e7",
+  "source_modified": false,
+  "production_changed": false,
+  "crewsync": {
+    "plan": "bifrost-live:plan:active",
+    "revision": "bifrost-live-20261031-r32-tests-pending-qa",
+    "session": "bifrost-live-production-20261031",
+    "root": {"key": "bifrost-live:root", "status": "claimed"},
+    "work": [
+      {"key": "bifrost-live:retry-contract", "status": "claimed", "candidate": "host verification passed, independent QA pending"},
+      {"key": "bifrost-live:vp49-service", "status": "open"},
+      {"key": "bifrost-live:vp49-cutover", "status": "open", "depends_on": ["bifrost-live:retry-contract", "bifrost-live:vp49-service"]},
+      {"key": "bifrost-live:a55-rollout", "status": "open", "depends_on": ["bifrost-live:retry-contract", "bifrost-live:vp49-service"]},
+      {"key": "bifrost-live:e2e-accept", "status": "open", "depends_on": ["bifrost-live:vp49-cutover", "bifrost-live:a55-rollout"]}
+    ],
+    "new_server_done": 0,
+    "old_bifrost_canary_done_preserved": true,
+    "native_running": 0
+  },
+  "tests": {
+    "go_selected_top_level_passed": 24,
+    "go_failed": 0,
+    "not_an_all_repository_suite_claim": true,
+    "burst_clients": 20,
+    "correct_results": 20,
+    "physical_sends": 27,
+    "faults_injected": 7,
+    "peak_upstream_concurrency": 1,
+    "client_retries": 0,
+    "real_model_provider_calls": 0,
+    "negative_control_detected_bad_payload": true,
+    "isolated_fixture_process_cleaned": true,
+    "verified_by": "coordinator host tools, not a native Worker or independent Reviewer"
+  },
+  "evidence_sha256": {
+    "go_log": "c4b97edf4b99aa306327643f796d4fbedbcbfc56446f7d01aa30983b09ed266d",
+    "burst_positive": "ff66f34fd4d41d58148bb050135838b397d89172eef10a7d46acd18433cd83fb",
+    "burst_negative": "0c52f8aea8340f17d310843b4c9df16c234ed35da78295b87c8e814f1de51317",
+    "harness": "4555b88aa8c5c5a5eed749f87f80267573104258828fa6315185197f49c0d8e1"
+  },
+  "native_manager": {
+    "thread_id": "01a18f61-c550-7183-94e9-d9b6106b477f",
+    "turn_id": "01a18f61-c610-7e72-a2f5-9b714229d7e6",
+    "model": "gpt-6.1-sol",
+    "effort": "medium",
+    "turn_status": "failed",
+    "goal_status": "blocked",
+    "children_started": 0,
+    "error": "Provider high demand; three HTTP 502 upstream_server_error rows observed"
+  },
+  "blockers": [
+    "Native Manager failed before starting children.",
+    "Writing the original-thread recovery script was denied by the tool safety system; no alternative executor was used for that denied continuation.",
+    "New queue verification has no independent QA_ACCEPT or SERVER_DONE.",
+    "A55 is not connected. Actual host boot observation remains an explicit final-acceptance gate."
+  ],
+  "local_artifacts": [
+    "_bmad-output/implementation-artifacts/sprint-status.yaml",
+    "evidence/bifrost-live-r31-registration.json",
+    "evidence/bifrost-live-r31-manager.json",
+    "evidence/live-retry-r31-go-tests.jsonl",
+    "evidence/live-retry-burst20.py",
+    "evidence/live-retry-burst20-1793407269044381400/receipt.json",
+    "evidence/live-retry-burst20-1793407311904854700/receipt.json",
+    "evidence/bifrost-live-r32-checkpoint.json"
+  ],
+  "next": "Resume the exact original Manager only through permitted native control; independently review the existing retry candidate, then continue vp49-service. Preserve old DONE and do not repeat known terminal effects."
+}
