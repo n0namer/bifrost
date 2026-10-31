@@ -1,0 +1,53 @@
+{
+  "schema": "bifrost-live-r34-checkpoint-v1",
+  "observed_at": "2026-10-31T01:34:19.653Z",
+  "provenance": "Coordinator summary of fresh CrewSync readbacks and original VP49 native receipt. Not independent QA and not task completion.",
+  "source_sha": "88b335b92192deab1edcd338c7276ae1a40cc1dd",
+  "source_modified": false,
+  "production_changed": false,
+  "global_config_sha256": "dccf8a88f8217191035ef9859cef7d73f3b71869b1556c03eaf0b92b4857a3dc",
+  "plan_revision": "bifrost-live-20261031-r34-native-qa-and-tool-blocked",
+  "new_server_done": 0,
+  "native_running": 0,
+  "old_fast_qa": {
+    "task_key": "bifrost-live:retry-contract",
+    "thread_id": "01a18f95-6088-7361-89fb-f4ee60a3e23b",
+    "turn_id": "01a18f95-6165-74b3-9c06-713738f2fd26",
+    "model": "gpt-6-luna",
+    "effort": "medium",
+    "goal": "blocked",
+    "turn": "failed",
+    "qa_verdict": "NOT_OBTAINED",
+    "error": "Provider high demand",
+    "receipt": "evidence/live-retry-r33-qa-native.json",
+    "receipt_sha256": "9e03cf56936160469e2e4074f0cdbabf343ce8d9776e5f46f6f9c7dafd927899",
+    "log_window_http_statuses": [502, 502, 502],
+    "log_error_code": "upstream_server_error",
+    "log_failure_cause": "upstream-fault",
+    "log_window_sha256": "f2114fe63c48e9f6f540c649e0360b3abe845bf4ae55c7fcbbaf8f8aa016ec69"
+  },
+  "service": {
+    "task_key": "bifrost-live:vp49-service",
+    "state": "HOST_TOOL_LAUNCH_DENIED",
+    "native_started": false,
+    "reason": "The Remote Desktop Commander start_process call for the scoped old FAST service Manager was rejected by tool safety before execution.",
+    "bypass_or_retry": false,
+    "claim_released": true,
+    "server_status_readback": "open"
+  },
+  "remaining": [
+    "bifrost-live:retry-contract (claimed; independent QA failed to execute)",
+    "bifrost-live:vp49-service (open; host launch denied)",
+    "bifrost-live:vp49-cutover (open; predecessors unfinished)",
+    "bifrost-live:a55-rollout (open; device unavailable and predecessors unfinished)",
+    "bifrost-live:e2e-accept (open; dependencies unfinished)"
+  ],
+  "preserved": {
+    "prior_root": "bifrost-canary:root SERVER_DONE unchanged",
+    "original_live_root_thread": "01a18f61-c550-7183-94e9-d9b6106b477f (blocked, not replaced)",
+    "prior_tests": "24 Go top-level tests and 20/20 loopback burst remain CANDIDATE evidence; not rerun or counted as new acceptance.",
+    "runtime": "OpenCodex and existing Bifrost processes unchanged"
+  },
+  "local_checkpoint": "evidence/bifrost-live-r34-checkpoint.json",
+  "next": "Continue original IDs only after provider execution and legitimate service-launch access are available; do not weaken QA or replay DONE."
+}
